@@ -1,0 +1,561 @@
+.about-pro-page {
+  width: 100%;
+}
+
+/* 1. Pro Hero */
+.about-pro-hero {
+  position: relative;
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-image: url('/images/canadian_starry_landscape.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 6rem 2rem 4rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.about-pro-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.85);
+  z-index: 1;
+}
+
+.about-pro-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+}
+
+.pro-hero-title {
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-heading);
+  background: linear-gradient(to right, var(--text-primary), var(--accent-gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.2;
+}
+
+.pro-hero-subtitle {
+  font-size: 1.3rem;
+  color: var(--text-secondary);
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+/* Shared Typography */
+.pro-section-title {
+  font-size: 2.5rem;
+  font-family: var(--font-heading);
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+}
+
+/* 2. Mission Section */
+.mission-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  align-items: center;
+}
+
+.mission-content {
+  flex: 1;
+}
+
+.pro-text-lead {
+  font-size: 1.25rem;
+  color: var(--accent-gold);
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.pro-text-body {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.mission-image-wrapper {
+  flex: 1;
+  width: 100%;
+}
+
+.mission-image {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  filter: grayscale(20%);
+}
+
+@media (min-width: 768px) {
+  .mission-container {
+    flex-direction: row;
+  }
+}
+
+/* 3. Impact Stats */
+.impact-stats-section {
+  padding: 4rem 2rem;
+  background: var(--bg-card);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.impact-stats-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.impact-stat {
+  padding: 3rem 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 12px;
+}
+
+.impact-number {
+  font-size: 3rem;
+  font-family: var(--font-heading);
+  color: var(--text-primary);
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.impact-label {
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* Mission Buttons */
+.mission-contact-buttons {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+@keyframes pulse-gold {
+  0% {
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4);
+  }
+
+  70% {
+    box-shadow: 0 0 0 15px rgba(212, 175, 55, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+  }
+}
+
+@keyframes pulse-green {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4);
+  }
+
+  70% {
+    box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+
+.mission-contact-buttons .btn-primary.animate-pulse-slow {
+  animation: pulse-gold 2s infinite;
+}
+
+.mission-contact-buttons .btn-whatsapp.animate-pulse-slow {
+  animation: pulse-green 2s infinite;
+  animation-delay: 1s;
+  /* staggered */
+}
+
+@media (max-width: 768px) {
+  .mission-contact-buttons {
+    flex-direction: column;
+  }
+}
+
+/* 3.5 Methodology */
+.methodology-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.methodology-step {
+  position: relative;
+  padding: 2.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.methodology-step:hover {
+  transform: translateY(-5px);
+  background: var(--bg-primary);
+  border-color: var(--accent-gold);
+}
+
+.step-number {
+  font-family: var(--font-heading);
+  font-size: 4rem;
+  font-weight: bold;
+  opacity: 0.2;
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  line-height: 1;
+}
+
+.methodology-step h3 {
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+.methodology-step p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  position: relative;
+  z-index: 2;
+}
+
+/* 4. Values Section */
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.value-card {
+  padding: 3rem 2rem;
+  text-align: left;
+  border-radius: 12px;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.value-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(212, 175, 55, 0.4);
+}
+
+.value-card h3 {
+  font-size: 1.3rem;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.value-card p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* 5. Sacred Instruments */
+.instruments-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 3rem;
+  border-radius: 12px;
+}
+
+.instruments-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.instrument-tab {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  padding: 0.8rem 2rem;
+  border-radius: 30px;
+  cursor: pointer;
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.instrument-tab:hover {
+  border-color: var(--accent-gold);
+  color: var(--text-primary);
+}
+
+.instrument-tab.active {
+  background: rgba(212, 175, 55, 0.15);
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+.instrument-content-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+.instrument-image-wrapper {
+  flex: 0 0 45%;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.instrument-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.instrument-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.trust-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.trust-bullets li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.avatar-stack-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.avatar-stack {
+  display: flex;
+  align-items: center;
+}
+
+.stack-avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--bg-card);
+  margin-left: -15px;
+  position: relative;
+}
+
+.stack-avatar:first-child {
+  margin-left: 0;
+  z-index: 3;
+}
+
+.stack-avatar:nth-child(2) {
+  z-index: 2;
+}
+
+.stack-avatar:nth-child(3) {
+  z-index: 1;
+}
+
+.stack-counter {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: var(--bg-primary);
+  border: 2px solid var(--bg-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.85rem;
+  color: var(--accent-gold);
+  margin-left: -15px;
+  position: relative;
+  z-index: 0;
+}
+
+.stack-text {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.instrument-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 768px) {
+  .instrument-content-area {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .instrument-text {
+    text-align: left;
+  }
+
+  .trust-bullets {
+    align-items: flex-start;
+  }
+
+  .avatar-stack-wrapper {
+    justify-content: flex-start;
+  }
+
+  .instrument-actions {
+    justify-content: flex-start;
+  }
+}
+
+/* 6. Media Trust */
+.media-trust-section {
+  background: var(--bg-card);
+  padding: 4rem 2rem;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  text-align: center;
+}
+
+.media-trust-title {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  letter-spacing: 3px;
+  margin-bottom: 3rem;
+  text-transform: uppercase;
+}
+
+.media-trust-logos {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  flex-wrap: wrap;
+}
+
+.media-logo {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--text-secondary);
+  opacity: 0.5;
+  letter-spacing: 2px;
+  transition: all 0.3s ease;
+}
+
+.media-logo:hover {
+  color: var(--text-primary);
+  opacity: 1;
+}
+
+/* 100% Mobile Responsiveness (Locked Desktop) */
+@media (max-width: 768px) {
+  .mission-container {
+    flex-direction: column-reverse !important;
+    gap: 1.5rem !important;
+  }
+
+  .mission-content {
+    padding-right: 0 !important;
+    text-align: center !important;
+  }
+
+  .mission-contact-buttons {
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+
+  .mission-contact-buttons a {
+    width: 100% !important;
+  }
+
+  .methodology-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  .impact-stats-container {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
+  .about-pro-hero-content {
+    padding: 0 1rem !important;
+  }
+
+  .impact-stats-section {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+  }
+
+  .mission-section {
+    padding-top: 1rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  .methodology-section {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+  }
+
+  .principles-section {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+  }
+
+  .instruments-section {
+    padding-top: 1rem !important;
+  }
+}

@@ -1,0 +1,97 @@
+/* BookAppointment.css */
+
+.booking-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.booking-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 2rem;
+}
+
+.booking-info-card {
+  padding: 2rem;
+  text-align: center;
+}
+
+.booking-main-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.booking-form-panel {
+  padding: 3rem;
+  width: 100%;
+}
+
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.booking-map-panel {
+  padding: 0;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.booking-map-header {
+  padding: 3rem 2rem 2rem 2rem;
+  text-align: center;
+}
+
+/* 100% Mobile Responsiveness (Locked Desktop) */
+@media (max-width: 768px) {
+  .booking-container {
+    gap: 1.5rem !important;
+  }
+  
+  .booking-info-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  .booking-main-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+  
+  .booking-info-card {
+    padding: 1.5rem !important;
+  }
+
+  .booking-form-panel {
+    padding: 1.5rem !important;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr !important;
+    gap: 15px !important;
+  }
+  
+  .booking-form {
+    gap: 15px !important;
+  }
+
+  .booking-map-header {
+    padding: 2rem 1rem 1rem 1rem !important;
+  }
+}
