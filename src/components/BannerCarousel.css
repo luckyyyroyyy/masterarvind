@@ -1,10 +1,10 @@
 .banner-carousel {
   position: relative;
   width: 100%;
-  height: calc(100vh - 70px); /* Exactly fill the viewport height minus navbar */
+  height: calc(100vh - 75px); /* Exactly fill the viewport height minus navbar */
   overflow: hidden;
   background: #05010a; /* Dark background fallback */
-  margin-top: 70px; /* Clear the transparent fixed navbar */
+  margin-top: 0;
 }
 
 .banner-carousel-inner {
@@ -89,6 +89,21 @@
 }
 
 @media (max-width: 768px) {
+  .banner-carousel {
+    height: auto;
+    aspect-ratio: 1717 / 916; /* Exact aspect ratio of all 3 images */
+  }
+  
+  .banner-slide {
+    height: 100%;
+  }
+
+  .banner-slide img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain; /* Show the entire image without any cropping or distortion */
+    background-color: transparent;
+  }
 
   .banner-nav {
     width: 32px;

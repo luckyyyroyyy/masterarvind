@@ -4,14 +4,15 @@
   left: 0;
   width: 100%;
   z-index: 1000;
-  padding: 20px 0;
+  padding: 10px 0;
   transition: all 0.3s ease;
-  background: transparent;
+  background: var(--bg-card);
 }
 
 .navbar.scrolled {
-  padding: 15px 0;
+  padding: 10px 0;
   background: var(--bg-card);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
 .navbar-container {
@@ -41,7 +42,7 @@
 }
 
 .logo-text {
-  background: linear-gradient(to right, var(--text-primary), var(--accent-gold));
+  background: linear-gradient(to right, var(--text-primary), var(--accent-red));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -56,18 +57,35 @@
 }
 
 .nav-link {
-  font-family: var(--font-body);
-  font-size: 1rem;
-  font-weight: 500;
   color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  padding: 8px 0;
   position: relative;
-  transition: color 0.3s ease;
-  padding: 5px 0;
 }
 
 .nav-link:hover,
 .nav-link.active {
-  color: var(--accent-gold);
+  color: var(--accent-red);
+}
+
+/* Add a glowing cyan underline for active links */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent-red);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
 }
 
 .desktop-btn {
@@ -77,11 +95,12 @@
 .mobile-menu-btn {
   background: transparent;
   border: none;
-  color: var(--accent-gold);
+  color: var(--accent-red);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0;
 }
 
 .mobile-nav {
@@ -89,7 +108,7 @@
   top: 70px;
   left: 0;
   width: 100%;
-  background: var(--bg-secondary);
+  background: var(--bg-card);
   padding: 2rem;
   transform: translateY(-150%);
   transition: transform 0.4s ease-in-out;
@@ -141,4 +160,20 @@
   .mobile-nav {
     display: none;
   }
+}
+
+/* Phone Ringing Animation */
+@keyframes ring-animation {
+  0% { transform: rotate(0); }
+  10% { transform: rotate(15deg); }
+  20% { transform: rotate(-10deg); }
+  30% { transform: rotate(15deg); }
+  40% { transform: rotate(-10deg); }
+  50% { transform: rotate(0); }
+  100% { transform: rotate(0); }
+}
+
+.animate-ring {
+  animation: ring-animation 2s ease infinite;
+  transform-origin: center;
 }

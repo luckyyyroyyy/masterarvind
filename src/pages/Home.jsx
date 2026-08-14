@@ -206,10 +206,10 @@ const Home = () => {
 
             <div className="city-pills-container">
               {cities.slice(0, 12).map((city, index) => (
-                <div key={index} className="city-pill">
+                <Link key={index} to="/location" className="city-pill">
                   <MapPin size={14} className="city-pill-icon" />
                   <span>{city}</span>
-                </div>
+                </Link>
               ))}
               <Link to="/location" className="city-pill view-all-pill">
                 <span>View All Locations</span>
@@ -265,6 +265,23 @@ const Home = () => {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Pre-Footer CTA Banner matching prototype */}
+      <section className="pre-footer-cta">
+        <div className="cta-content">
+          <div className="cta-left">
+            <h2>Ready to Change Your Life?</h2>
+          </div>
+          <div className="cta-middle">
+            <p>Book a consultation with our expert astrologers and take the first step towards a better tomorrow.</p>
+          </div>
+          <div className="cta-right">
+            <Link to="/book" className="btn-cta-white">
+              BOOK NOW &rarr;
+            </Link>
+          </div>
         </div>
       </section>
     </div>

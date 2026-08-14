@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
-
 :root {
   /* Premium Light Theme Colors */
   --bg-primary: #FAFAFA;
@@ -8,11 +7,18 @@
   --accent-gold: #d4af37;
   --accent-gold-hover: #b8972e;
   --accent-purple: #B794F4;
-  --text-primary: #2D3748;
-  --text-secondary: #718096;
+  --accent-blue: #42EAFF;
+  /* Cyan / Aqua Blue */
+  --accent-blue-light: #2BC5D9;
+  /* Slightly darker shade for contrast */
+  --accent-red: #C53030;
+  /* Ruby Red */
+  --accent-red-hover: #9B2C2C;
+  --text-primary: #171717;
+  --text-secondary: #444444;
   --border-color: rgba(0, 0, 0, 0.08);
 
-  /* Typography */
+  /* Typography Fonts */
   --font-heading: 'Cinzel', serif;
   --font-body: 'Inter', sans-serif;
 
@@ -36,7 +42,8 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   background-image:
-    radial-gradient(circle at 15% 50%, rgba(183, 148, 244, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 15% 50%, rgba(49, 130, 206, 0.08) 0%, transparent 50%),
+    /* Replaced purple with subtle blue */
     radial-gradient(circle at 85% 30%, rgba(212, 175, 55, 0.08) 0%, transparent 50%);
   background-attachment: fixed;
 }
@@ -84,7 +91,7 @@ ul {
 }
 
 .btn-primary {
-  background: linear-gradient(45deg, var(--accent-gold), #b8972e);
+  background: var(--accent-red);
   color: #fff;
   font-weight: 600;
   padding: 12px 28px;
@@ -100,19 +107,21 @@ ul {
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 0.9rem;
+  box-shadow: 0 4px 15px rgba(223, 48, 28, 0.2);
 }
 
 .btn-primary:hover {
+  background: var(--accent-blue);
   transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+  box-shadow: 0 10px 20px rgba(48, 175, 255, 0.3);
 }
 
 .btn-outline {
-  background: transparent;
-  color: var(--accent-gold);
-  border: 1px solid var(--accent-gold);
+  background: var(--accent-blue);
+  color: #fff;
+  border: 2px solid var(--accent-blue);
   font-weight: 600;
-  padding: 12px 28px;
+  padding: 10px 26px;
   border-radius: 30px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -120,11 +129,15 @@ ul {
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 0.9rem;
+  box-shadow: 0 4px 15px rgba(48, 175, 255, 0.2);
 }
 
 .btn-outline:hover {
-  background: rgba(212, 175, 55, 0.1);
+  background: var(--accent-red);
+  border-color: var(--accent-red);
+  color: #fff;
   transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(223, 48, 28, 0.3);
 }
 
 .section-padding {
@@ -192,8 +205,8 @@ ul {
 
 .main-content {
   flex: 1;
-  padding-top: 30px;
-  /* Reduced offset for fixed navbar */
+  padding-top: 75px;
+  /* Space for fixed navbar */
 }
 
 /* 100% Mobile Responsiveness (Locked Desktop) */

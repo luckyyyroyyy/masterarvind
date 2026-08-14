@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { Menu, X, Star } from 'lucide-react';
+import { Menu, X, Star, Phone } from 'lucide-react';
 import { CONTACT_INFO } from '../../config/contact';
 import './Navbar.css';
 
@@ -25,13 +25,10 @@ const Navbar = () => {
   ];
 
   return (
-    <header className={`navbar ${isScrolled ? 'scrolled glass-panel' : ''}`}>
+    <header className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="navbar-container">
         <Link to="/" className="navbar-logo">
-          <Star className="logo-icon text-gold" size={28} />
-          <span className="logo-text">
-            {CONTACT_INFO.name.split(' ')[0]} <span className="text-gold">{CONTACT_INFO.name.split(' ').slice(1).join(' ')}</span>
-          </span>
+          <img src="/images/Pandit Sairam - Logo.png" alt="Pandit Sairam Logo" style={{ maxHeight: '55px', width: 'auto' }} />
         </Link>
 
         {/* Desktop Nav */}
@@ -50,7 +47,10 @@ const Navbar = () => {
           </ul>
         </nav>
 
-        <div className="navbar-actions">
+        <div className="navbar-actions" style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
+          <a href={`tel:${CONTACT_INFO.phoneLink}`} style={{ color: 'var(--accent-red)', display: 'flex', alignItems: 'center' }} title="Call Now">
+            <Phone size={24} className="animate-ring" />
+          </a>
           <Link to="/book" className="btn-primary desktop-btn">
             Book Appointment
           </Link>

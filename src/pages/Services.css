@@ -55,13 +55,13 @@
 
 .filter-tab:hover {
   background: var(--bg-primary);
-  border-color: var(--accent-gold);
+  border-color: var(--accent-yellow);
 }
 
 .filter-tab.active {
-  background: var(--accent-gold);
+  background: var(--accent-yellow);
   color: var(--bg-color);
-  border-color: var(--accent-gold);
+  border-color: var(--accent-yellow);
   font-weight: bold;
 }
 
@@ -89,7 +89,7 @@
 .service-card-premium:hover {
   transform: translateY(-8px);
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1), 0 0 20px rgba(212, 175, 55, 0.15);
-  border-color: var(--accent-gold);
+  border-color: var(--accent-yellow);
 }
 
 .service-card-image {
@@ -121,7 +121,7 @@
   font-size: 1.4rem;
   margin-bottom: 1rem;
   font-family: var(--font-heading);
-  color: var(--accent-gold);
+  color: var(--accent-yellow);
 }
 
 .service-card-desc {
@@ -152,7 +152,7 @@
 .services-cta h2 {
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
-  color: var(--accent-gold);
+  color: var(--accent-yellow);
 }
 
 .services-cta p {

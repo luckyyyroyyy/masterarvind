@@ -35,7 +35,7 @@ const Footer = () => {
           </div>
           
           <div className="footer-col links-col">
-            <h3>Quick Links</h3>
+            <h3 style={{ color: '#fff', textDecoration: 'underline', textDecorationColor: '#FFDE4E', textUnderlineOffset: '8px', textDecorationThickness: '2px' }}>Quick Links</h3>
             <ul>
               <li><Link to="/">Home</Link></li>
               <li><Link to="/about">About Us</Link></li>
@@ -46,7 +46,7 @@ const Footer = () => {
           </div>
           
           <div className="footer-col services-col">
-            <h3>Top Services</h3>
+            <h3 style={{ color: '#fff', textDecoration: 'underline', textDecorationColor: '#FFDE4E', textUnderlineOffset: '8px', textDecorationThickness: '2px' }}>Top Services</h3>
             <ul>
               <li><Link to="/services">Psychic Reading</Link></li>
               <li><Link to="/services">Palm Reading</Link></li>
@@ -57,7 +57,7 @@ const Footer = () => {
           </div>
 
           <div className="footer-col contact-col">
-            <h3>Contact Us</h3>
+            <h3 style={{ color: '#fff', textDecoration: 'underline', textDecorationColor: '#FFDE4E', textUnderlineOffset: '8px', textDecorationThickness: '2px' }}>Contact Us</h3>
             <ul className="contact-info">
               <li>
                 <MapPin className="text-gold" size={18} />
