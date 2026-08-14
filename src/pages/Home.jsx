@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Star, ChevronDown, MapPin, Quote, Shield, Users } from 'lucide-react';
 import CarouselStacked from '../components/CarouselStacked';
+import BannerCarousel from '../components/BannerCarousel';
 import './Home.css';
 
 const Home = () => {
@@ -112,6 +113,9 @@ const Home = () => {
 
   return (
     <div className="home-page animate-fade-in">
+      {/* Banners Section */}
+      <BannerCarousel banners={['/images/bnr1.png', '/images/bnr2.png', '/images/bnr3.png']} />
+
       {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-content">
