@@ -28,7 +28,7 @@ const Navbar = () => {
     <header className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="navbar-container">
         <Link to="/" className="navbar-logo">
-          <img src="/images/Pandit Sairam - Logo.png" alt="Pandit Sairam Logo" style={{ maxHeight: '55px', width: 'auto' }} />
+          <img src="/images/PSR - LOGO.png" alt="Pandit Sairam Logo" style={{ maxHeight: '55px', width: 'auto' }} />
         </Link>
 
         {/* Desktop Nav */}
