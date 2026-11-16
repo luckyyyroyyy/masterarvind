@@ -1,83 +1,48 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { MessageCircle, Phone, Mail } from 'lucide-react';
+import { MessageCircle, Phone } from 'lucide-react';
 import { CONTACT_INFO } from '../../config/contact';
 import './FloatingContact.css';
 
 const FloatingContact = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.8 // Wait for initial page load animations
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, x: 50, scale: 0.5 },
-    visible: { 
-      opacity: 1, 
-      x: 0, 
-      scale: 1,
-      transition: {
-        type: 'spring',
-        stiffness: 300,
-        damping: 20
-      }
-    }
-  };
-
   return (
-    <motion.div 
-      className="floating-contact-container"
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-    >
-      {/* Email Button */}
-      <motion.a 
-        href={`mailto:${CONTACT_INFO.email}`} 
-        className="floating-btn email"
-        variants={itemVariants}
-        whileHover={{ scale: 1.1, y: -5 }}
-        whileTap={{ scale: 0.9 }}
-        aria-label="Email Us"
-      >
-        <Mail size={24} />
-        <span className="tooltip">Email Us</span>
-      </motion.a>
-
-      {/* Call Button */}
+    <aside className="floating-actions-container" aria-label="Quick Contact Options">
+      {/* Direct Phone Call Button */}
       <motion.a 
         href={`tel:${CONTACT_INFO.phoneLink}`} 
-        className="floating-btn call"
-        variants={itemVariants}
-        whileHover={{ scale: 1.1, y: -5 }}
-        whileTap={{ scale: 0.9 }}
-        aria-label="Call Us"
+        className="floating-btn floating-call-btn"
+        aria-label={`Call Master Arvind at ${CONTACT_INFO.phoneDisplay}`}
+        whileHover={{ scale: 1.1, x: -3 }}
+        whileTap={{ scale: 0.95 }}
       >
-        <Phone size={24} />
-        <span className="tooltip">Call Now</span>
+        <span className="floating-tooltip">
+          Call: {CONTACT_INFO.phoneDisplay}
+        </span>
+        <div className="floating-icon-wrap animate-ring">
+          <Phone size={22} />
+        </div>
       </motion.a>
 
-      {/* WhatsApp Button */}
+      {/* WhatsApp Live Chat Button */}
       <motion.a 
-        href={`https://wa.me/${CONTACT_INFO.whatsappLink}`} 
+        href={`https://wa.me/${CONTACT_INFO.whatsappLink}?text=${encodeURIComponent("Hello Master Arvind, I would like to get guidance on my love/relationship problem.")}`}
         target="_blank" 
         rel="noopener noreferrer" 
-        className="floating-btn whatsapp"
-        variants={itemVariants}
-        whileHover={{ scale: 1.1, y: -5 }}
-        whileTap={{ scale: 0.9 }}
-        aria-label="Chat on WhatsApp"
+        className="floating-btn floating-whatsapp-btn"
+        aria-label="WhatsApp Master Arvind"
+        whileHover={{ scale: 1.1, x: -3 }}
+        whileTap={{ scale: 0.95 }}
       >
-        <MessageCircle size={26} />
-        <span className="tooltip">WhatsApp Us</span>
+        <span className="floating-pulse-ring"></span>
+        <span className="floating-tooltip">
+          Chat on WhatsApp
+        </span>
+        <div className="floating-icon-wrap">
+          <MessageCircle size={24} />
+        </div>
+        <span className="floating-live-dot" title="Online 24/7"></span>
       </motion.a>
-    </motion.div>
+    </aside>
   );
 };
 

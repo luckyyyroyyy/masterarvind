@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Shield, Award, Sparkles, Compass, BookOpen, Globe, Users, CheckCircle, PhoneCall, MessageCircle } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  Shield, Award, Sparkles, Compass, CheckCircle, PhoneCall, 
+  MessageCircle, Heart, Star, MapPin, Clock, ArrowRight, Eye, Sun
+} from 'lucide-react';
 import { CONTACT_INFO } from '../config/contact';
 import './About.css';
 
@@ -9,208 +13,473 @@ const About = () => {
 
   const instruments = [
     {
-      name: "Vedic Birth Charts",
-      description: "Calculated with to-the-minute precision based on ancient Jyotish mathematics, the birth chart is the fundamental blueprint of your soul's journey. It reveals karma, inherent strengths, and cosmic timing.",
+      name: "Vedic Love Synastry Charts",
+      description: "Calculated with to-the-minute astronomical precision based on ancient Jyotish mathematics. Master Arvind compares both lovers' charts to reveal karmic bonds, planetary clashes (Venus-Mars-Rahu), and the exact auspicious timing for reconciliation.",
       image: "/images/astrology_birth_chart_1786437182041.png",
-      avatars: ["https://i.pravatar.cc/100?img=44", "https://i.pravatar.cc/100?img=12", "https://i.pravatar.cc/100?img=5"],
-      counter: "15k+",
-      trustText: "Join 15,000+ chart seekers"
+      counter: "30k+",
+      trustText: "Over 30,000+ synastry charts analyzed",
+      tags: ["Jyotish Accuracy", "Karmic Bonds", "Timing Calculation"]
     },
     {
-      name: "The Tarot",
-      description: "A rich tapestry of esoteric symbolism used for immediate, intuitive answers. Our grandmasters use the cards not to predict a fixed future, but to reveal the hidden undercurrents of your present reality.",
+      name: "Sacred Love & Clairvoyant Tarot",
+      description: "Esoteric tarot spreads channeled during deep meditation to reveal the unspoken feelings, hidden thoughts, and future intentions of your partner or ex. It provides immediate, unfiltered clarity on relationship crossroads.",
       image: "/images/astrology_tarot_cards_1786433937486.png",
-      avatars: ["https://i.pravatar.cc/100?img=16", "https://i.pravatar.cc/100?img=33", "https://i.pravatar.cc/100?img=22"],
-      counter: "20k+",
-      trustText: "Trusted by 20,000+ clients"
+      counter: "25k+",
+      trustText: "Trusted by 25,000+ love seekers",
+      tags: ["Clairvoyant Insight", "Unspoken Feelings", "Clear Timelines"]
     },
     {
-      name: "Crystal Matrices",
-      description: "Specific resonant stones and geometric grid formations used to clear energetic blockages during our most intensive healing sessions, amplifying the power of our spiritual remedies.",
+      name: "Energy Cord Cleansing Crystals",
+      description: "Resonant energized crystals and consecrated geometric yantras used during Master Arvind's intensive spiritual rituals to sever toxic third-party cords, break the evil eye (Nazar), and amplify love attraction.",
       image: "/images/astrology_healing_crystals_1786437220476.png",
-      avatars: ["https://i.pravatar.cc/100?img=9", "https://i.pravatar.cc/100?img=64", "https://i.pravatar.cc/100?img=28"],
-      counter: "5k+",
-      trustText: "Chosen by 5,000+ healers"
+      counter: "10k+",
+      trustText: "Purified 10,000+ auric fields",
+      tags: ["Aura Cleansing", "Cut Third-Party Cords", "White-Light Healing"]
+    }
+  ];
+
+  const stats = [
+    {
+      icon: <Award className="text-gold" size={32} />,
+      num: "25+",
+      label: "Years of Mastery",
+      sub: "Vedic Lineage"
+    },
+    {
+      icon: <Heart className="text-love" size={32} fill="#C2185B" />,
+      num: "30k+",
+      label: "Couples Reunited",
+      sub: "Across Canada & USA"
+    },
+    {
+      icon: <CheckCircle className="text-gold" size={32} />,
+      num: "99.4%",
+      label: "Resolution Rate",
+      sub: "Documented Success"
+    },
+    {
+      icon: <Shield className="text-gold" size={32} />,
+      num: "100%",
+      label: "Confidentiality",
+      sub: "Strict Sanctuary Pledge"
+    }
+  ];
+
+  const values = [
+    {
+      icon: <Shield className="text-gold" size={30} />,
+      title: "Absolute Discretion",
+      description: "Every consultation is conducted under the strictest pledge of confidentiality. Your identity, photos, and personal situations are sacredly safeguarded.",
+      accent: "gold"
+    },
+    {
+      icon: <Sparkles className="text-love" size={30} />,
+      title: "100% White-Light Rituals",
+      description: "No negative karma, no harm, and no destructive forces. Master Arvind works solely with sacred divine energies and positive cosmic universal frequencies.",
+      accent: "love"
+    },
+    {
+      icon: <Compass className="text-gold" size={30} />,
+      title: "Actionable & Lasting Results",
+      description: "We do not offer vague platitudes. You receive concrete timelines, personalized mantras, and clear spiritual direction to permanently restore harmony.",
+      accent: "gold"
     }
   ];
 
   return (
-    <div className="about-pro-page animate-fade-in">
+    <div className="about-page-root">
 
-      {/* 1. Hero Section */}
-      <section className="about-pro-hero">
-        <div className="about-pro-hero-overlay"></div>
-        <div className="about-pro-hero-content">
-          <h1 className="pro-hero-title">Empowering Lives Through Cosmic Clarity</h1>
-          <p className="pro-hero-subtitle">Premium astrological guidance tailored for the modern truth-seeker.</p>
+      {/* 1. Hero Section with Animated Ambient Orbs */}
+      <section className="about-hero-section">
+        <div className="about-hero-orb orb-1"></div>
+        <div className="about-hero-orb orb-2"></div>
+        <div className="about-hero-orb orb-3"></div>
+
+        <div className="about-hero-content">
+          <motion.div 
+            className="section-badge love-badge"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            style={{ margin: '0 auto 1.5rem auto' }}
+          >
+            <Heart size={14} className="text-love" fill="currentColor" /> Authentic Vedic Master
+          </motion.div>
+
+          <motion.h1 
+            className="about-hero-title"
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.15 }}
+          >
+            Meet <span className="gradient-text-gold">Master Arvind</span>
+          </motion.h1>
+
+          <motion.p 
+            className="about-hero-subtitle"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+          >
+            Canada’s trusted authority on love reconciliation, sacred Vedic rituals, and spiritual problem solving with over 25 years of divine mastery in Edmonton, AB.
+          </motion.p>
+
+          <motion.div 
+            className="about-hero-tags"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.45 }}
+          >
+            <span className="hero-pill-tag"><Sun size={14} className="text-gold" /> Vedic Jyotish Master</span>
+            <span className="hero-pill-tag"><Heart size={14} className="text-love" fill="#C2185B" /> Get Ex Love Back Specialist</span>
+            <span className="hero-pill-tag"><MapPin size={14} className="text-gold" /> Edmonton Sanctuary</span>
+            <span className="hero-pill-tag"><Shield size={14} className="text-gold" /> 100% Private</span>
+          </motion.div>
         </div>
       </section>
 
-      {/* 2. Mission & Vision (Two-Column) */}
-      <section className="mission-section section-padding">
-        <div className="mission-container">
-          <div className="mission-content">
-            <h2 className="pro-section-title">Our Mission</h2>
-            <p className="pro-text-lead">
-              For over two decades, {CONTACT_INFO.name} has been the guiding light for thousands of individuals seeking spiritual answers. We believe that the universe has a distinct plan for everyone, and our mission is to help you uncover it with clarity and confidence.
-            </p>
-            <p className="pro-text-body" style={{ marginBottom: '2rem' }}>
-              Whether you are navigating career transitions, facing complex relationship dynamics, or seeking a deeper understanding of your life's true purpose, our authentic and profoundly accurate readings are designed to illuminate your path. We combine ancient Vedic wisdom with modern psychological framing to provide guidance that is not just insightful, but deeply actionable.
-            </p>
-            <div className="mission-contact-buttons">
-              <a href={`tel:${CONTACT_INFO.phoneLink}`} className="btn-primary animate-pulse-slow">
-                <PhoneCall size={20} /> Call Now
-              </a>
-              <a href={`https://wa.me/${CONTACT_INFO.whatsappLink}`} className="btn-whatsapp animate-pulse-slow" target="_blank" rel="noreferrer">
-                <MessageCircle size={20} /> WhatsApp Us
-              </a>
+      {/* 2. Mission & Personal Story with Slide & Floating Badges */}
+      <section className="about-story-section section-padding">
+        <div className="about-story-container">
+          
+          <motion.div 
+            className="about-story-content"
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.75, ease: "easeOut" }}
+          >
+            <div className="section-badge">
+              <Award size={14} className="text-gold" /> Divine Heritage
             </div>
-          </div>
-          <div className="mission-image-wrapper">
-            <img src="/images/944911565587737657.jpg" alt={`${CONTACT_INFO.name} Mission`} className="mission-image glass-panel" />
-          </div>
-        </div>
-      </section>
 
-      {/* 3. Global Impact Stats */}
-      <section className="impact-stats-section">
-        <div className="impact-stats-container">
-          <div className="impact-stat glass-panel">
-            <Globe className="text-gold mb-3" size={32} />
-            <span className="impact-number">120+</span>
-            <span className="impact-label">Countries Reached</span>
-          </div>
-          <div className="impact-stat glass-panel">
-            <Users className="text-gold mb-3" size={32} />
-            <span className="impact-number">50k+</span>
-            <span className="impact-label">Readings Delivered</span>
-          </div>
-          <div className="impact-stat glass-panel">
-            <CheckCircle className="text-gold mb-3" size={32} />
-            <span className="impact-number">99%</span>
-            <span className="impact-label">Client Satisfaction</span>
-          </div>
-        </div>
-      </section>
+            <h2 className="about-section-heading">
+              Dedicated to Reconnecting Hearts & <span className="gradient-text-love">Restoring Peace</span>
+            </h2>
 
-      {/* 3.5 Our Methodology */}
-      <section className="methodology-section section-padding" style={{ paddingTop: '2rem' }}>
-        <h2 className="pro-section-title text-center">Our Methodology</h2>
-        <div className="methodology-grid">
-          <div className="methodology-step">
-            <div className="step-number text-gold">01</div>
-            <h3>Natal Analysis</h3>
-            <p>We begin by casting a highly precise chart based on your exact time and coordinates of birth to map your celestial blueprint.</p>
-          </div>
-          <div className="methodology-step">
-            <div className="step-number text-gold">02</div>
-            <h3>Planetary Transits</h3>
-            <p>We analyze the current movement of the cosmos and how it actively interacts with your foundational natal energies.</p>
-          </div>
-          <div className="methodology-step">
-            <div className="step-number text-gold">03</div>
-            <h3>Spiritual Remedies</h3>
-            <p>Finally, we provide actionable guidance, from Vedic Poojas to psychological framing, to help you overcome cosmic friction.</p>
-          </div>
-        </div>
-      </section>
+            <p className="about-text-lead">
+              For over two and a half decades, <strong>Master Arvind</strong> has served as a beacon of hope for thousands of individuals caught in the storm of heartbreak, emotional separation, and marital breakdown.
+            </p>
 
-      {/* 4. Core Values Grid */}
-      <section className="values-section section-padding" style={{ paddingTop: '0' }}>
-        <h2 className="pro-section-title text-center">Our Core Principles</h2>
-        <div className="values-grid">
-          <div className="value-card glass-panel">
-            <Shield className="text-gold mb-4" size={36} />
-            <h3>Strict Confidentiality</h3>
-            <p>Your privacy is our paramount concern. We uphold the strictest standards of discretion for all our private and high-profile clients.</p>
-          </div>
-          <div className="value-card glass-panel">
-            <Sparkles className="text-gold mb-4" size={36} />
-            <h3>Uncompromising Authenticity</h3>
-            <p>No generic interpretations. Every reading is a deeply personal, unscripted channel into your unique celestial blueprint.</p>
-          </div>
-          <div className="value-card glass-panel">
-            <Compass className="text-gold mb-4" size={36} />
-            <h3>Actionable Guidance</h3>
-            <p>We do not dictate your fate. We reveal the cosmic energies at play so you can make empowered, confident decisions for your future.</p>
-          </div>
-        </div>
-      </section>
+            <p className="about-text-body">
+              Born into a revered lineage of Vedic astrologers and spiritual healers, Master Arvind was initiated into the sacred sciences of Jyotish, Mantra Shastra, and psychic channeling at an early age. His deep empathy and uncompromising spiritual ethics have earned him a reputation as Edmonton’s premier astrologer.
+            </p>
 
-      {/* 5. Sacred Instruments (Interactive) */}
-      <section className="instruments-section section-padding" style={{ paddingTop: '0' }}>
-        <h2 className="pro-section-title" style={{ textAlign: 'center' }}>Our Sacred Instruments</h2>
-        <p className="text-secondary mb-5 mx-auto" style={{ textAlign: 'center', maxWidth: '600px', margin: '0 auto 3rem' }}>Explore the tools of the trade our master astrologers use to decode the universe and guide your journey.</p>
+            <p className="about-text-body">
+              Master Arvind believes that true love is the highest cosmic vibration in the universe. When relationships falter due to temporary planetary afflictions, ego clashes, or jealous interference, his sacred white-light remedies gently dissolve obstacles and reunite souls in unconditional devotion.
+            </p>
 
-        <div className="instruments-container glass-panel">
-          <div className="instruments-tabs">
-            {instruments.map((inst, idx) => (
-              <button
-                key={idx}
-                className={`instrument-tab ${activeInstrument === idx ? 'active' : ''}`}
-                onClick={() => setActiveInstrument(idx)}
+            <div className="about-contact-buttons">
+              <motion.a 
+                href={`tel:${CONTACT_INFO.phoneLink}`} 
+                className="btn-primary"
+                whileHover={{ scale: 1.04, y: -2 }}
+                whileTap={{ scale: 0.97 }}
               >
-                {inst.name}
-              </button>
+                <PhoneCall size={18} />
+                <span>Call: {CONTACT_INFO.phoneDisplay}</span>
+              </motion.a>
+
+              <motion.a 
+                href={`https://wa.me/${CONTACT_INFO.whatsappLink}?text=${encodeURIComponent("Hello Master Arvind, I would like to book a private consultation.")}`} 
+                className="btn-whatsapp" 
+                target="_blank" 
+                rel="noreferrer"
+                whileHover={{ scale: 1.04, y: -2 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                <MessageCircle size={18} />
+                <span>WhatsApp Master</span>
+              </motion.a>
+            </div>
+          </motion.div>
+
+          {/* Portrait with Floating Badges & Sacred Glow */}
+          <motion.div 
+            className="about-story-image-col"
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.75, ease: "easeOut", delay: 0.15 }}
+          >
+            <div className="about-portrait-card-wrapper">
+              
+              {/* Floating Badge Top Right */}
+              <motion.div 
+                className="about-floating-badge badge-top-right"
+                animate={{ y: [0, -8, 0] }}
+                transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+              >
+                <Sparkles size={16} className="text-gold" />
+                <div>
+                  <strong>25+ Years Legacy</strong>
+                  <span>Hereditary Master</span>
+                </div>
+              </motion.div>
+
+              {/* Main Portrait Card */}
+              <div className="about-portrait-card glass-panel">
+                <div className="about-portrait-img-box">
+                  <img 
+                    src="/images/services/consult-best-astrologer.webp" 
+                    alt="Master Arvind" 
+                    className="about-portrait-img" 
+                    onError={(e) => { e.target.src = "/images/services/Master Jai Bn-1.webp"; }}
+                  />
+                  <div className="about-portrait-shine"></div>
+                </div>
+
+                <div className="about-portrait-meta">
+                  <div className="meta-icon">
+                    <Star size={24} className="fill-gold" />
+                  </div>
+                  <div>
+                    <strong>Master Arvind</strong>
+                    <p>{CONTACT_INFO.address}</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Floating Badge Bottom Left */}
+              <motion.div 
+                className="about-floating-badge badge-bottom-left"
+                animate={{ y: [0, 8, 0] }}
+                transition={{ repeat: Infinity, duration: 4.8, ease: "easeInOut", delay: 0.5 }}
+              >
+                <Heart size={16} className="text-love" fill="#C2185B" />
+                <div>
+                  <strong>99.4% Reunion Rate</strong>
+                  <span>Edmonton Sanctuary</span>
+                </div>
+              </motion.div>
+
+            </div>
+          </motion.div>
+
+        </div>
+      </section>
+
+      {/* 3. Global & Canadian Impact Stats with Staggered Pop-in */}
+      <section className="about-stats-strip">
+        <div className="about-stats-container">
+          {stats.map((stat, idx) => (
+            <motion.div 
+              key={idx} 
+              className="about-stat-box glass-panel"
+              initial={{ opacity: 0, y: 30, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.5, delay: idx * 0.12 }}
+              whileHover={{ 
+                y: -6, 
+                scale: 1.03,
+                boxShadow: "0 18px 36px rgba(194, 24, 91, 0.12)"
+              }}
+            >
+              <div className="stat-icon-wrapper mb-2">
+                {stat.icon}
+              </div>
+              <span className="stat-big-num">{stat.num}</span>
+              <span className="stat-caption">{stat.label}</span>
+              <span className="stat-subcaption">{stat.sub}</span>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* 4. Core Spiritual Principles with Staggered Entrance & Hover Glow */}
+      <section className="about-values-section section-padding">
+        <motion.div 
+          className="text-center"
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="section-badge love-badge">
+            <Shield size={14} className="text-love" /> Our Guiding Code
+          </div>
+          <h2 className="section-title">
+            Master Arvind's <span className="gradient-text-gold">Core Principles</span>
+          </h2>
+          <p className="section-subtitle">
+            Ethical, transparent, and results-driven spiritual guidance you can trust with your most delicate personal matters.
+          </p>
+        </motion.div>
+
+        <div className="about-values-grid">
+          {values.map((val, idx) => (
+            <motion.div 
+              key={idx}
+              className={`about-value-card glass-panel accent-${val.accent}`}
+              initial={{ opacity: 0, y: 35 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: idx * 0.15 }}
+              whileHover={{ 
+                y: -8, 
+                scale: 1.02,
+                boxShadow: "0 18px 40px rgba(184, 134, 11, 0.15)"
+              }}
+            >
+              <div className="val-icon-wrap">
+                {val.icon}
+              </div>
+              <h3>{val.title}</h3>
+              <p>{val.description}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* 5. Sacred Instruments with AnimatePresence Tab Switching */}
+      <section className="about-instruments-section section-padding">
+        <motion.div 
+          className="text-center"
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="section-badge">
+            <Sparkles size={14} className="text-gold" /> Ancient Divine Tools
+          </div>
+          <h2 className="section-title">
+            Our Sacred <span className="gradient-text-love">Spiritual Instruments</span>
+          </h2>
+          <p className="section-subtitle">
+            Explore the traditional tools Master Arvind employs to diagnose karmic blockages and channel powerful healing energies.
+          </p>
+        </motion.div>
+
+        <motion.div 
+          className="instruments-panel-card glass-panel"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.7 }}
+        >
+          <div className="instruments-nav-tabs">
+            {instruments.map((inst, idx) => (
+              <motion.button
+                key={idx}
+                className={`inst-tab-btn ${activeInstrument === idx ? 'active' : ''}`}
+                onClick={() => setActiveInstrument(idx)}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                <span>{inst.name}</span>
+                {activeInstrument === idx && (
+                  <motion.div 
+                    className="active-tab-glow" 
+                    layoutId="activeTabGlow"
+                    transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                  />
+                )}
+              </motion.button>
             ))}
           </div>
 
-          <div className="instrument-content-area">
-            <div className="instrument-image-wrapper">
-              <img src={instruments[activeInstrument].image} alt={instruments[activeInstrument].name} className="animate-fade-in" key={activeInstrument} />
-            </div>
-            <div className="instrument-text animate-fade-in" key={`text-${activeInstrument}`}>
-              <h3 className="text-gold mb-3 text-2xl">{instruments[activeInstrument].name}</h3>
-              <p className="text-secondary leading-relaxed text-lg" style={{ lineHeight: 1.8, marginBottom: '2rem' }}>
-                {instruments[activeInstrument].description}
-              </p>
-              
-              <ul className="trust-bullets">
-                <li><Shield size={16} className="text-gold"/> 100% Confidential & Secure</li>
-                <li><CheckCircle size={16} className="text-gold"/> Board Certified Master Astrologers</li>
-                <li><Sparkles size={16} className="text-gold"/> Deeply Personalized Insights</li>
-              </ul>
-              
-              <div className="avatar-stack-wrapper">
-                <div className="avatar-stack">
-                  {instruments[activeInstrument].avatars.map((av, i) => (
-                    <img key={i} src={av} alt={`Client ${i+1}`} className="stack-avatar" />
-                  ))}
-                  <div className="stack-counter">{instruments[activeInstrument].counter}</div>
+          <AnimatePresence mode="wait">
+            <motion.div 
+              key={activeInstrument}
+              className="inst-display-area"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+            >
+              <div className="inst-image-side">
+                <div className="inst-img-wrapper">
+                  <img src={instruments[activeInstrument].image} alt={instruments[activeInstrument].name} />
+                  <div className="inst-floating-chip">
+                    <Sparkles size={14} className="text-gold" />
+                    <span>{instruments[activeInstrument].counter} Consultations</span>
+                  </div>
                 </div>
-                <span className="stack-text">{instruments[activeInstrument].trustText}</span>
               </div>
 
-              <div className="instrument-actions">
-                <Link to="/book" className="btn-primary">Book Session</Link>
-                <Link to="/services" className="btn-outline">Learn More</Link>
+              <div className="inst-info-side">
+                <div className="inst-tags-row">
+                  {instruments[activeInstrument].tags.map((tag, tIdx) => (
+                    <span key={tIdx} className="inst-tag-pill">{tag}</span>
+                  ))}
+                </div>
+
+                <h3 className="inst-name-title">{instruments[activeInstrument].name}</h3>
+                
+                <p className="inst-description-text">
+                  {instruments[activeInstrument].description}
+                </p>
+
+                <div className="inst-trust-strip">
+                  <CheckCircle size={18} className="text-gold" />
+                  <span>{instruments[activeInstrument].trustText}</span>
+                </div>
+
+                <div className="inst-cta-row">
+                  <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
+                    <Link to="/book" className="btn-primary">
+                      <span>Book Private Session</span>
+                    </Link>
+                  </motion.div>
+                  <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
+                    <a href={`tel:${CONTACT_INFO.phoneLink}`} className="btn-outline">
+                      <PhoneCall size={16} />
+                      <span>Call Master Arvind</span>
+                    </a>
+                  </motion.div>
+                </div>
               </div>
+            </motion.div>
+          </AnimatePresence>
+
+        </motion.div>
+      </section>
+
+      {/* 6. Bottom Sanctuary Callout with Floating Bobbing Pin */}
+      <section className="about-bottom-cta section-padding text-center">
+        <motion.div 
+          className="about-cta-box glass-panel"
+          initial={{ opacity: 0, scale: 0.96, y: 35 }}
+          whileInView={{ opacity: 1, scale: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.7 }}
+          whileHover={{ boxShadow: "0 20px 50px rgba(194, 24, 91, 0.12)" }}
+        >
+          <motion.div 
+            animate={{ y: [0, -8, 0] }}
+            transition={{ repeat: Infinity, duration: 3.2, ease: "easeInOut" }}
+            style={{ display: 'inline-block' }}
+          >
+            <div className="sanctuary-icon-circle">
+              <MapPin size={34} className="text-gold" />
             </div>
+          </motion.div>
+
+          <h2>Visit Our Edmonton Sanctuary Or Call Today</h2>
+          
+          <p className="about-cta-lead-text">
+            Conveniently located at <strong>{CONTACT_INFO.address}</strong>. Private appointments available in-person or via Phone/WhatsApp daily across Canada & USA.
+          </p>
+
+          <div className="about-cta-actions">
+            <motion.a 
+              href={`tel:${CONTACT_INFO.phoneLink}`} 
+              className="btn-primary"
+              whileHover={{ scale: 1.04, y: -2 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              <PhoneCall size={18} /> Call: {CONTACT_INFO.phoneDisplay}
+            </motion.a>
+
+            <motion.div whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.97 }}>
+              <Link to="/book" className="btn-gold">
+                Schedule Appointment
+              </Link>
+            </motion.div>
           </div>
-        </div>
-      </section>
-
-      {/* 6. Trust & Media */}
-      <section className="media-trust-section">
-        <p className="media-trust-title">TRUSTED BY SEEKERS WORLDWIDE & FEATURED IN</p>
-        <div className="media-trust-logos">
-          <span className="media-logo">COSMIC TIMES</span>
-          <span className="media-logo">THE DAILY MYSTIC</span>
-          <span className="media-logo">ASTRAL LIVING</span>
-          <span className="media-logo">SPIRITUALITY TODAY</span>
-        </div>
-      </section>
-
-      {/* 7. CTA */}
-      <section className="pro-cta-section section-padding text-center" style={{ paddingTop: '1rem' }}>
-        <h2 className="pro-section-title" style={{ textAlign: 'center' }}>Your Cosmic Blueprint Awaits</h2>
-        <p className="pro-cta-text mb-5 mx-auto" style={{ textAlign: 'center', maxWidth: '700px', margin: '0 auto 2rem', color: 'var(--text-secondary)' }}>
-          The stars hold the answers you seek. Our master astrologers are ready to guide you towards a future of clarity and purpose.
-        </p>
-        <div className="pro-cta-buttons" style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem' }}>
-          <Link to="/book" className="btn-primary" style={{ padding: '1rem 2.5rem' }}>Book a Consultation</Link>
-          <Link to="/services" className="btn-outline" style={{ padding: '1rem 2.5rem' }}>View All Services</Link>
-        </div>
+        </motion.div>
       </section>
 
     </div>

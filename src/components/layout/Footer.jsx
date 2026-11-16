@@ -1,91 +1,162 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Star, Mail, Phone, MapPin } from 'lucide-react';
+import { Star, Mail, Phone, MapPin, Heart, Shield, Sparkles, Clock, MessageCircle } from 'lucide-react';
 import { CONTACT_INFO } from '../../config/contact';
 import './Footer.css';
 
 const Footer = () => {
   return (
-    <footer className="footer">
-      <div className="footer-top">
+    <footer className="footer-root">
+      {/* Top Reassurance Bar */}
+      <div className="footer-reassurance">
+        <div className="reassurance-container">
+          <div className="reassurance-card">
+            <Shield className="reassurance-icon text-gold" size={28} />
+            <div>
+              <h4>100% Confidential</h4>
+              <p>Your privacy and sacred situation remain strictly private.</p>
+            </div>
+          </div>
+          <div className="reassurance-card">
+            <Heart className="reassurance-icon text-love" size={28} />
+            <div>
+              <h4>99.4% Success in Love</h4>
+              <p>Reuniting hearts with positive, ethical Vedic rituals.</p>
+            </div>
+          </div>
+          <div className="reassurance-card">
+            <Clock className="reassurance-icon text-gold" size={28} />
+            <div>
+              <h4>Fast Spiritual Guidance</h4>
+              <p>Immediate phone & WhatsApp consultation available 24/7.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="footer-main">
         <div className="footer-container">
+          {/* Brand Col */}
           <div className="footer-col brand-col">
-            <Link to="/" className="footer-logo">
-              <Star className="text-gold" size={32} />
-              <span>{CONTACT_INFO.name.split(' ')[0]} <span className="text-gold">{CONTACT_INFO.name.split(' ').slice(1).join(' ')}</span></span>
+            <Link to="/" className="footer-brand-logo">
+              <div className="footer-brand-symbol">
+                <Sparkles size={22} className="text-dark" />
+              </div>
+              <div className="footer-brand-text">
+                <span className="footer-brand-title">MASTER <span className="text-gold">ARVIND</span></span>
+                <span className="footer-brand-tagline">Vedic Love & Relationship Astrologer</span>
+              </div>
             </Link>
+            
             <p className="footer-desc">
-              Discover your destiny with our premium astrology and spiritual services. 
-              Guiding you towards a brighter, more harmonious future.
+              Edmonton’s foremost spiritual master and Vedic astrologer, specializing in restoring broken love, resolving marital discord, ethical love spells, and liberating lives from negative energies.
             </p>
-            <div className="social-links">
-              <a href="#" className="social-icon" aria-label="Facebook">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+
+            <div className="footer-badges">
+              <span className="badge-pill">25+ Years Experience</span>
+              <span className="badge-pill">30,000+ Reunions</span>
+            </div>
+
+            <div className="footer-cta-quick">
+              <a href={`tel:${CONTACT_INFO.phoneLink}`} className="btn-primary" style={{ padding: '10px 20px', fontSize: '0.86rem' }}>
+                <Phone size={15} /> Call Master Arvind
               </a>
-              <a href="#" className="social-icon" aria-label="Instagram">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-              </a>
-              <a href="#" className="social-icon" aria-label="Twitter">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5 2.8 11 3 11c1.2.6 2.6.5 3.8-.1C-2 6.5 1 2 1 2c2.6 3.1 6.5 5.1 10.8 5.4C11.5 4.5 13 2 16 2c2.2 0 4 1.8 4 4 1.2-.2 2.3-.7 3.2-1.3-.4 1.2-1.2 2.1-2.2 2.7 1.1-.1 2.1-.4 3-.9z"></path></svg>
-              </a>
-              <a href="#" className="social-icon" aria-label="Youtube">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+              <a 
+                href={`https://wa.me/${CONTACT_INFO.whatsappLink}`} 
+                target="_blank" 
+                rel="noreferrer" 
+                className="btn-whatsapp" 
+                style={{ padding: '10px 18px', fontSize: '0.86rem' }}
+              >
+                <MessageCircle size={15} /> WhatsApp
               </a>
             </div>
           </div>
-          
-          <div className="footer-col links-col">
-            <h3 style={{ color: '#fff', textDecoration: 'underline', textDecorationColor: '#FFDE4E', textUnderlineOffset: '8px', textDecorationThickness: '2px' }}>Quick Links</h3>
-            <ul>
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/about">About Us</Link></li>
-              <li><Link to="/services">Our Services</Link></li>
-              <li><Link to="/blog">Latest Insights</Link></li>
-              <li><Link to="/book">Book Appointment</Link></li>
-            </ul>
-          </div>
-          
-          <div className="footer-col services-col">
-            <h3 style={{ color: '#fff', textDecoration: 'underline', textDecorationColor: '#FFDE4E', textUnderlineOffset: '8px', textDecorationThickness: '2px' }}>Top Services</h3>
-            <ul>
-              <li><Link to="/services">Psychic Reading</Link></li>
-              <li><Link to="/services">Palm Reading</Link></li>
-              <li><Link to="/services">Love & Relationships</Link></li>
-              <li><Link to="/services">Spiritual Healing</Link></li>
-              <li><Link to="/services">Vashikaran Specialist</Link></li>
+
+          {/* Love & Relationship Services Col */}
+          <div className="footer-col">
+            <h3 className="footer-heading">Love & Relationships</h3>
+            <ul className="footer-links-list">
+              <li><Link to="/services/ex-love-back">Get Ex Love Back</Link></li>
+              <li><Link to="/services/love-spells">Sacred Love Spells</Link></li>
+              <li><Link to="/services/love-relationships">Relationship Problem Solutions</Link></li>
+              <li><Link to="/services/husband-wife-dispute">Husband Wife Dispute & Stop Divorce</Link></li>
+              <li><Link to="/services/vashikaran-specialist">Positive Love Vashikaran</Link></li>
+              <li><Link to="/services/twin-flame-reconnection">Twin Flame Reconnection</Link></li>
             </ul>
           </div>
 
+          {/* Spiritual & Protection Col */}
+          <div className="footer-col">
+            <h3 className="footer-heading">Spiritual & Healing</h3>
+            <ul className="footer-links-list">
+              <li><Link to="/services/black-magic-removal">Black Magic & Evil Eye Removal</Link></li>
+              <li><Link to="/services/psychic-reading">Clairvoyant Psychic Reading</Link></li>
+              <li><Link to="/services/palm-reading">Palm Reading & Hand Analysis</Link></li>
+              <li><Link to="/services/spiritual-healing">Chakra Balancing & Aura Cleansing</Link></li>
+              <li><Link to="/services/family-problems">Family Dispute Resolution</Link></li>
+              <li><Link to="/services/career-guidance">Career & Business Prosperity</Link></li>
+            </ul>
+          </div>
+
+          {/* Contact Details Col */}
           <div className="footer-col contact-col">
-            <h3 style={{ color: '#fff', textDecoration: 'underline', textDecorationColor: '#FFDE4E', textUnderlineOffset: '8px', textDecorationThickness: '2px' }}>Contact Us</h3>
-            <ul className="contact-info">
+            <h3 className="footer-heading">Edmonton Sanctuary</h3>
+            <ul className="footer-contact-info">
               <li>
-                <MapPin className="text-gold" size={18} />
-                <span>{CONTACT_INFO.address}</span>
+                <div className="contact-icon-wrap">
+                  <MapPin className="text-gold" size={18} />
+                </div>
+                <div>
+                  <span className="contact-meta-label">Center Address:</span>
+                  <p className="contact-meta-val">{CONTACT_INFO.address}</p>
+                </div>
               </li>
               <li>
-                <Phone className="text-gold" size={18} />
-                <a href={`tel:${CONTACT_INFO.phoneLink}`} style={{ color: 'inherit', textDecoration: 'none' }}>
-                  <span>{CONTACT_INFO.phoneDisplay}</span>
-                </a>
+                <div className="contact-icon-wrap">
+                  <Phone className="text-love" size={18} />
+                </div>
+                <div>
+                  <span className="contact-meta-label">Direct Hotline:</span>
+                  <a href={`tel:${CONTACT_INFO.phoneLink}`} className="contact-meta-val highlight-gold">
+                    {CONTACT_INFO.phoneDisplay}
+                  </a>
+                </div>
               </li>
               <li>
-                <Mail className="text-gold" size={18} />
-                <a href={`mailto:${CONTACT_INFO.email}`} style={{ color: 'inherit', textDecoration: 'none' }}>
-                  <span>{CONTACT_INFO.email}</span>
-                </a>
+                <div className="contact-icon-wrap">
+                  <Mail className="text-gold" size={18} />
+                </div>
+                <div>
+                  <span className="contact-meta-label">Email Inquiries:</span>
+                  <a href={`mailto:${CONTACT_INFO.email}`} className="contact-meta-val">
+                    {CONTACT_INFO.email}
+                  </a>
+                </div>
+              </li>
+              <li>
+                <div className="contact-icon-wrap">
+                  <Clock className="text-gold" size={18} />
+                </div>
+                <div>
+                  <span className="contact-meta-label">Availability:</span>
+                  <p className="contact-meta-val">Mon - Sun: 8:00 AM - 10:00 PM (MST)</p>
+                </div>
               </li>
             </ul>
           </div>
         </div>
       </div>
-      
+
+      {/* Footer Bottom */}
       <div className="footer-bottom">
-        <div className="footer-container bottom-container">
-          <p>&copy; {new Date().getFullYear()} {CONTACT_INFO.name}. All rights reserved.</p>
-          <div className="bottom-links">
-            <Link to="/privacy">Privacy Policy</Link>
-            <Link to="/terms">Terms of Service</Link>
+        <div className="footer-bottom-container">
+          <p>&copy; {new Date().getFullYear()} {CONTACT_INFO.name}. All Rights Reserved. Edmonton, AB, Canada.</p>
+          <div className="footer-bottom-links">
+            <Link to="/about">About Master Arvind</Link>
+            <Link to="/services">Services</Link>
+            <Link to="/location">Locations</Link>
+            <Link to="/book">Book Appointment</Link>
           </div>
         </div>
       </div>
