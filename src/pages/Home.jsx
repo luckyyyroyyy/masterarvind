@@ -3,18 +3,116 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Heart, Sparkles, Phone, MessageCircle, Shield, Star, 
-  Clock, MapPin, CheckCircle, ChevronDown, ArrowRight, 
-  Lock, Flame, Zap, Award, Users, Calendar, HelpCircle 
+  Clock, MapPin, CheckCircle, ChevronDown, ChevronLeft, ChevronRight, ArrowRight, 
+  Lock, Flame, Zap, Award, Users, Calendar, HelpCircle, Send 
 } from 'lucide-react';
 import { CONTACT_INFO } from '../config/contact';
 import { servicesData } from '../data/servicesData';
+import BannerCarousel from '../components/BannerCarousel';
 import './Home.css';
 
+// Animated Growing Counter
+const CounterNumber = ({ target, suffix = "" }) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let start = 0;
+    const duration = 2000;
+    const stepTime = 30;
+    const totalSteps = duration / stepTime;
+    const increment = target / totalSteps;
+
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= target) {
+        setCount(target);
+        clearInterval(timer);
+      } else {
+        setCount(Math.floor(start));
+      }
+    }, stepTime);
+
+    return () => clearInterval(timer);
+  }, [target]);
+
+  return (
+    <motion.span 
+      className="stat-pill-num growing-number"
+      animate={{ scale: [1, 1.05, 1] }}
+      transition={{ repeat: Infinity, duration: 2.8, ease: "easeInOut" }}
+    >
+      {count}{suffix}
+    </motion.span>
+  );
+};
+
 const Home = () => {
-  // Relationship diagnostic tool active situation
-  const [activeSituationIndex, setActiveSituationIndex] = useState(0);
   const [activeFaq, setActiveFaq] = useState(null);
   const [currentHeroImg, setCurrentHeroImg] = useState(0);
+
+  // Connect Form State (Spiritual Methodology Section)
+  const [methodologyForm, setMethodologyForm] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    service: 'Love Problem Solution / Ex Back',
+    problem: ''
+  });
+  const [methodologySubmitted, setMethodologySubmitted] = useState(false);
+
+  const handleMethodologyChange = (e) => {
+    setMethodologyForm({
+      ...methodologyForm,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleMethodologySubmit = (e) => {
+    e.preventDefault();
+    const fullName = `${methodologyForm.firstName} ${methodologyForm.lastName}`.trim();
+    const message = `*New Consultation Request - Master Arvind*\n\n*Name:* ${fullName || 'Not provided'}\n*Phone:* ${methodologyForm.phone}\n*Email:* ${methodologyForm.email}\n*Service:* ${methodologyForm.service}\n*Problem Details:* ${methodologyForm.problem || 'None provided'}`;
+    window.open(`https://wa.me/${CONTACT_INFO.whatsappLink}?text=${encodeURIComponent(message)}`, '_blank');
+    setMethodologySubmitted(true);
+  };
+
+  // Dynamic Animated Typewriter
+  const typewriterPhrases = [
+    "Negative Energy Removal",
+    "Getting Your Ex Love Back",
+    "Stopping Divorce & Separation",
+    "Sacred White-Light Love Spells",
+    "Black Magic & Evil Eye Cleansing",
+    "Twin Flame & Soulmate Reconnection"
+  ];
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [displayText, setDisplayText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [typingSpeed, setTypingSpeed] = useState(90);
+
+  useEffect(() => {
+    const currentPhrase = typewriterPhrases[phraseIndex];
+    let timer;
+
+    if (!isDeleting && displayText === currentPhrase) {
+      timer = setTimeout(() => setIsDeleting(true), 2000);
+    } else if (isDeleting && displayText === '') {
+      setIsDeleting(false);
+      setPhraseIndex((prev) => (prev + 1) % typewriterPhrases.length);
+      setTypingSpeed(90);
+    } else {
+      timer = setTimeout(() => {
+        setDisplayText((prev) => 
+          isDeleting 
+            ? currentPhrase.substring(0, prev.length - 1)
+            : currentPhrase.substring(0, prev.length + 1)
+        );
+        setTypingSpeed(isDeleting ? 40 : 85);
+      }, typingSpeed);
+    }
+
+    return () => clearTimeout(timer);
+  }, [displayText, isDeleting, phraseIndex, typingSpeed]);
 
   const heroImages = [
     { src: "/images/services/bring-ex-back.webp", alt: "Get Ex Love Back" },
@@ -31,118 +129,76 @@ const Home = () => {
     return () => clearInterval(timer);
   }, [heroImages.length]);
 
-  const loveSituations = [
-    {
-      id: "ex-back",
-      tabLabel: "💔 Ex Left / Blocked Me",
-      title: "Get Ex Love Back & Reconnect Hearts",
-      problem: "Your ex walked out, stopped communicating, or blocked you on all social media. Misunderstandings, ego, or outside interference tore you apart.",
-      cosmicCause: "Severe Venus affliction, malefic Rahu interference, or broken emotional cords causing sudden distance.",
-      solution: "Master Arvind performs sacred Vedic love reconnection rituals and energetic cord-healing to dissolve hostility and draw your ex back with renewed desire.",
-      timeframe: "Results typically felt in 3 to 10 days",
-      successRate: "99.4% Success Rate",
-      actionText: "Fix This Situation on WhatsApp",
-      image: "/images/services/bring-ex-back.webp"
-    },
-    {
-      id: "love-spells",
-      tabLabel: "✨ Need Potent Love Spell",
-      title: "Sacred White-Light Love Spells & Fast Binding",
-      problem: "You are deeply in love, but your partner is emotionally distant, reluctant to commit, or feelings are fading away.",
-      cosmicCause: "Weak planetary magnetic resonance in the 5th & 7th astrological houses preventing full emotional surrender.",
-      solution: "Consecrated white-light Vedic love spells channel pure positive cosmic energy, reigniting profound attraction, passion, and true devotion.",
-      timeframe: "Visible positive shifts in 48 to 72 hours",
-      successRate: "98.9% Success Rate",
-      actionText: "Cast Love Spell with Master",
-      image: "/images/services/love_reading.webp"
-    },
-    {
-      id: "stop-divorce",
-      tabLabel: "⚡ Marital Dispute & Divorce",
-      title: "Stop Divorce & Restore Marital Harmony",
-      problem: "Constant fights, sleepless nights, separate bedrooms, or pending divorce papers threatening to shatter your family.",
-      cosmicCause: "Manglik Dosh clashes, negative domestic Vastu, or malefic transits across the 7th house of marriage.",
-      solution: "Gauri-Shankar Vedic poojas combined with home Vastu pacification dissolve mutual resentment and restore peace and sacred fidelity.",
-      timeframe: "Significant marital peace within 7 to 14 days",
-      successRate: "99.1% Success Rate",
-      actionText: "Save My Marriage Now",
-      image: "/images/services/toxic-marriage-signs.webp"
-    },
-    {
-      id: "third-party",
-      tabLabel: "👥 Third-Party Interference",
-      title: "Remove Third-Party & Jealous Envy",
-      problem: "A friend, in-law, or third-party romantic interest is manipulating your partner and turning them against you.",
-      cosmicCause: "Nazar (Evil Eye), toxic cord attachments, or deliberate negative psychic interference.",
-      solution: "Master Arvind conducts an intense occult cord-cutting kriya and installs an impenetrable spiritual shield (Raksha Kavach) around your partner.",
-      timeframe: "Negative third-party influences severed in 5 to 12 days",
-      successRate: "99.6% Success Rate",
-      actionText: "Remove Third-Party Influence",
-      image: "/images/services/black-magic-removal.webp"
-    },
-    {
-      id: "vashikaran",
-      tabLabel: "🧲 Positive Love Vashikaran",
-      title: "Love Vashikaran & Emotional Attraction",
-      problem: "Your partner has become stubborn, aggressive, or completely emotionally closed off to your pleas and communication.",
-      cosmicCause: "Rigid ego blocks and discordant mental frequency vibrations between both horoscopes.",
-      solution: "Ethical Vedic Vashikaran mantras gently harmonize thoughts and awaken compassionate feelings without harm or bad karma.",
-      timeframe: "Emotional softness and contact within 4 to 9 days",
-      successRate: "99.2% Success Rate",
-      actionText: "Consult on Positive Vashikaran",
-      image: "/images/services/soulmate-connection.webp"
-    },
-    {
-      id: "twin-flame",
-      tabLabel: "🌌 Twin Flame Separation",
-      title: "Twin Flame Reunion & Soul Cord Healing",
-      problem: "Agonizing runner-chaser stages, intense soul ache, telepathic exhaustion, and inability to move on from your divine counterpart.",
-      cosmicCause: "Spiritual karmic debt and unaligned chakra frequencies between twin souls.",
-      solution: "Specialized soul-contract readings and heart chakra alignment to end painful separation and bring physical reunion.",
-      timeframe: "Alignment shifts within 1 to 2 lunar cycles",
-      successRate: "98.7% Success Rate",
-      actionText: "Align With My Twin Flame",
-      image: "/images/services/relationship_astrology_hero.webp"
-    }
-  ];
-
-  const currentSituation = loveSituations[activeSituationIndex];
-
-  // Love Testimonials with before/after status
+  // Love Testimonials (8 Real Stories)
   const loveTestimonials = [
     {
       couple: "Jessica & Marcus",
       city: "Edmonton, AB",
-      status: "💔 Blocked for 5 Months ➔ ❤️ Reunited & Engaged",
-      text: "Marcus left our shared home and blocked my number everywhere. I felt hopeless until I visited Master Arvind in Edmonton. He performed a sacred love reconnection ritual. In just 11 days, Marcus unblocked me and knocked on my door in tears. We are getting married this summer!",
       timeframe: "Reunited in 11 Days",
+      text: "Marcus left our shared home and blocked my number everywhere. I felt hopeless until I visited Master Arvind in Edmonton. He performed a sacred love reconnection ritual. In just 11 days, Marcus unblocked me and knocked on my door in tears. We are getting married this summer!",
       image: "https://randomuser.me/api/portraits/women/44.jpg"
     },
     {
       couple: "David & Sarah",
       city: "Calgary, AB",
-      status: "⚡ Divorce Papers Filed ➔ ❤️ Sacred Marriage Saved",
+      timeframe: "Marriage Saved in 2 Weeks",
       text: "We were sleeping in separate rooms and our lawyers had already prepared separation documents. Master Arvind identified a severe planetary clash and evil eye from an envious relative. After his remedies, the bitterness completely dissolved. He saved our marriage and our children's future.",
-      timeframe: "Saved in 2 Weeks",
       image: "https://randomuser.me/api/portraits/men/32.jpg"
     },
     {
       couple: "Simran & Harpreet",
       city: "Vancouver, BC",
-      status: "👥 Family Opposing Marriage ➔ ❤️ Parents Blessed Union",
-      text: "Both our families were strongly opposed to our inter-caste marriage for over 3 years. Master Arvind performed powerful Vedic family harmony poojas. Within 3 weeks, both sets of parents had a change of heart and celebrated our engagement together!",
       timeframe: "Blessings in 18 Days",
+      text: "Both our families were strongly opposed to our inter-caste marriage for over 3 years. Master Arvind performed powerful Vedic family harmony poojas. Within 3 weeks, both sets of parents had a change of heart and celebrated our engagement together!",
       image: "https://randomuser.me/api/portraits/women/68.jpg"
     },
     {
       couple: "Chloe & Liam",
       city: "Toronto, ON",
-      status: "❄️ Cold Emotional Drift ➔ ❤️ Deep Passion Reignited",
+      timeframe: "Reignited in 5 Days",
       text: "My fiancé seemed to have lost all interest in me and commitment felt impossible. Master Arvind’s sacred love attraction rituals ignited a spark we hadn't felt in years. He is now more affectionate and attentive than ever before.",
-      timeframe: "Shifted in 5 Days",
       image: "https://randomuser.me/api/portraits/women/89.jpg"
+    },
+    {
+      couple: "Aman & Priya",
+      city: "Surrey, BC",
+      timeframe: "Reunited in 9 Days",
+      text: "My partner walked away after constant misunderstandings and refused to speak with me for months. Master Arvind did a detailed astrological reading and performed a Venus attraction ritual. Within 9 days, Aman called me apologizing and asked to restart our relationship!",
+      image: "https://randomuser.me/api/portraits/women/65.jpg"
+    },
+    {
+      couple: "Michael & Jennifer",
+      city: "Red Deer, AB",
+      timeframe: "Divorce Stopped in 12 Days",
+      text: "Third-party interference and negative jealousy had completely destroyed trust between my wife and me. Master Arvind removed the dark energy surrounding our home. Within 12 days, Jennifer broke off contact with the outside influence and our marriage is thriving again.",
+      image: "https://randomuser.me/api/portraits/men/45.jpg"
+    },
+    {
+      couple: "Rajesh & Sunita",
+      city: "Edmonton, AB",
+      timeframe: "Harmony Restored in 7 Days",
+      text: "In-law tensions and astrological Manglik dosha were creating daily fights. We visited Master Arvind at his Edmonton sanctuary in Millwoods. His poojas brought an immediate peaceful calm into our marriage. We are happier than ever!",
+      image: "https://randomuser.me/api/portraits/women/33.jpg"
+    },
+    {
+      couple: "Emily & Daniel",
+      city: "Ottawa, ON",
+      timeframe: "Reconnected in 8 Days",
+      text: "Daniel had gone completely silent and cold after a bitter argument. I consulted Master Arvind over phone from Ottawa. His white-light spiritual healing worked like a miracle. Daniel texted me on day 8 asking to meet and we have reconciled completely.",
+      image: "https://randomuser.me/api/portraits/women/53.jpg"
     }
   ];
+
+  const [testimonialPage, setTestimonialPage] = useState(0);
+  const [isTestimonialHovered, setIsTestimonialHovered] = useState(false);
+
+  useEffect(() => {
+    if (isTestimonialHovered) return;
+    const timer = setInterval(() => {
+      setTestimonialPage((prev) => (prev === 0 ? 1 : 0));
+    }, 6000); // Transitions to next 4 testimonials every 6 seconds
+    return () => clearInterval(timer);
+  }, [isTestimonialHovered]);
 
   const faqs = [
     {
@@ -167,10 +223,147 @@ const Home = () => {
     }
   ];
 
+  const topBanners = [
+    '/images/banners/banner-ex-love-back.jpg',
+    '/images/banners/banner-black-magic-removal.jpg',
+    '/images/banners/banner-love-spell.jpg'
+  ];
+
   return (
     <div className="home-root">
       
-      {/* HERO SECTION */}
+      {/* ========================================================
+         0. TOP SACRED HERO BANNERS (CLEAN BANNERS ONLY)
+         ======================================================== */}
+      <BannerCarousel banners={topBanners} />
+
+      {/* ========================================================
+         1. TOP GRAND VEDIC HERO SECTION (COMMANDING AUTHORITY)
+         ======================================================== */}
+      <section className="vedic-master-hero">
+        <div className="vedic-hero-atmosphere">
+          <div className="vedic-nebula-orb orb-primary"></div>
+          <div className="vedic-nebula-orb orb-gold"></div>
+          <div className="vedic-star-shimmer"></div>
+        </div>
+
+        <div className="vedic-hero-container">
+          {/* Left Column: Framed Sacred Visual Card + Overlaid Badge + 3-Box Stat Strip */}
+          <motion.div 
+            className="vedic-hero-visual-side"
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.75, ease: "easeOut" }}
+          >
+            <div className="vedic-visual-card-wrapper">
+              {/* Sacred Frame (Pure visual without overlaid text) */}
+              <div className="vedic-framed-card">
+                <div className="vedic-card-image-box">
+                  <img 
+                    src="/images/services/SHIVA.webp" 
+                    alt="Master Arvind Vedic Astrology Sanctuary"
+                    className="vedic-card-img"
+                  />
+                  <div className="vedic-card-shimmer"></div>
+                </div>
+              </div>
+
+              {/* 3-Box Horizontal Stats Strip directly beneath with Animated Growing Numbers */}
+              <div className="vedic-stats-strip-underneath">
+                <div className="vedic-stat-pill stat-pill-red">
+                  <CounterNumber target={30} suffix="k+" />
+                  <span className="stat-pill-label">Happy Clients</span>
+                </div>
+                <div className="vedic-stat-pill stat-pill-orange">
+                  <CounterNumber target={100} suffix="%" />
+                  <span className="stat-pill-label">Confidential</span>
+                </div>
+                <div className="vedic-stat-pill stat-pill-crimson">
+                  <CounterNumber target={25} suffix="+" />
+                  <span className="stat-pill-label">Yrs Experience</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Right Column: Vedic Master Authority Content */}
+          <motion.div 
+            className="vedic-hero-content"
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.75, ease: "easeOut", delay: 0.15 }}
+          >
+            {/* Main Headline */}
+            <h1 className="vedic-hero-title">
+              <span className="text-solid-red">Best Indian Vedic</span> <br />
+              <span className="text-solid-orange">Astrologer in Canada</span>
+            </h1>
+
+            {/* Dynamic Typewriter Animation */}
+            <div className="vedic-typewriter-row">
+              <span className="typewriter-lead">Trusted for </span>
+              <span className="typewriter-phrase">{displayText}</span>
+              <span className="typewriter-blink">|</span>
+            </div>
+
+            {/* Location Subtitle with Gold Accent Line */}
+            <div className="vedic-location-strip">
+              <span>Serving Millwoods, Edmonton, Calgary & Across Canada</span>
+              <div className="vedic-gold-divider"></div>
+            </div>
+
+            {/* Narrative Paragraph */}
+            <p className="vedic-hero-desc">
+              <strong>Master Arvind</strong> is a world-renowned <strong>Indian Vedic Astrologer and Psychic in Canada</strong> with over <strong>25+ years of hereditary experience</strong> helping thousands find instant, lasting solutions for <strong>love problems, marriage issues, career guidance, family disputes, black magic removal, negative energy cleansing, and spiritual healing</strong>. Offering confidential <strong>phone, online, and in-person astrology consultations</strong> across Alberta and throughout Canada.
+            </p>
+
+            {/* 4 Feature Bullet Points */}
+            <div className="vedic-feature-bullets">
+              <div className="vedic-bullet-item">
+                <span className="vedic-star-sparkle">✦</span>
+                <span><strong>25+ years of trusted experience</strong> in Vedic Astrology and spiritual guidance.</span>
+              </div>
+              <div className="vedic-bullet-item">
+                <span className="vedic-star-sparkle">✦</span>
+                <span><strong>Phone, online, and in-person consultations</strong> available across Canada.</span>
+              </div>
+              <div className="vedic-bullet-item">
+                <span className="vedic-star-sparkle">✦</span>
+                <span><strong>Expert guidance</strong> for love, marriage, career, family, and black magic removal.</span>
+              </div>
+              <div className="vedic-bullet-item">
+                <span className="vedic-star-sparkle">✦</span>
+                <span><strong>Personalized astrology remedies</strong> with complete privacy and 100% confidential consultation.</span>
+              </div>
+            </div>
+
+            {/* CTAs */}
+            <div className="vedic-cta-buttons">
+              <a href={`tel:${CONTACT_INFO.phoneLink}`} className="btn-primary">
+                <Phone size={18} className="animate-ring" />
+                <span>Call: {CONTACT_INFO.phoneDisplay}</span>
+              </a>
+              <a 
+                href={`https://wa.me/${CONTACT_INFO.whatsappLink}?text=${encodeURIComponent("Hello Master Arvind, I would like to book a private consultation.")}`} 
+                target="_blank" 
+                rel="noreferrer" 
+                className="btn-whatsapp" 
+              >
+                <MessageCircle size={18} />
+                <span>WhatsApp Master</span>
+              </a>
+              <Link to="/book" className="btn-appointment">
+                <Calendar size={18} />
+                <span>Book Appointment</span>
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ========================================================
+         2. LOVE RECONCILIATION & PASSION RESTORATION SECTION
+         ======================================================== */}
       <section className="hero-cosmic-section">
         {/* Animated Background Atmosphere */}
         <div className="hero-celestial-glow glow-1"></div>
@@ -180,7 +373,7 @@ const Home = () => {
         <div className="hero-inner-container">
           {/* Left Text Content */}
           <div className="hero-text-side">
-            <div className="hero-top-badge animate-fade-in">
+            <div className="hero-top-badge animate-fade-in badge-ruby">
               <span className="badge-flame-icon">🔥</span>
               <span className="badge-text">Edmonton’s #1 Renowned Love & Relationship Specialist</span>
             </div>
@@ -188,7 +381,7 @@ const Home = () => {
             <h1 className="hero-headline">
               Bring Your Lost Love Back & <br />
               <span className="gradient-text-love">Restore True Passion</span> With <br />
-              <span className="gradient-text-gold">Master Arvind</span>
+              <span className="gradient-text-ruby">Master Arvind</span>
             </h1>
 
             <p className="hero-lead-desc">
@@ -202,7 +395,7 @@ const Home = () => {
                 <span>Get Ex Love Back Swiftly</span>
               </div>
               <div className="key-point-item">
-                <CheckCircle size={18} className="text-gold" />
+                <CheckCircle size={18} className="text-ruby" />
                 <span>100% Confidential & Ethical</span>
               </div>
               <div className="key-point-item">
@@ -210,7 +403,7 @@ const Home = () => {
                 <span>Stop Divorce & Third Parties</span>
               </div>
               <div className="key-point-item">
-                <CheckCircle size={18} className="text-gold" />
+                <CheckCircle size={18} className="text-ruby" />
                 <span>Rapid Spiritual Results</span>
               </div>
             </div>
@@ -229,7 +422,7 @@ const Home = () => {
 
               <a 
                 href={`tel:${CONTACT_INFO.phoneLink}`} 
-                className="btn-gold hero-btn-call"
+                className="btn-ruby hero-btn-call"
               >
                 <Phone size={18} className="animate-ring" />
                 <span>Call: {CONTACT_INFO.phoneDisplay}</span>
@@ -252,57 +445,61 @@ const Home = () => {
               <div className="proof-text-wrap">
                 <div className="proof-stars">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={14} className="fill-gold" />
+                    <Star key={i} size={14} className="fill-ruby text-ruby" />
                   ))}
-                  <strong className="proof-rating">4.99/5 Rating</strong>
+                  <strong className="proof-rating rating-ruby">4.99/5 Rating</strong>
                 </div>
                 <span className="proof-caption">Over 30,000+ Couples Reunited Across Canada</span>
               </div>
             </div>
           </div>
 
-          {/* Right Visual Side - Pure Image Swapping Animation */}
+          {/* Right Visual Side - Pure Reconnection Frame (Zero Overlaid Text) */}
           <div className="hero-visual-side">
-            <div className="hero-image-swapper-frame">
-              {/* Background Glow */}
-              <div className="swapper-halo-glow"></div>
+            <motion.div 
+              className="reconnection-lens-container"
+              animate={{ y: [-7, 7, -7] }}
+              transition={{ repeat: Infinity, duration: 4.8, ease: "easeInOut" }}
+            >
+              {/* Radiant Rose-Ruby Ambient Halo */}
+              <div className="lens-ambient-glow"></div>
 
-              {/* Multi-Layered 3D Deck Effect */}
-              <div className="swapper-deck-layer deck-layer-2"></div>
-              <div className="swapper-deck-layer deck-layer-1"></div>
-
-              {/* Main Swapping Image Card */}
-              <div className="swapper-main-card">
+              {/* Main Dual-Polarized Lens Frame - Pure Clean Visual */}
+              <div className="reconnection-lens-frame">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentHeroImg}
-                    className="swapper-slide"
-                    initial={{ opacity: 0, scale: 0.94, rotate: -2 }}
-                    animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                    exit={{ opacity: 0, scale: 1.04, rotate: 2 }}
-                    transition={{ duration: 0.7, ease: [0.25, 1, 0.5, 1] }}
+                    className="lens-slide-wrap"
+                    initial={{ opacity: 0, scale: 0.96 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 1.04 }}
+                    transition={{ duration: 0.75, ease: "easeInOut" }}
                   >
+                    {/* Background Primary Image */}
                     <img 
                       src={heroImages[currentHeroImg].src} 
                       alt={heroImages[currentHeroImg].alt} 
-                      className="swapper-img"
+                      className="lens-main-img"
                     />
+
+                    {/* Scanning Divine Light Bar (Energy Sweep) */}
+                    <div className="lens-energy-sweep"></div>
                   </motion.div>
                 </AnimatePresence>
               </div>
 
-              {/* Minimal Dot Indicators */}
-              <div className="swapper-indicators">
+              {/* Minimalist Dot Indicators */}
+              <div className="lens-dots-row">
                 {heroImages.map((_, idx) => (
                   <button
                     key={idx}
                     onClick={() => setCurrentHeroImg(idx)}
-                    className={`swapper-dot ${currentHeroImg === idx ? 'active' : ''}`}
-                    aria-label={`View image ${idx + 1}`}
+                    className={`lens-dot-pill ${currentHeroImg === idx ? 'active' : ''}`}
+                    aria-label={`Switch to slide ${idx + 1}`}
                   />
                 ))}
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -334,108 +531,11 @@ const Home = () => {
         </div>
       </section>
 
-      {/* 4. INTERACTIVE RELATIONSHIP EMERGENCY DIAGNOSTIC TOOL */}
-      <section className="diagnostic-section section-padding">
-        <div className="diagnostic-header text-center">
-          <div className="section-badge love-badge">
-            <Heart size={14} className="text-love" fill="currentColor" /> Interactive Love Problem Diagnosis
-          </div>
-          <h2 className="section-title">
-            Select Your Situation — <span className="gradient-text-gold">See Master Arvind's Solution</span>
-          </h2>
-          <p className="section-subtitle">
-            Every broken relationship has a unique cosmic signature. Click on your current situation below to see the astrological root cause and Master Arvind's proven Vedic ritual.
-          </p>
-        </div>
-
-        {/* Situation Tabs */}
-        <div className="situation-tabs-grid">
-          {loveSituations.map((item, idx) => (
-            <button
-              key={item.id}
-              className={`situation-tab-btn ${activeSituationIndex === idx ? 'active' : ''}`}
-              onClick={() => setActiveSituationIndex(idx)}
-            >
-              <span>{item.tabLabel}</span>
-            </button>
-          ))}
-        </div>
-
-        {/* Selected Situation Display Card with Motion */}
-        <AnimatePresence mode="wait">
-          <motion.div 
-            key={currentSituation.id}
-            className="diagnostic-result-card glass-panel"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.35 }}
-          >
-            <div className="result-card-inner">
-              <div className="result-card-info">
-                <div className="result-meta-tags">
-                  <span className="result-timeframe-tag">
-                    <Clock size={14} /> {currentSituation.timeframe}
-                  </span>
-                  <span className="result-rate-tag">
-                    <Sparkles size={14} /> {currentSituation.successRate}
-                  </span>
-                </div>
-
-                <h3 className="result-title">{currentSituation.title}</h3>
-                
-                <div className="result-block problem-block">
-                  <strong>The Current Situation:</strong>
-                  <p>{currentSituation.problem}</p>
-                </div>
-
-                <div className="result-block cause-block">
-                  <strong>Astrological Root Cause:</strong>
-                  <p>{currentSituation.cosmicCause}</p>
-                </div>
-
-                <div className="result-block cure-block">
-                  <strong>Master Arvind's Proven Remedy:</strong>
-                  <p>{currentSituation.solution}</p>
-                </div>
-
-                <div className="result-cta-row">
-                  <a 
-                    href={`https://wa.me/${CONTACT_INFO.whatsappLink}?text=${encodeURIComponent(`Hello Master Arvind, I need help with: ${currentSituation.title}. Please guide me.`)}`}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="btn-primary"
-                  >
-                    <MessageCircle size={18} />
-                    <span>{currentSituation.actionText}</span>
-                  </a>
-
-                  <a href={`tel:${CONTACT_INFO.phoneLink}`} className="btn-gold">
-                    <Phone size={18} />
-                    <span>Speak with Master Arvind</span>
-                  </a>
-                </div>
-              </div>
-
-              <div className="result-card-visual">
-                <div className="result-image-wrapper">
-                  <img src={currentSituation.image} alt={currentSituation.title} />
-                  <div className="result-image-glass-badge">
-                    <Shield size={16} className="text-gold" />
-                    <span>100% Confidential Guidance</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
-      </section>
-
-      {/* 5. TOP LOVE & RELATIONSHIP SERVICES SHOWCASE */}
+      {/* 3. TOP LOVE & RELATIONSHIP SERVICES SHOWCASE */}
       <section className="services-showcase-section section-padding">
         <div className="services-showcase-header text-center">
-          <div className="section-badge">
-            <Sparkles size={14} className="text-gold" /> Specialized Divine Services
+          <div className="section-badge love-badge">
+            <Sparkles size={14} className="text-ruby" /> Specialized Divine Services
           </div>
           <h2 className="section-title">
             Our Core <span className="gradient-text-love">Love & Relationship</span> Remedies
@@ -446,7 +546,7 @@ const Home = () => {
         </div>
 
         <div className="love-services-grid">
-          {servicesData.slice(0, 6).map((service, index) => (
+          {servicesData.slice(0, 6).map((service) => (
             <div key={service.id} className="love-service-card glass-panel">
               <div className="service-card-top-image">
                 <img 
@@ -454,36 +554,35 @@ const Home = () => {
                   alt={service.title} 
                   onError={(e) => { e.target.src = "/images/services/love-solutions.webp"; }}
                 />
-                <span className="service-card-badge">{service.badge || "Featured"}</span>
               </div>
 
               <div className="service-card-body-content">
                 <h3 className="service-card-heading">{service.title}</h3>
-                <p className="service-card-desc-text">{service.shortDesc}</p>
 
-                <ul className="service-benefits-quicklist">
-                  {service.benefits.slice(0, 2).map((benefit, bIdx) => (
-                    <li key={bIdx}>
-                      <CheckCircle size={14} className="text-love" />
-                      <span>{benefit}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="service-card-action-bar">
-                  <Link to={`/services/${service.id}`} className="service-learn-link">
-                    <span>View Full Details</span>
-                    <ArrowRight size={15} />
+                <div className="service-card-buttons-row">
+                  <Link to={`/services/${service.id}`} className="service-btn-know-more">
+                    <span>Know More</span>
+                    <ArrowRight size={13} />
                   </Link>
+
+                  <a 
+                    href={`tel:${CONTACT_INFO.phoneLink}`} 
+                    className="service-btn-call"
+                    title={`Call Master Arvind about ${service.title}`}
+                  >
+                    <Phone size={13} />
+                    <span>Call</span>
+                  </a>
 
                   <a 
                     href={`https://wa.me/${CONTACT_INFO.whatsappLink}?text=${encodeURIComponent(`Hello Master Arvind, I would like to consult regarding ${service.title}.`)}`} 
                     target="_blank" 
                     rel="noreferrer"
-                    className="service-quick-wa-btn" 
-                    title="Quick WhatsApp Inquiry"
+                    className="service-btn-wa" 
+                    title={`WhatsApp Master Arvind about ${service.title}`}
                   >
-                    <MessageCircle size={16} />
+                    <MessageCircle size={13} />
+                    <span>WhatsApp</span>
                   </a>
                 </div>
               </div>
@@ -506,48 +605,146 @@ const Home = () => {
             <Heart size={14} className="text-love" fill="currentColor" /> Spiritual Methodology
           </div>
           <h2 className="section-title">
-            How Master Arvind <span className="gradient-text-gold">Reunites Broken Love</span>
+            How Master Arvind <span className="text-solid-orange">Reunites Broken Love</span>
           </h2>
           <p className="section-subtitle">
             A proven, compassionate 4-step spiritual journey designed to dissolve negative energetic blockages and realign both souls in lasting harmony.
           </p>
         </div>
 
-        <div className="process-steps-container">
-          <div className="process-step-card glass-panel">
-            <div className="process-step-num">01</div>
-            <div className="process-step-icon-wrap">
-              <Sparkles size={24} className="text-gold" />
+        <div className="methodology-split-container">
+          {/* Left: 2x2 Grid for Steps 1, 2, 3, 4 */}
+          <div className="methodology-steps-2x2">
+            <div className="process-step-card glass-panel">
+              <div className="process-step-num">01</div>
+              <div className="process-step-icon-wrap">
+                <Sparkles size={22} className="text-gold" />
+              </div>
+              <h4>Cosmic Root Diagnosis</h4>
+              <p>Master Arvind analyzes both natal horoscopes to identify planetary afflictions (Venus, Mars, Rahu) and karmic blocks creating separation.</p>
             </div>
-            <h4>Cosmic Root Diagnosis</h4>
-            <p>Master Arvind analyzes both natal horoscopes to identify planetary afflictions (Venus, Mars, Rahu) and karmic blocks creating separation.</p>
+
+            <div className="process-step-card glass-panel">
+              <div className="process-step-num">02</div>
+              <div className="process-step-icon-wrap">
+                <Zap size={22} className="text-love" />
+              </div>
+              <h4>Negative Cord Cleansing</h4>
+              <p>Severing accumulated resentment, toxic evil eye, in-law discord, and outside interference poisoning your partner’s thoughts.</p>
+            </div>
+
+            <div className="process-step-card glass-panel">
+              <div className="process-step-num">03</div>
+              <div className="process-step-icon-wrap">
+                <Flame size={22} className="text-gold" />
+              </div>
+              <h4>Sacred Love Spell & Hawan</h4>
+              <p>Consecrated Vedic mantras and white-light attraction rituals chanted during favorable cosmic muhurats to awaken intense affection.</p>
+            </div>
+
+            <div className="process-step-card glass-panel">
+              <div className="process-step-num">04</div>
+              <div className="process-step-icon-wrap">
+                <Shield size={22} className="text-love" />
+              </div>
+              <h4>Reunion & Protection Shield</h4>
+              <p>Your lover reaches out with genuine remorse and warmth. A protective spiritual talisman (Kavach) is installed to prevent future breakups.</p>
+            </div>
           </div>
 
-          <div className="process-step-card glass-panel">
-            <div className="process-step-num">02</div>
-            <div className="process-step-icon-wrap">
-              <Zap size={24} className="text-love" />
-            </div>
-            <h4>Negative Cord Cleansing</h4>
-            <p>Severing accumulated resentment, toxic evil eye, in-law discord, and outside interference poisoning your partner’s thoughts.</p>
-          </div>
+          {/* Right: Connect Form Card */}
+          <div className="methodology-form-wrapper">
+            <div className="connect-master-card">
+              <h3 className="connect-card-title">Connect With Master Arvind</h3>
+              <p className="connect-card-subtitle">
+                We hear you and would be happy to serve you. Connect and fill this form to get in touch with Arvind Ji now.
+              </p>
 
-          <div className="process-step-card glass-panel">
-            <div className="process-step-num">03</div>
-            <div className="process-step-icon-wrap">
-              <Flame size={24} className="text-gold" />
-            </div>
-            <h4>Sacred Love Spell & Hawan</h4>
-            <p>Consecrated Vedic mantras and white-light attraction rituals chanted during favorable cosmic muhurats to awaken intense affection.</p>
-          </div>
+              <form onSubmit={handleMethodologySubmit} className="connect-actual-form">
+                <div className="connect-form-row two-col">
+                  <input
+                    type="text"
+                    name="firstName"
+                    placeholder="First Name *"
+                    required
+                    value={methodologyForm.firstName}
+                    onChange={handleMethodologyChange}
+                    className="connect-form-input"
+                  />
+                  <input
+                    type="text"
+                    name="lastName"
+                    placeholder="Last Name"
+                    value={methodologyForm.lastName}
+                    onChange={handleMethodologyChange}
+                    className="connect-form-input"
+                  />
+                </div>
 
-          <div className="process-step-card glass-panel">
-            <div className="process-step-num">04</div>
-            <div className="process-step-icon-wrap">
-              <Shield size={24} className="text-love" />
+                <div className="connect-form-row two-col">
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Email Address *"
+                    required
+                    value={methodologyForm.email}
+                    onChange={handleMethodologyChange}
+                    className="connect-form-input"
+                  />
+                  <input
+                    type="tel"
+                    name="phone"
+                    placeholder="Phone Number *"
+                    required
+                    value={methodologyForm.phone}
+                    onChange={handleMethodologyChange}
+                    className="connect-form-input"
+                  />
+                </div>
+
+                <div className="connect-form-row full-col">
+                  <div className="connect-select-wrap">
+                    <select
+                      name="service"
+                      value={methodologyForm.service}
+                      onChange={handleMethodologyChange}
+                      className="connect-form-select"
+                    >
+                      <option value="Love Problem Solution / Ex Back">Love Problem Solution / Ex Back</option>
+                      <option value="Stop Divorce & Marriage Separation">Stop Divorce & Marriage Separation</option>
+                      <option value="Black Magic & Evil Eye Cleansing">Black Magic & Evil Eye Cleansing</option>
+                      <option value="Family & Relationship Harmony">Family & Relationship Harmony</option>
+                      <option value="Spiritual Protection & Healing">Spiritual Protection & Healing</option>
+                      <option value="Other Astrological Consultation">Other Astrological Consultation</option>
+                    </select>
+                    <ChevronDown size={18} className="select-arrow-icon" />
+                  </div>
+                </div>
+
+                <div className="connect-form-row full-col">
+                  <textarea
+                    name="problem"
+                    rows="4"
+                    placeholder="Share your problem in detail..."
+                    value={methodologyForm.problem}
+                    onChange={handleMethodologyChange}
+                    className="connect-form-textarea"
+                  ></textarea>
+                </div>
+
+                <button type="submit" className="connect-form-submit-btn">
+                  <Send size={16} />
+                  <span>Send Message &rarr;</span>
+                </button>
+
+                {methodologySubmitted && (
+                  <div className="connect-success-msg">
+                    <CheckCircle size={16} />
+                    <span>Your message has been sent to Master Arvind via WhatsApp!</span>
+                  </div>
+                )}
+              </form>
             </div>
-            <h4>Reunion & Protection Shield</h4>
-            <p>Your lover reaches out with genuine remorse and warmth. A protective spiritual talisman (Kavach) is installed to prevent future breakups.</p>
           </div>
         </div>
       </section>
@@ -633,48 +830,84 @@ const Home = () => {
             <Heart size={14} className="text-love" fill="currentColor" /> Real Love Miracles
           </div>
           <h2 className="section-title">
-            Couples Reunited by <span className="gradient-text-love">Master Arvind</span>
+            Couples Reunited by <span className="text-solid-orange">Master Arvind</span>
           </h2>
           <p className="section-subtitle">
-            Read heartfelt stories from real clients in Edmonton, Calgary, Vancouver, and Toronto whose love was resurrected through Master Arvind's guidance.
+            Heartfelt verified experiences from real couples in Edmonton, Calgary, Vancouver, and Toronto whose love was healed through Master Arvind's guidance.
           </p>
         </div>
 
-        <div className="reviews-cards-grid">
-          {loveTestimonials.map((item, idx) => (
-            <div key={idx} className="review-card glass-panel">
-              <div className="review-card-top">
-                <div className="review-author-wrap">
-                  <img src={item.image} alt={item.couple} className="review-avatar" />
-                  <div>
-                    <h4>{item.couple}</h4>
-                    <span className="review-city">{item.city}</span>
+        <div 
+          className="reviews-slider-wrapper"
+          onMouseEnter={() => setIsTestimonialHovered(true)}
+          onMouseLeave={() => setIsTestimonialHovered(false)}
+        >
+          <AnimatePresence mode="wait">
+            <motion.div 
+              key={testimonialPage}
+              className="reviews-cards-grid"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
+            >
+              {loveTestimonials.slice(testimonialPage * 4, testimonialPage * 4 + 4).map((item, idx) => (
+                <div key={idx} className="simple-review-card">
+                  <div className="simple-card-stars">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} size={17} fill="#F59E0B" color="#F59E0B" />
+                    ))}
+                  </div>
+
+                  <p className="simple-card-text">
+                    "{item.text}"
+                  </p>
+
+                  <div className="simple-card-author">
+                    <img src={item.image} alt={item.couple} className="simple-card-avatar" />
+                    <div className="simple-card-info">
+                      <h4 className="simple-card-name">{item.couple}</h4>
+                      <div className="simple-card-meta">
+                        <span>{item.city}</span>
+                        <span className="simple-card-dot">•</span>
+                        <span className="simple-card-timeframe">{item.timeframe}</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div className="review-stars-col">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={13} className="fill-gold" />
-                  ))}
-                </div>
-              </div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
 
-              <div className="review-transformation-badge">
-                <Heart size={13} className="text-love" fill="currentColor" />
-                <span>{item.status}</span>
-              </div>
+          {/* Clean Pagination Controls */}
+          <div className="reviews-pagination-row">
+            <button 
+              className="review-page-nav-btn prev"
+              onClick={() => setTestimonialPage((prev) => (prev === 0 ? 1 : 0))}
+              aria-label="Previous Testimonials"
+            >
+              <ChevronLeft size={18} />
+            </button>
 
-              <p className="review-text-content">
-                "{item.text}"
-              </p>
-
-              <div className="review-card-footer">
-                <span className="review-timeframe-tag">
-                  <CheckCircle size={13} className="text-gold" /> {item.timeframe}
-                </span>
-                <span className="verified-badge">Verified Consultation</span>
-              </div>
+            <div className="reviews-dots-box">
+              {[0, 1].map((index) => (
+                <button
+                  key={index}
+                  className={`review-page-dot ${index === testimonialPage ? 'active' : ''}`}
+                  onClick={() => setTestimonialPage(index)}
+                  aria-label={`View Testimonials Set ${index + 1}`}
+                />
+              ))}
             </div>
-          ))}
+
+            <button 
+              className="review-page-nav-btn next"
+              onClick={() => setTestimonialPage((prev) => (prev === 0 ? 1 : 0))}
+              aria-label="Next Testimonials"
+            >
+              <ChevronRight size={18} />
+            </button>
+          </div>
         </div>
       </section>
 

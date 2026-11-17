@@ -83,6 +83,66 @@
   flex-shrink: 0;
 }
 
+/* 4 Official Social Media Icons */
+.top-social-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.top-social-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #5A4E5C;
+  margin-right: 2px;
+}
+
+.top-social-icon {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  flex-shrink: 0;
+}
+
+.top-social-icon:hover {
+  transform: translateY(-2px) scale(1.12);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.icon-facebook {
+  background: #1877F2;
+}
+
+.icon-facebook:hover {
+  background: #0D65D9;
+}
+
+.icon-instagram {
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+}
+
+.icon-whatsapp {
+  background: #25D366;
+}
+
+.icon-whatsapp:hover {
+  background: #1EBE5D;
+}
+
+.icon-youtube {
+  background: #FF0000;
+}
+
+.icon-youtube:hover {
+  background: #CC0000;
+}
+
 .top-call-link, .top-wa-link {
   display: flex;
   align-items: center;

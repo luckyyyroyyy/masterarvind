@@ -44,6 +44,26 @@
   box-shadow: 0 12px 35px rgba(194, 24, 91, 0.52);
 }
 
+.floating-location-btn {
+  background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+  box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
+}
+
+.floating-location-btn:hover {
+  box-shadow: 0 12px 35px rgba(239, 68, 68, 0.55);
+}
+
+.floating-scroll-top-btn {
+  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+  box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+  border: none;
+  cursor: pointer;
+}
+
+.floating-scroll-top-btn:hover {
+  box-shadow: 0 12px 35px rgba(245, 158, 11, 0.55);
+}
+
 .floating-icon-wrap {
   display: flex;
   align-items: center;
