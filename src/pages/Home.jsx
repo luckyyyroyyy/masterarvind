@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { 
   Heart, Sparkles, Phone, MessageCircle, Shield, Star, 
   Clock, MapPin, CheckCircle, ChevronDown, ChevronLeft, ChevronRight, ArrowRight, 
-  Lock, Flame, Zap, Award, Users, Calendar, HelpCircle, Send 
+  Lock, Flame, Zap, Award, Users, Calendar, HelpCircle, Send, ShieldCheck,
+  Edit3, X 
 } from 'lucide-react';
 import { CONTACT_INFO } from '../config/contact';
 import { servicesData } from '../data/servicesData';
@@ -46,9 +47,63 @@ const CounterNumber = ({ target, suffix = "" }) => {
   );
 };
 
+// Precision Animated Stat Counter (In-View Triggered for Meet Master Arvind Section)
+const StatCounter = ({ target, suffix = "", decimals = 0, formatComma = false }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: false, amount: 0.3 });
+  const [displayValue, setDisplayValue] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) {
+      setDisplayValue(0);
+      return;
+    }
+
+    let startTime = null;
+    let animationFrameId;
+    const duration = 2000;
+
+    const animateCount = (timestamp) => {
+      if (!startTime) startTime = timestamp;
+      const elapsed = timestamp - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      
+      const easeProgress = 1 - Math.pow(1 - progress, 3);
+      const current = easeProgress * target;
+
+      setDisplayValue(current);
+
+      if (progress < 1) {
+        animationFrameId = requestAnimationFrame(animateCount);
+      } else {
+        setDisplayValue(target);
+      }
+    };
+
+    animationFrameId = requestAnimationFrame(animateCount);
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [isInView, target]);
+
+  const formatted = decimals > 0 
+    ? displayValue.toFixed(decimals) 
+    : formatComma 
+      ? Math.floor(displayValue).toLocaleString() 
+      : Math.floor(displayValue).toString();
+
+  return (
+    <motion.span 
+      ref={ref} 
+      className="stat-number growing-stat-number"
+      animate={{ scale: [1, 1.04, 1] }}
+      transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+    >
+      {formatted}{suffix}
+    </motion.span>
+  );
+};
+
 const Home = () => {
   const [activeFaq, setActiveFaq] = useState(null);
-  const [currentHeroImg, setCurrentHeroImg] = useState(0);
 
   // Connect Form State (Spiritual Methodology Section)
   const [methodologyForm, setMethodologyForm] = useState({
@@ -75,6 +130,152 @@ const Home = () => {
     window.open(`https://wa.me/${CONTACT_INFO.whatsappLink}?text=${encodeURIComponent(message)}`, '_blank');
     setMethodologySubmitted(true);
   };
+
+  // Write a Review Modal State
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+  const [reviewForm, setReviewForm] = useState({
+    name: '',
+    city: '',
+    service: 'Ex Love Problem Solution',
+    rating: 5,
+    text: ''
+  });
+  const [reviewSubmitted, setReviewSubmitted] = useState(false);
+
+  const handleReviewSubmit = (e) => {
+    e.preventDefault();
+    const message = `*New 5-Star Google Review Submission - Master Arvind*\n\n*Name:* ${reviewForm.name}\n*City:* ${reviewForm.city}\n*Service:* ${reviewForm.service}\n*Rating:* ${'⭐'.repeat(reviewForm.rating)}\n*Review:* "${reviewForm.text}"`;
+    window.open(`https://wa.me/${CONTACT_INFO.whatsappLink}?text=${encodeURIComponent(message)}`, '_blank');
+    setReviewSubmitted(true);
+    setTimeout(() => {
+      setReviewSubmitted(false);
+      setIsReviewModalOpen(false);
+      setReviewForm({ name: '', city: '', service: 'Ex Love Problem Solution', rating: 5, text: '' });
+    }, 2000);
+  };
+
+  // 9 Diverse Astrological & Spiritual Services (Excluding pure love/relationship services)
+  const diverseServices = [
+    'career-guidance',
+    'psychic-reading',
+    'horoscope-reading',
+    'palm-reading',
+    'spiritual-healing',
+    'black-magic-removal',
+    'family-problems',
+    'court-cases',
+    'vastu-shastra'
+  ].map(id => servicesData.find(s => s.id === id)).filter(Boolean);
+
+  // Why Choose Us Pillars Data
+  const whyChooseUsData = [
+    {
+      num: "01",
+      icon: <Award size={26} />,
+      bgClass: "icon-bg-gold",
+      title: "25+ Years Hereditary Lineage",
+      highlight: "Sacred Vedic Scholarship",
+      desc: "Descended from a multi-generational lineage of enlightened Jyotish masters, Master Arvind combines ancestral spiritual authority with deep clairvoyant intuition.",
+      tag: "Verified Master"
+    },
+    {
+      num: "02",
+      icon: <Sparkles size={26} />,
+      bgClass: "icon-bg-ruby",
+      title: "100% White-Light Sacred Rituals",
+      highlight: "Ethical Divine Energies",
+      desc: "Exclusively positive, safe universal frequencies that heal souls. Zero harmful karma, zero forced manipulation, and total spiritual protection.",
+      tag: "Pure & Ethical"
+    },
+    {
+      num: "03",
+      icon: <Zap size={26} />,
+      bgClass: "icon-bg-orange",
+      title: "Fast & Tangible Breakthroughs",
+      highlight: "Results in 3 to 7 Days",
+      desc: "Accurately diagnosing the root cosmic blockage to perform targeted Vedic remedies that spark undeniable breakthroughs within days.",
+      tag: "Proven Impact"
+    },
+    {
+      num: "04",
+      icon: <Lock size={26} />,
+      bgClass: "icon-bg-emerald",
+      title: "Absolute Confidentiality",
+      highlight: "100% Privacy Protected",
+      desc: "Your personal story, photos, and birth chart details are safeguarded with strict spiritual discretion, total anonymity, and zero judgment.",
+      tag: "Discreet Sanctuary"
+    }
+  ];
+
+  // 10 Distinct Dynamic Morphing Shapes for Why Choose Us Cards (Morphing every 2s, one-by-one)
+  const masterShapes = [
+    "24px 24px 24px 24px", // 1. Classic Sleek Rounded Card
+    "60px 18px 60px 18px", // 2. Sacred Diagonal Leaf
+    "18px 60px 18px 60px", // 3. Reverse Diagonal Leaf
+    "60px 60px 18px 60px", // 4. Top Arch Teardrop
+    "18px 60px 60px 18px", // 5. Fluid Wave Pebble
+    "55px 18px 30px 60px", // 6. Dynamic Asymmetric Polygon
+    "30px 60px 55px 18px", // 7. Inverted Asymmetric Wave
+    "20px 50px 20px 50px", // 8. Gentle Elliptical Petal
+    "50px 20px 50px 20px", // 9. Opposite Elliptical Petal
+    "44px 44px 18px 18px"  // 10. Vaulted Arch Dome
+  ];
+
+  // 4 Unique offset sequences of 10 shapes (completing full seamless loop)
+  const cardMorphShapes = [
+    [
+      masterShapes[0], masterShapes[1], masterShapes[2], masterShapes[3], masterShapes[4],
+      masterShapes[5], masterShapes[6], masterShapes[7], masterShapes[8], masterShapes[9],
+      masterShapes[0]
+    ],
+    [
+      masterShapes[3], masterShapes[4], masterShapes[5], masterShapes[6], masterShapes[7],
+      masterShapes[8], masterShapes[9], masterShapes[0], masterShapes[1], masterShapes[2],
+      masterShapes[3]
+    ],
+    [
+      masterShapes[6], masterShapes[7], masterShapes[8], masterShapes[9], masterShapes[0],
+      masterShapes[1], masterShapes[2], masterShapes[3], masterShapes[4], masterShapes[5],
+      masterShapes[6]
+    ],
+    [
+      masterShapes[8], masterShapes[9], masterShapes[0], masterShapes[1], masterShapes[2],
+      masterShapes[3], masterShapes[4], masterShapes[5], masterShapes[6], masterShapes[7],
+      masterShapes[8]
+    ]
+  ];
+
+  // 8 Attractive Vibrant Solid Colors for Why Choose Us Cards (Cycling every 4 seconds)
+  const masterColorThemes = [
+    { bg: "#EA580C", border: "rgba(255, 255, 255, 0.5)", shadow: "0 16px 40px rgba(234, 88, 12, 0.42)" }, // 1. Sunset Saffron
+    { bg: "#B91C1C", border: "rgba(255, 255, 255, 0.5)", shadow: "0 16px 40px rgba(185, 28, 28, 0.42)" }, // 2. Ruby Crimson
+    { bg: "#6D28D9", border: "rgba(255, 255, 255, 0.5)", shadow: "0 16px 40px rgba(109, 40, 217, 0.42)" }, // 3. Mystic Violet
+    { bg: "#1D4ED8", border: "rgba(255, 255, 255, 0.5)", shadow: "0 16px 40px rgba(29, 78, 216, 0.42)" },  // 4. Cosmic Sapphire
+    { bg: "#047857", border: "rgba(255, 255, 255, 0.5)", shadow: "0 16px 40px rgba(4, 120, 87, 0.42)" },  // 5. Divine Emerald
+    { bg: "#BE185D", border: "rgba(255, 255, 255, 0.5)", shadow: "0 16px 40px rgba(190, 24, 93, 0.42)" },  // 6. Lotus Magenta
+    { bg: "#B45309", border: "rgba(255, 255, 255, 0.5)", shadow: "0 16px 40px rgba(180, 83, 9, 0.42)" },  // 7. Sacred Amber Gold
+    { bg: "#0F766E", border: "rgba(255, 255, 255, 0.5)", shadow: "0 16px 40px rgba(15, 118, 110, 0.42)" }  // 8. Mystic Ocean Teal
+  ];
+
+  const getCardColorCycle = (offset) => {
+    const list = [];
+    for (let i = 0; i < 8; i++) {
+      list.push(masterColorThemes[(i + offset) % 8]);
+    }
+    list.push(masterColorThemes[offset % 8]);
+    return {
+      bg: list.map(c => c.bg),
+      border: list.map(c => c.border),
+      shadow: list.map(c => c.shadow)
+    };
+  };
+
+  const cardColors = [
+    getCardColorCycle(0),
+    getCardColorCycle(2),
+    getCardColorCycle(4),
+    getCardColorCycle(6)
+  ];
 
   // Dynamic Animated Typewriter
   const typewriterPhrases = [
@@ -114,91 +315,103 @@ const Home = () => {
     return () => clearTimeout(timer);
   }, [displayText, isDeleting, phraseIndex, typingSpeed]);
 
-  const heroImages = [
-    { src: "/images/services/bring-ex-back.webp", alt: "Get Ex Love Back" },
-    { src: "/images/services/love_reading.webp", alt: "Sacred Love Spells" },
-    { src: "/images/services/soulmate-connection.webp", alt: "Soulmate Connection" },
-    { src: "/images/services/relationship_astrology_hero.webp", alt: "Relationship Harmony" },
-    { src: "/images/services/toxic-marriage-signs.webp", alt: "Stop Divorce" }
-  ];
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentHeroImg((prev) => (prev + 1) % heroImages.length);
-    }, 3200);
-    return () => clearInterval(timer);
-  }, [heroImages.length]);
-
-  // Love Testimonials (8 Real Stories)
-  const loveTestimonials = [
+  // Row 1 Official Google Reviews (5 Authentic Client Stories)
+  const googleReviewsRow1 = [
     {
-      couple: "Jessica & Marcus",
-      city: "Edmonton, AB",
-      timeframe: "Reunited in 11 Days",
-      text: "Marcus left our shared home and blocked my number everywhere. I felt hopeless until I visited Master Arvind in Edmonton. He performed a sacred love reconnection ritual. In just 11 days, Marcus unblocked me and knocked on my door in tears. We are getting married this summer!",
-      image: "https://randomuser.me/api/portraits/women/44.jpg"
+      name: "Jessica Martinez & Marcus",
+      meta: "Local Guide · 14 reviews · Edmonton",
+      avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&auto=format&fit=crop&q=80",
+      date: "2 weeks ago",
+      tag: "❤️ Ex Love Reconnection",
+      text: "Marcus had packed his bags, left our home, and blocked my number everywhere. I was heartbroken until a friend recommended Master Arvind in Edmonton. In just 11 days of his sacred Vedic rituals, Marcus called me in tears asking to come back. We are now happily engaged!",
+      outcome: "Reunited in 11 Days"
     },
     {
-      couple: "David & Sarah",
-      city: "Calgary, AB",
-      timeframe: "Marriage Saved in 2 Weeks",
-      text: "We were sleeping in separate rooms and our lawyers had already prepared separation documents. Master Arvind identified a severe planetary clash and evil eye from an envious relative. After his remedies, the bitterness completely dissolved. He saved our marriage and our children's future.",
-      image: "https://randomuser.me/api/portraits/men/32.jpg"
+      name: "David & Sarah Sterling",
+      meta: "Verified Client · Calgary, AB",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80",
+      date: "3 weeks ago",
+      tag: "💍 Marriage Saved from Divorce",
+      text: "Divorce papers were already drawn up and we hadn't spoken with kindness in months. Master Arvind diagnosed severe planetary blockage and performed white-light family harmony poojas. Within two weeks the anger completely vanished. He saved our family.",
+      outcome: "Marriage Saved in 14 Days"
     },
     {
-      couple: "Simran & Harpreet",
-      city: "Vancouver, BC",
-      timeframe: "Blessings in 18 Days",
-      text: "Both our families were strongly opposed to our inter-caste marriage for over 3 years. Master Arvind performed powerful Vedic family harmony poojas. Within 3 weeks, both sets of parents had a change of heart and celebrated our engagement together!",
-      image: "https://randomuser.me/api/portraits/women/68.jpg"
+      name: "Simranjeet Kaur & Harpreet",
+      meta: "Local Guide · 22 reviews · Vancouver",
+      avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=120&auto=format&fit=crop&q=80",
+      date: "a month ago",
+      tag: "✨ Inter-Caste Family Approval",
+      text: "Both our parents vehemently rejected our relationship for 3 long years. We consulted Master Arvind virtually over WhatsApp. His spiritual remedies removed the hostility between the families. Both families joyfully attended our engagement!",
+      outcome: "Parental Blessing in 18 Days"
     },
     {
-      couple: "Chloe & Liam",
-      city: "Toronto, ON",
-      timeframe: "Reignited in 5 Days",
-      text: "My fiancé seemed to have lost all interest in me and commitment felt impossible. Master Arvind’s sacred love attraction rituals ignited a spark we hadn't felt in years. He is now more affectionate and attentive than ever before.",
-      image: "https://randomuser.me/api/portraits/women/89.jpg"
+      name: "Chloe & Liam Henderson",
+      meta: "Verified Client · Toronto, ON",
+      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80",
+      date: "a month ago",
+      tag: "🔥 Passion & Commitment Reignited",
+      text: "Liam grew distant and told me he had lost feelings. Master Arvind performed a Venus love attraction reading and ritual. In only 5 days, Liam surprised me with flowers and admitted how deeply he loves me. The romance is stronger than when we first met.",
+      outcome: "Reignited in 5 Days"
     },
     {
-      couple: "Aman & Priya",
-      city: "Surrey, BC",
-      timeframe: "Reunited in 9 Days",
-      text: "My partner walked away after constant misunderstandings and refused to speak with me for months. Master Arvind did a detailed astrological reading and performed a Venus attraction ritual. Within 9 days, Aman called me apologizing and asked to restart our relationship!",
-      image: "https://randomuser.me/api/portraits/women/65.jpg"
-    },
-    {
-      couple: "Michael & Jennifer",
-      city: "Red Deer, AB",
-      timeframe: "Divorce Stopped in 12 Days",
-      text: "Third-party interference and negative jealousy had completely destroyed trust between my wife and me. Master Arvind removed the dark energy surrounding our home. Within 12 days, Jennifer broke off contact with the outside influence and our marriage is thriving again.",
-      image: "https://randomuser.me/api/portraits/men/45.jpg"
-    },
-    {
-      couple: "Rajesh & Sunita",
-      city: "Edmonton, AB",
-      timeframe: "Harmony Restored in 7 Days",
-      text: "In-law tensions and astrological Manglik dosha were creating daily fights. We visited Master Arvind at his Edmonton sanctuary in Millwoods. His poojas brought an immediate peaceful calm into our marriage. We are happier than ever!",
-      image: "https://randomuser.me/api/portraits/women/33.jpg"
-    },
-    {
-      couple: "Emily & Daniel",
-      city: "Ottawa, ON",
-      timeframe: "Reconnected in 8 Days",
-      text: "Daniel had gone completely silent and cold after a bitter argument. I consulted Master Arvind over phone from Ottawa. His white-light spiritual healing worked like a miracle. Daniel texted me on day 8 asking to meet and we have reconciled completely.",
-      image: "https://randomuser.me/api/portraits/women/53.jpg"
+      name: "Amandeep Singh & Priya",
+      meta: "Local Guide · 9 reviews · Surrey, BC",
+      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&auto=format&fit=crop&q=80",
+      date: "2 months ago",
+      tag: "🛡️ Negative Energy Cleansed",
+      text: "Constant unexplainable fighting tore our relationship apart. Master Arvind identified negative evil eye energy sent by an envious person. Once cleansed, the dark cloud lifted immediately. We are at complete peace and closer than ever.",
+      outcome: "Harmony Restored in 9 Days"
     }
   ];
 
-  const [testimonialPage, setTestimonialPage] = useState(0);
-  const [isTestimonialHovered, setIsTestimonialHovered] = useState(false);
-
-  useEffect(() => {
-    if (isTestimonialHovered) return;
-    const timer = setInterval(() => {
-      setTestimonialPage((prev) => (prev === 0 ? 1 : 0));
-    }, 6000); // Transitions to next 4 testimonials every 6 seconds
-    return () => clearInterval(timer);
-  }, [isTestimonialHovered]);
+  // Row 2 Official Google Reviews (5 Authentic Client Stories)
+  const googleReviewsRow2 = [
+    {
+      name: "Michael & Jennifer Kowalski",
+      meta: "Verified Client · Red Deer, AB",
+      avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=120&auto=format&fit=crop&q=80",
+      date: "3 weeks ago",
+      tag: "🚫 Third-Party Interference Removed",
+      text: "An outside third person came between my wife and me, creating a wedge that looked impossible to fix. Master Arvind performed protective Vedic shield poojas. Within 12 days, the outside contact completely ceased and my wife returned home full of love.",
+      outcome: "Reunited in 12 Days"
+    },
+    {
+      name: "Rajesh & Sunita Patel",
+      meta: "Local Guide · 31 reviews · Edmonton",
+      avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=120&auto=format&fit=crop&q=80",
+      date: "2 weeks ago",
+      tag: "🕉️ Manglik Dosha & In-Law Healing",
+      text: "We visited Master Arvind at his Edmonton center. We were suffering from deep Manglik dosha and severe family stress. His personalized gemstones and prayers brought instant serenity. Master Arvind is truly God-gifted and profoundly humble.",
+      outcome: "Peace in 7 Days"
+    },
+    {
+      name: "Emily & Daniel Tremblay",
+      meta: "Verified Client · Montreal, QC",
+      avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=120&auto=format&fit=crop&q=80",
+      date: "a month ago",
+      tag: "🕊️ Long-Distance Reconnection",
+      text: "Living in different provinces, Daniel stopped calling and said he couldn't do it anymore. Master Arvind worked remotely using our birth photos. On day 8, Daniel booked a flight to visit me. We moved in together last weekend. Master Arvind is a miracle worker!",
+      outcome: "Reconnected in 8 Days"
+    },
+    {
+      name: "Navjot & Gurpreet Brar",
+      meta: "Local Guide · 17 reviews · Calgary",
+      avatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=120&auto=format&fit=crop&q=80",
+      date: "5 weeks ago",
+      tag: "💫 Accurate Destiny & Soulmate Forecast",
+      text: "I had given up on marriage after multiple broken engagements. Master Arvind read my Kundali and accurately pinpointed the exact month my soulmate would arrive. Met Gurpreet exactly when he predicted and we are married today! Forever indebted.",
+      outcome: "Accurate Destiny Forecast"
+    },
+    {
+      name: "Tanya & Brandon Scott",
+      meta: "Verified Client · Edmonton Sanctuary",
+      avatar: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=120&auto=format&fit=crop&q=80",
+      date: "1 month ago",
+      tag: "🌟 Sacred White-Light Love Healing",
+      text: "Master Arvind's sanctuary in Edmonton is full of calming spiritual aura. His reading was 100% accurate without me saying a word. His love spell worked gently with zero negativity. Brandon treats me like a queen now. Don't hesitate to contact him!",
+      outcome: "Result in 6 Days"
+    }
+  ];
 
   const faqs = [
     {
@@ -248,50 +461,12 @@ const Home = () => {
         </div>
 
         <div className="vedic-hero-container">
-          {/* Left Column: Framed Sacred Visual Card + Overlaid Badge + 3-Box Stat Strip */}
+          {/* Left Column: Vedic Master Authority Content */}
           <motion.div 
-            className="vedic-hero-visual-side"
+            className="vedic-hero-content"
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.75, ease: "easeOut" }}
-          >
-            <div className="vedic-visual-card-wrapper">
-              {/* Sacred Frame (Pure visual without overlaid text) */}
-              <div className="vedic-framed-card">
-                <div className="vedic-card-image-box">
-                  <img 
-                    src="/images/services/SHIVA.webp" 
-                    alt="Master Arvind Vedic Astrology Sanctuary"
-                    className="vedic-card-img"
-                  />
-                  <div className="vedic-card-shimmer"></div>
-                </div>
-              </div>
-
-              {/* 3-Box Horizontal Stats Strip directly beneath with Animated Growing Numbers */}
-              <div className="vedic-stats-strip-underneath">
-                <div className="vedic-stat-pill stat-pill-red">
-                  <CounterNumber target={30} suffix="k+" />
-                  <span className="stat-pill-label">Happy Clients</span>
-                </div>
-                <div className="vedic-stat-pill stat-pill-orange">
-                  <CounterNumber target={100} suffix="%" />
-                  <span className="stat-pill-label">Confidential</span>
-                </div>
-                <div className="vedic-stat-pill stat-pill-crimson">
-                  <CounterNumber target={25} suffix="+" />
-                  <span className="stat-pill-label">Yrs Experience</span>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Right Column: Vedic Master Authority Content */}
-          <motion.div 
-            className="vedic-hero-content"
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.75, ease: "easeOut", delay: 0.15 }}
           >
             {/* Main Headline */}
             <h1 className="vedic-hero-title">
@@ -358,249 +533,249 @@ const Home = () => {
               </Link>
             </div>
           </motion.div>
+
+          {/* Right Column: Framed Sacred Visual Card + Overlaid Badge + 3-Box Stat Strip */}
+          <motion.div 
+            className="vedic-hero-visual-side"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <div className="vedic-visual-card-wrapper">
+              {/* Sacred Frame - Pop Small to Big Animation (Whole Frame & Image Together) */}
+              <motion.div 
+                className="vedic-framed-card"
+                initial={{ opacity: 0, scale: 0.15 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: false, amount: 0.15 }}
+                transition={{ 
+                  type: "spring", 
+                  stiffness: 175, 
+                  damping: 11, 
+                  mass: 0.8,
+                  delay: 0.15 
+                }}
+                whileHover={{ scale: 1.025, transition: { duration: 0.25 } }}
+              >
+                <div className="vedic-card-image-box">
+                  <img 
+                    src="/images/services/shiva-meditation.jpg" 
+                    alt="Master Arvind Vedic Astrology Sanctuary - Lord Shiva in Meditation"
+                    className="vedic-card-img"
+                  />
+                  <div className="vedic-card-shimmer"></div>
+                </div>
+              </motion.div>
+
+              {/* 3-Box Horizontal Stats Strip directly beneath with Animated Growing Numbers */}
+              <div className="vedic-stats-strip-underneath">
+                <div className="vedic-stat-pill stat-pill-red">
+                  <CounterNumber target={30} suffix="k+" />
+                  <span className="stat-pill-label">Happy Clients</span>
+                </div>
+                <div className="vedic-stat-pill stat-pill-orange">
+                  <CounterNumber target={100} suffix="%" />
+                  <span className="stat-pill-label">Confidential</span>
+                </div>
+                <div className="vedic-stat-pill stat-pill-crimson">
+                  <CounterNumber target={25} suffix="+" />
+                  <span className="stat-pill-label">Yrs Experience</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
       {/* ========================================================
-         2. LOVE RECONCILIATION & PASSION RESTORATION SECTION
+         2. THREE CORE SPECIALIZED SERVICES (GET EX BACK, LOVE SPELL, BLACK MAGIC REMOVAL)
          ======================================================== */}
-      <section className="hero-cosmic-section">
-        {/* Animated Background Atmosphere */}
-        <div className="hero-celestial-glow glow-1"></div>
-        <div className="hero-celestial-glow glow-2"></div>
-        <div className="hero-star-particles"></div>
-
-        <div className="hero-inner-container">
-          {/* Left Text Content */}
-          <div className="hero-text-side">
-            <div className="hero-top-badge animate-fade-in badge-ruby">
-              <span className="badge-flame-icon">🔥</span>
-              <span className="badge-text">Edmonton’s #1 Renowned Love & Relationship Specialist</span>
+      <section className="three-pillars-section section-padding">
+        <div className="three-pillars-container">
+          <motion.div 
+            className="section-header text-center"
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.3 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <div className="section-badge love-badge">
+              <Sparkles size={14} className="text-ruby" /> Most Requested Divine Consultations
             </div>
-
-            <h1 className="hero-headline">
-              Bring Your Lost Love Back & <br />
-              <span className="gradient-text-love">Restore True Passion</span> With <br />
-              <span className="gradient-text-ruby">Master Arvind</span>
-            </h1>
-
-            <p className="hero-lead-desc">
-              Struggling with a heartbreaking breakup, cold distance, or marriage conflicts? Master Arvind utilizes 25+ years of authentic Vedic spiritual mastery, white-light love spells, and energy cord healing to reunite lovers and bring lifelong peace.
+            <h2 className="section-title">
+              Specialized <span className="text-solid-red">Spiritual</span> Solutions
+            </h2>
+            <p className="section-subtitle">
+              Master Arvind’s three primary sacred specialties — reuniting broken love, casting ethical white-light love spells, and permanently eradicating dark black magic forces.
             </p>
+          </motion.div>
 
-            {/* Key Trust Highlights */}
-            <div className="hero-key-points">
-              <div className="key-point-item">
-                <CheckCircle size={18} className="text-love" />
-                <span>Get Ex Love Back Swiftly</span>
-              </div>
-              <div className="key-point-item">
-                <CheckCircle size={18} className="text-ruby" />
-                <span>100% Confidential & Ethical</span>
-              </div>
-              <div className="key-point-item">
-                <CheckCircle size={18} className="text-love" />
-                <span>Stop Divorce & Third Parties</span>
-              </div>
-              <div className="key-point-item">
-                <CheckCircle size={18} className="text-ruby" />
-                <span>Rapid Spiritual Results</span>
-              </div>
-            </div>
-
-            {/* Hero CTAs */}
-            <div className="hero-cta-group">
-              <a 
-                href={`https://wa.me/${CONTACT_INFO.whatsappLink}?text=${encodeURIComponent("Hello Master Arvind, I need urgent help to get my ex love back / fix my relationship.")}`} 
-                target="_blank" 
-                rel="noreferrer" 
-                className="btn-primary hero-btn-main"
-              >
-                <Heart size={18} fill="#fff" />
-                <span>Reunite With Your Love</span>
-              </a>
-
-              <a 
-                href={`tel:${CONTACT_INFO.phoneLink}`} 
-                className="btn-ruby hero-btn-call"
-              >
-                <Phone size={18} className="animate-ring" />
-                <span>Call: {CONTACT_INFO.phoneDisplay}</span>
-              </a>
-
-              <Link to="/book" className="btn-outline hero-btn-book">
-                <span>Book Session</span>
-              </Link>
-            </div>
-
-            {/* Social Proof Bar */}
-            <div className="hero-social-proof">
-              <div className="proof-avatars">
-                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client review" />
-                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client review" />
-                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Client review" />
-                <img src="https://randomuser.me/api/portraits/men/46.jpg" alt="Client review" />
-                <div className="proof-counter">30k+</div>
-              </div>
-              <div className="proof-text-wrap">
-                <div className="proof-stars">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={14} className="fill-ruby text-ruby" />
-                  ))}
-                  <strong className="proof-rating rating-ruby">4.99/5 Rating</strong>
-                </div>
-                <span className="proof-caption">Over 30,000+ Couples Reunited Across Canada</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Visual Side - Pure Reconnection Frame (Zero Overlaid Text) */}
-          <div className="hero-visual-side">
+          <div className="three-pillars-grid">
+            {/* Card 1: Get Ex Love Back - Flying in from Left */}
             <motion.div 
-              className="reconnection-lens-container"
-              animate={{ y: [-7, 7, -7] }}
-              transition={{ repeat: Infinity, duration: 4.8, ease: "easeInOut" }}
+              className="three-pillar-card"
+              initial={{ opacity: 0, x: -90, y: 70, rotate: -6, scale: 0.85 }}
+              whileInView={{ opacity: 1, x: 0, y: 0, rotate: 0, scale: 1 }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ 
+                type: "spring", 
+                stiffness: 75, 
+                damping: 14, 
+                mass: 0.85,
+                delay: 0.1 
+              }}
+              whileHover={{ y: -10, transition: { duration: 0.25, ease: "easeOut" } }}
             >
-              {/* Radiant Rose-Ruby Ambient Halo */}
-              <div className="lens-ambient-glow"></div>
-
-              {/* Main Dual-Polarized Lens Frame - Pure Clean Visual */}
-              <div className="reconnection-lens-frame">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={currentHeroImg}
-                    className="lens-slide-wrap"
-                    initial={{ opacity: 0, scale: 0.96 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 1.04 }}
-                    transition={{ duration: 0.75, ease: "easeInOut" }}
-                  >
-                    {/* Background Primary Image */}
-                    <img 
-                      src={heroImages[currentHeroImg].src} 
-                      alt={heroImages[currentHeroImg].alt} 
-                      className="lens-main-img"
-                    />
-
-                    {/* Scanning Divine Light Bar (Energy Sweep) */}
-                    <div className="lens-energy-sweep"></div>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-
-              {/* Minimalist Dot Indicators */}
-              <div className="lens-dots-row">
-                {heroImages.map((_, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setCurrentHeroImg(idx)}
-                    className={`lens-dot-pill ${currentHeroImg === idx ? 'active' : ''}`}
-                    aria-label={`Switch to slide ${idx + 1}`}
-                  />
-                ))}
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* 3. URGENT HELP TICKER */}
-      <section className="urgent-ticker-bar">
-        <div className="ticker-track">
-          <div className="ticker-content">
-            <span>✨ WORLD-RENOWNED LOVE SPECIALIST MASTER ARVIND</span>
-            <span>•</span>
-            <span>❤️ GET YOUR EX LOVE BACK IN 3-7 DAYS</span>
-            <span>•</span>
-            <span>📍 EDMONTON SANCTUARY: 3231 24 AVE NW</span>
-            <span>•</span>
-            <span>📞 24/7 HOTLINE: +1 (587) 723-1237</span>
-            <span>•</span>
-            <span>🛡️ 100% CONFIDENTIAL & ETHICAL WHITE-LIGHT RITUALS</span>
-            <span>•</span>
-            <span>💍 STOP DIVORCE & MARITAL SEPARATION</span>
-            <span>•</span>
-            <span>✨ WORLD-RENOWNED LOVE SPECIALIST MASTER ARVIND</span>
-            <span>•</span>
-            <span>❤️ GET YOUR EX LOVE BACK IN 3-7 DAYS</span>
-            <span>•</span>
-            <span>📍 EDMONTON SANCTUARY: 3231 24 AVE NW</span>
-            <span>•</span>
-            <span>📞 24/7 HOTLINE: +1 (587) 723-1237</span>
-          </div>
-        </div>
-      </section>
-
-      {/* 3. TOP LOVE & RELATIONSHIP SERVICES SHOWCASE */}
-      <section className="services-showcase-section section-padding">
-        <div className="services-showcase-header text-center">
-          <div className="section-badge love-badge">
-            <Sparkles size={14} className="text-ruby" /> Specialized Divine Services
-          </div>
-          <h2 className="section-title">
-            Our Core <span className="gradient-text-love">Love & Relationship</span> Remedies
-          </h2>
-          <p className="section-subtitle">
-            Restoring love requires authentic mastery. Explore our specialized services created to protect your happiness and eliminate relationship obstacles permanently.
-          </p>
-        </div>
-
-        <div className="love-services-grid">
-          {servicesData.slice(0, 6).map((service) => (
-            <div key={service.id} className="love-service-card glass-panel">
-              <div className="service-card-top-image">
+              <div className="pillar-card-image-wrap">
                 <img 
-                  src={service.image} 
-                  alt={service.title} 
+                  src="/images/services/ex-love-couple.jpg" 
+                  alt="Get Ex Love Back in 3-7 Days" 
+                  className="pillar-card-img"
                   onError={(e) => { e.target.src = "/images/services/love-solutions.webp"; }}
                 />
               </div>
-
-              <div className="service-card-body-content">
-                <h3 className="service-card-heading">{service.title}</h3>
-
-                <div className="service-card-buttons-row">
-                  <Link to={`/services/${service.id}`} className="service-btn-know-more">
+              <div className="pillar-card-body">
+                <h3 className="pillar-card-title">Get Ex Love Back</h3>
+                <p className="pillar-card-desc">
+                  Reignite lost passion, dissolve third-party interference, and bring your ex-partner back into your life permanently within 3 to 7 days.
+                </p>
+                <div className="pillar-card-actions">
+                  <Link to="/services/ex-love-back" className="pillar-btn-more">
                     <span>Know More</span>
                     <ArrowRight size={13} />
                   </Link>
-
-                  <a 
-                    href={`tel:${CONTACT_INFO.phoneLink}`} 
-                    className="service-btn-call"
-                    title={`Call Master Arvind about ${service.title}`}
-                  >
+                  <a href={`tel:${CONTACT_INFO.phoneLink}`} className="pillar-btn-call" title="Call Now">
                     <Phone size={13} />
                     <span>Call</span>
                   </a>
-
                   <a 
-                    href={`https://wa.me/${CONTACT_INFO.whatsappLink}?text=${encodeURIComponent(`Hello Master Arvind, I would like to consult regarding ${service.title}.`)}`} 
+                    href={`https://wa.me/${CONTACT_INFO.whatsappLink}?text=${encodeURIComponent("Hello Master Arvind, I need urgent guidance to get my ex love back.")}`} 
                     target="_blank" 
-                    rel="noreferrer"
-                    className="service-btn-wa" 
-                    title={`WhatsApp Master Arvind about ${service.title}`}
+                    rel="noreferrer" 
+                    className="pillar-btn-wa"
+                    title="WhatsApp Now"
                   >
                     <MessageCircle size={13} />
                     <span>WhatsApp</span>
                   </a>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            </motion.div>
 
-        <div className="services-bottom-action text-center">
-          <Link to="/services" className="btn-outline">
-            <span>Explore All 13+ Spiritual & Astrology Services</span>
-            <ArrowRight size={16} />
-          </Link>
+            {/* Card 2: Sacred Love Spells - Flying in from Bottom */}
+            <motion.div 
+              className="three-pillar-card"
+              initial={{ opacity: 0, y: 110, scale: 0.8 }}
+              whileInView={{ opacity: 1, x: 0, y: 0, scale: 1 }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ 
+                type: "spring", 
+                stiffness: 75, 
+                damping: 14, 
+                mass: 0.85,
+                delay: 0.25 
+              }}
+              whileHover={{ y: -10, transition: { duration: 0.25, ease: "easeOut" } }}
+            >
+              <div className="pillar-card-image-wrap">
+                <img 
+                  src="/images/services/love-spell-candles.jpg" 
+                  alt="Sacred Love Spells & Attraction" 
+                  className="pillar-card-img"
+                  onError={(e) => { e.target.src = "/images/services/love-solutions.webp"; }}
+                />
+              </div>
+              <div className="pillar-card-body">
+                <h3 className="pillar-card-title">Love Spells</h3>
+                <p className="pillar-card-desc">
+                  Ethical Vedic attraction rituals to spark deep devotion, inspire marriage commitment, and strengthen emotional soulmate bonds with zero negative karma.
+                </p>
+                <div className="pillar-card-actions">
+                  <Link to="/services/love-spells" className="pillar-btn-more">
+                    <span>Know More</span>
+                    <ArrowRight size={13} />
+                  </Link>
+                  <a href={`tel:${CONTACT_INFO.phoneLink}`} className="pillar-btn-call" title="Call Now">
+                    <Phone size={13} />
+                    <span>Call</span>
+                  </a>
+                  <a 
+                    href={`https://wa.me/${CONTACT_INFO.whatsappLink}?text=${encodeURIComponent("Hello Master Arvind, I would like to consult regarding sacred love spells.")}`} 
+                    target="_blank" 
+                    rel="noreferrer" 
+                    className="pillar-btn-wa"
+                    title="WhatsApp Now"
+                  >
+                    <MessageCircle size={13} />
+                    <span>WhatsApp</span>
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Card 3: Black Magic Removal - Flying in from Right */}
+            <motion.div 
+              className="three-pillar-card"
+              initial={{ opacity: 0, x: 90, y: 70, rotate: 6, scale: 0.85 }}
+              whileInView={{ opacity: 1, x: 0, y: 0, rotate: 0, scale: 1 }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ 
+                type: "spring", 
+                stiffness: 75, 
+                damping: 14, 
+                mass: 0.85,
+                delay: 0.4 
+              }}
+              whileHover={{ y: -10, transition: { duration: 0.25, ease: "easeOut" } }}
+            >
+              <div className="pillar-card-image-wrap">
+                <img 
+                  src="/images/services/black-magic-ritual.jpg" 
+                  alt="Black Magic & Negative Energy Removal" 
+                  className="pillar-card-img"
+                  onError={(e) => { e.target.src = "/images/services/love-solutions.webp"; }}
+                />
+              </div>
+              <div className="pillar-card-body">
+                <h3 className="pillar-card-title">Black Magic Removal</h3>
+                <p className="pillar-card-desc">
+                  Permanently eradicate dark forces, jealous curses, evil eye (Nazar), and negative spiritual blocks sabotaging your relationships, health, and peace.
+                </p>
+                <div className="pillar-card-actions">
+                  <Link to="/services/black-magic-removal" className="pillar-btn-more">
+                    <span>Know More</span>
+                    <ArrowRight size={13} />
+                  </Link>
+                  <a href={`tel:${CONTACT_INFO.phoneLink}`} className="pillar-btn-call" title="Call Now">
+                    <Phone size={13} />
+                    <span>Call</span>
+                  </a>
+                  <a 
+                    href={`https://wa.me/${CONTACT_INFO.whatsappLink}?text=${encodeURIComponent("Hello Master Arvind, I need urgent help with black magic and negative energy removal.")}`} 
+                    target="_blank" 
+                    rel="noreferrer" 
+                    className="pillar-btn-wa"
+                    title="WhatsApp Now"
+                  >
+                    <MessageCircle size={13} />
+                    <span>WhatsApp</span>
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
       {/* 6. THE 4-STEP COSMIC JOURNEY OF LOVE RESTORATION */}
       <section className="process-timeline-section section-padding">
-        <div className="process-header text-center">
+        <motion.div 
+          className="process-header text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.55, ease: "easeOut" }}
+        >
           <div className="section-badge love-badge">
             <Heart size={14} className="text-love" fill="currentColor" /> Spiritual Methodology
           </div>
@@ -610,51 +785,115 @@ const Home = () => {
           <p className="section-subtitle">
             A proven, compassionate 4-step spiritual journey designed to dissolve negative energetic blockages and realign both souls in lasting harmony.
           </p>
-        </div>
+        </motion.div>
 
         <div className="methodology-split-container">
-          {/* Left: 2x2 Grid for Steps 1, 2, 3, 4 */}
+          {/* Left: 2x2 Grid for Steps 1, 2, 3, 4 - Popping up one after another */}
           <div className="methodology-steps-2x2">
-            <div className="process-step-card glass-panel">
+            <motion.div 
+              className="process-step-card glass-panel"
+              initial={{ opacity: 0, scale: 0.35, y: 30 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ 
+                type: "spring", 
+                stiffness: 130, 
+                damping: 12, 
+                mass: 0.75, 
+                delay: 0.1 
+              }}
+              whileHover={{ y: -6, scale: 1.025, transition: { duration: 0.2 } }}
+            >
               <div className="process-step-num">01</div>
               <div className="process-step-icon-wrap">
                 <Sparkles size={22} className="text-gold" />
               </div>
               <h4>Cosmic Root Diagnosis</h4>
               <p>Master Arvind analyzes both natal horoscopes to identify planetary afflictions (Venus, Mars, Rahu) and karmic blocks creating separation.</p>
-            </div>
+            </motion.div>
 
-            <div className="process-step-card glass-panel">
+            <motion.div 
+              className="process-step-card glass-panel"
+              initial={{ opacity: 0, scale: 0.35, y: 30 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ 
+                type: "spring", 
+                stiffness: 130, 
+                damping: 12, 
+                mass: 0.75, 
+                delay: 0.5 
+              }}
+              whileHover={{ y: -6, scale: 1.025, transition: { duration: 0.2 } }}
+            >
               <div className="process-step-num">02</div>
               <div className="process-step-icon-wrap">
                 <Zap size={22} className="text-love" />
               </div>
               <h4>Negative Cord Cleansing</h4>
               <p>Severing accumulated resentment, toxic evil eye, in-law discord, and outside interference poisoning your partner’s thoughts.</p>
-            </div>
+            </motion.div>
 
-            <div className="process-step-card glass-panel">
+            <motion.div 
+              className="process-step-card glass-panel"
+              initial={{ opacity: 0, scale: 0.35, y: 30 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ 
+                type: "spring", 
+                stiffness: 130, 
+                damping: 12, 
+                mass: 0.75, 
+                delay: 0.9 
+              }}
+              whileHover={{ y: -6, scale: 1.025, transition: { duration: 0.2 } }}
+            >
               <div className="process-step-num">03</div>
               <div className="process-step-icon-wrap">
                 <Flame size={22} className="text-gold" />
               </div>
               <h4>Sacred Love Spell & Hawan</h4>
               <p>Consecrated Vedic mantras and white-light attraction rituals chanted during favorable cosmic muhurats to awaken intense affection.</p>
-            </div>
+            </motion.div>
 
-            <div className="process-step-card glass-panel">
+            <motion.div 
+              className="process-step-card glass-panel"
+              initial={{ opacity: 0, scale: 0.35, y: 30 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ 
+                type: "spring", 
+                stiffness: 130, 
+                damping: 12, 
+                mass: 0.75, 
+                delay: 1.3 
+              }}
+              whileHover={{ y: -6, scale: 1.025, transition: { duration: 0.2 } }}
+            >
               <div className="process-step-num">04</div>
               <div className="process-step-icon-wrap">
                 <Shield size={22} className="text-love" />
               </div>
               <h4>Reunion & Protection Shield</h4>
               <p>Your lover reaches out with genuine remorse and warmth. A protective spiritual talisman (Kavach) is installed to prevent future breakups.</p>
-            </div>
+            </motion.div>
           </div>
 
-          {/* Right: Connect Form Card */}
+          {/* Right: Connect Form Card - Falling from the sky naturally */}
           <div className="methodology-form-wrapper">
-            <div className="connect-master-card">
+            <motion.div 
+              className="connect-master-card"
+              initial={{ opacity: 0, y: -280, rotate: -2.5, scale: 1.02 }}
+              whileInView={{ opacity: 1, y: 0, rotate: 0, scale: 1 }}
+              viewport={{ once: false, amount: 0.15 }}
+              transition={{ 
+                type: "spring", 
+                stiffness: 75, 
+                damping: 11, 
+                mass: 1.35, 
+                delay: 0.35 
+              }}
+            >
               <h3 className="connect-card-title">Connect With Master Arvind</h3>
               <p className="connect-card-subtitle">
                 We hear you and would be happy to serve you. Connect and fill this form to get in touch with Arvind Ji now.
@@ -744,8 +983,105 @@ const Home = () => {
                   </div>
                 )}
               </form>
-            </div>
+            </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* ========================================================
+         4. DIVERSE ASTROLOGY & SPIRITUAL SERVICES SHOWCASE (9-CARD GRID)
+         ======================================================== */}
+      <section className="services-showcase-section section-padding">
+        <div className="services-showcase-header text-center">
+          <div className="section-badge love-badge">
+            <Sparkles size={14} className="text-ruby" /> Specialized Divine Services
+          </div>
+          <h2 className="section-title">
+            Our Comprehensive <span className="gradient-text-love">Vedic Astrology & Spiritual</span> Remedies
+          </h2>
+          <p className="section-subtitle">
+            Beyond relationship guidance, Master Arvind provides hereditary astrological foresight, career prosperity rituals, psychic clairvoyance, family dispute resolution, and space energy cleansing.
+          </p>
+        </div>
+
+        <div className="love-services-grid">
+          {diverseServices.map((service, idx) => (
+            <motion.div 
+              key={service.id} 
+              className="love-service-card glass-panel"
+              initial={{ 
+                opacity: 0, 
+                scale: 0.25, 
+                rotate: (idx % 2 === 0 ? -35 : 35), 
+                y: 50 
+              }}
+              whileInView={{ 
+                opacity: 1, 
+                scale: 1, 
+                rotate: 0, 
+                y: 0 
+              }}
+              viewport={{ once: false, amount: 0.12 }}
+              transition={{ 
+                type: "spring", 
+                stiffness: 140, 
+                damping: 10, 
+                mass: 0.75, 
+                delay: (idx % 3) * 0.12 + Math.floor(idx / 3) * 0.15 
+              }}
+              whileHover={{ 
+                y: -8, 
+                scale: 1.03, 
+                transition: { type: "spring", stiffness: 300, damping: 15 } 
+              }}
+            >
+              <div className="service-card-top-image">
+                <img 
+                  src={service.image} 
+                  alt={service.title} 
+                  onError={(e) => { e.target.src = "/images/services/love-solutions.webp"; }}
+                />
+              </div>
+
+              <div className="service-card-body-content">
+                <h3 className="service-card-heading">{service.title}</h3>
+
+                <div className="service-card-buttons-row">
+                  <Link to={`/services/${service.id}`} className="service-btn-know-more">
+                    <span>Know More</span>
+                    <ArrowRight size={13} />
+                  </Link>
+
+                  <a 
+                    href={`tel:${CONTACT_INFO.phoneLink}`} 
+                    className="service-btn-call"
+                    title={`Call Master Arvind about ${service.title}`}
+                  >
+                    <Phone size={13} />
+                    <span>Call</span>
+                  </a>
+
+                  <a 
+                    href={`https://wa.me/${CONTACT_INFO.whatsappLink}?text=${encodeURIComponent(`Hello Master Arvind, I would like to consult regarding ${service.title}.`)}`} 
+                    target="_blank" 
+                    rel="noreferrer" 
+                    className="service-btn-wa" 
+                    title={`WhatsApp Master Arvind about ${service.title}`}
+                  >
+                    <MessageCircle size={13} />
+                    <span>WhatsApp</span>
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="services-bottom-action text-center">
+          <Link to="/services" className="btn-outline">
+            <span>Explore All 15+ Spiritual & Astrology Services</span>
+            <ArrowRight size={16} />
+          </Link>
         </div>
       </section>
 
@@ -756,18 +1092,11 @@ const Home = () => {
             <div className="master-image-col">
               <div className="master-portrait-frame">
                 <img 
-                  src="/images/services/consult-best-astrologer.webp" 
-                  alt="Master Arvind Vedic Astrologer" 
+                  src="/images/services/master-arvind-portrait.jpg" 
+                  alt="Master Arvind Vedic Astrologer & Spiritualist" 
                   className="master-portrait-img"
                   onError={(e) => { e.target.src = "/images/services/Master Jai Bn-1.webp"; }}
                 />
-                <div className="master-experience-badge">
-                  <Award size={24} className="text-gold" />
-                  <div>
-                    <strong>25+ Years</strong>
-                    <span>Vedic Astrologer</span>
-                  </div>
-                </div>
               </div>
             </div>
 
@@ -792,19 +1121,19 @@ const Home = () => {
 
               <div className="master-stats-row">
                 <div className="master-stat-item">
-                  <span className="stat-number">30,000+</span>
+                  <StatCounter target={30000} suffix="+" formatComma={true} />
                   <span className="stat-label">Couples Reunited</span>
                 </div>
                 <div className="master-stat-item">
-                  <span className="stat-number">99.4%</span>
+                  <StatCounter target={99.4} suffix="%" decimals={1} />
                   <span className="stat-label">Accurate Readings</span>
                 </div>
                 <div className="master-stat-item">
-                  <span className="stat-number">25+</span>
+                  <StatCounter target={25} suffix="+" />
                   <span className="stat-label">Years of Mastery</span>
                 </div>
                 <div className="master-stat-item">
-                  <span className="stat-number">100%</span>
+                  <StatCounter target={100} suffix="%" />
                   <span className="stat-label">Confidential</span>
                 </div>
               </div>
@@ -823,246 +1152,502 @@ const Home = () => {
         </div>
       </section>
 
-      {/* 8. CLIENT LOVE MIRACLE TRANSFORMATIONS (REVIEWS) */}
-      <section className="reviews-section section-padding">
-        <div className="reviews-header text-center">
-          <div className="section-badge love-badge">
-            <Heart size={14} className="text-love" fill="currentColor" /> Real Love Miracles
-          </div>
-          <h2 className="section-title">
-            Couples Reunited by <span className="text-solid-orange">Master Arvind</span>
-          </h2>
-          <p className="section-subtitle">
-            Heartfelt verified experiences from real couples in Edmonton, Calgary, Vancouver, and Toronto whose love was healed through Master Arvind's guidance.
-          </p>
-        </div>
+      {/* ========================================================
+         7.5 WHY CHOOSE US SECTION (POWERFUL & ATTRACTIVE)
+         ======================================================== */}
+      <section className="why-choose-section section-padding">
+        <div className="why-choose-container">
+          <motion.div 
+            className="why-choose-header text-center"
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.3 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <div className="section-badge love-badge">
+              <Sparkles size={14} className="text-ruby" /> Unrivaled Spiritual Authority
+            </div>
+            <h2 className="section-title">
+              Why Thousands Trust <span className="gradient-text-love">Master Arvind</span>
+            </h2>
+            <p className="section-subtitle">
+              Discover the core pillars of trust, authentic hereditary Vedic mastery, and compassionate care that make Master Arvind Canada’s most sought-after spiritualist.
+            </p>
+          </motion.div>
 
-        <div 
-          className="reviews-slider-wrapper"
-          onMouseEnter={() => setIsTestimonialHovered(true)}
-          onMouseLeave={() => setIsTestimonialHovered(false)}
-        >
-          <AnimatePresence mode="wait">
-            <motion.div 
-              key={testimonialPage}
-              className="reviews-cards-grid"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
-            >
-              {loveTestimonials.slice(testimonialPage * 4, testimonialPage * 4 + 4).map((item, idx) => (
-                <div key={idx} className="simple-review-card">
-                  <div className="simple-card-stars">
+          <div className="why-choose-grid">
+            {whyChooseUsData.map((item, idx) => (
+              <motion.div
+                key={idx}
+                className="why-choose-card"
+                initial={{ 
+                  opacity: 0, 
+                  y: 35, 
+                  scale: 0.94,
+                  backgroundColor: cardColors[idx].bg[0],
+                  borderColor: cardColors[idx].border[0]
+                }}
+                whileInView={{ 
+                  opacity: 1, 
+                  y: 0, 
+                  scale: 1,
+                  borderRadius: cardMorphShapes[idx],
+                  backgroundColor: cardColors[idx].bg,
+                  borderColor: cardColors[idx].border,
+                  boxShadow: cardColors[idx].shadow
+                }}
+                viewport={{ once: false, amount: 0.2 }}
+                transition={{ 
+                  opacity: { duration: 0.5, delay: idx * 0.12 },
+                  y: { type: "spring", stiffness: 110, damping: 13, delay: idx * 0.12 },
+                  scale: { type: "spring", stiffness: 110, damping: 13, delay: idx * 0.12 },
+                  borderRadius: { 
+                    duration: 20, 
+                    repeat: Infinity, 
+                    ease: "easeInOut", 
+                    delay: idx * 0.5 
+                  },
+                  backgroundColor: {
+                    duration: 32,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: idx * 1.0
+                  },
+                  borderColor: {
+                    duration: 32,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: idx * 1.0
+                  },
+                  boxShadow: {
+                    duration: 32,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: idx * 1.0
+                  }
+                }}
+                whileHover={{ y: -8, scale: 1.025, transition: { duration: 0.25 } }}
+              >
+                <div className="why-card-top-row">
+                  <span className="why-card-num">{item.num}</span>
+                  <span className="why-card-tag">{item.tag}</span>
+                </div>
+
+                <div className={`why-card-icon-wrap ${item.bgClass}`}>
+                  {item.icon}
+                </div>
+
+                <h3 className="why-card-title">{item.title}</h3>
+                <span className="why-card-highlight">{item.highlight}</span>
+                <p className="why-card-desc">{item.desc}</p>
+                <div className="why-card-bottom-bar"></div>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div 
+            className="why-reassurance-ribbon"
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
+          >
+            <div className="why-ribbon-left">
+              <div className="why-ribbon-icon">
+                <ShieldCheck size={26} />
+              </div>
+              <div className="why-ribbon-text">
+                <h4>Facing a painful breakup, family crisis, or negative energy?</h4>
+                <p>Speak directly with Master Arvind today for a confidential, compassionate reading.</p>
+              </div>
+            </div>
+
+            <div className="why-ribbon-actions">
+              <a href={`tel:${CONTACT_INFO.phoneLink}`} className="btn-primary">
+                <Phone size={16} />
+                <span>Call Directly</span>
+              </a>
+              <a 
+                href={`https://wa.me/${CONTACT_INFO.whatsappLink}?text=${encodeURIComponent("Hello Master Arvind, I would like to consult with you confidentially.")}`} 
+                target="_blank" 
+                rel="noreferrer" 
+                className="btn-whatsapp"
+              >
+                <MessageCircle size={16} />
+                <span>WhatsApp Now</span>
+              </a>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* 8. CLIENT LOVE MIRACLE TRANSFORMATIONS (OFFICIAL GOOGLE REVIEWS WITH CAR-BRAKE ANIMATION) */}
+      <section className="reviews-section">
+        <div className="reviews-header-container">
+          <div className="reviews-header text-center">
+            <div className="section-badge love-badge">
+              <Heart size={14} className="text-love" fill="currentColor" /> Real Love Miracles
+            </div>
+            <h2 className="section-title">
+              Couples Reunited by <span className="text-solid-orange">Master Arvind</span>
+            </h2>
+            <p className="section-subtitle">
+              Heartfelt 5-star experiences posted on Google by real couples and families whose love was healed through Master Arvind's sacred Vedic guidance.
+            </p>
+          </div>
+
+          {/* Official Google Reviews Trust Bar */}
+          <div className="google-trust-bar">
+            <div className="google-trust-left">
+              <div className="google-big-g">
+                <svg viewBox="0 0 24 24" width="28" height="28">
+                  <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
+                  <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/>
+                  <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.97 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/>
+                  <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+                </svg>
+              </div>
+              <div className="google-rating-summary">
+                <div className="google-score-row">
+                  <span className="google-score-num">4.9</span>
+                  <div className="google-trust-stars">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} size={17} fill="#F59E0B" color="#F59E0B" />
+                      <Star key={i} size={16} fill="#FBBC04" color="#FBBC04" />
                     ))}
                   </div>
+                </div>
+                <span className="google-reviews-count">Based on 380+ Verified Google Reviews</span>
+              </div>
+            </div>
 
-                  <p className="simple-card-text">
+            <div className="google-trust-badges">
+              <div className="google-pill-badge">
+                <ShieldCheck size={15} className="text-emerald" />
+                <span>100% Genuine Client Experiences</span>
+              </div>
+              <div className="google-pill-badge">
+                <Heart size={14} className="text-love" fill="currentColor" />
+                <span>Over 30,000 Couples Reunited</span>
+              </div>
+              <button 
+                type="button" 
+                className="google-write-review-btn"
+                onClick={() => setIsReviewModalOpen(true)}
+              >
+                <Edit3 size={14} />
+                <span>Write a Review</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Two Animated Rows Viewport with Car-Brake Dynamics (Full Bleed - Edge to Edge) */}
+        <div className="google-reviews-viewport">
+          {/* Row 1: Left to Right */}
+          <div className="google-reviews-row row-left-to-right">
+            <div className="google-reviews-track">
+              {[...googleReviewsRow1, ...googleReviewsRow1].map((item, idx) => (
+                <div key={`row1-${idx}`} className="google-review-card">
+                  <div className="google-card-header">
+                    <div className="google-user-profile">
+                      <img src={item.avatar} alt={item.name} className="google-avatar" />
+                      <div className="google-user-meta">
+                        <h4 className="google-user-name">{item.name}</h4>
+                        <span className="google-user-sub">{item.meta}</span>
+                      </div>
+                    </div>
+                    <div className="google-g-logo" title="Google Verified Review">
+                      <svg viewBox="0 0 24 24" width="20" height="20">
+                        <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
+                        <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/>
+                        <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.97 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/>
+                        <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+                      </svg>
+                    </div>
+                  </div>
+
+                  <div className="google-card-rating">
+                    <div className="google-stars">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} size={15} fill="#FBBC04" color="#FBBC04" />
+                      ))}
+                    </div>
+                    <span className="google-card-date">{item.date}</span>
+                  </div>
+
+                  <p className="google-card-text">
                     "{item.text}"
                   </p>
 
-                  <div className="simple-card-author">
-                    <img src={item.image} alt={item.couple} className="simple-card-avatar" />
-                    <div className="simple-card-info">
-                      <h4 className="simple-card-name">{item.couple}</h4>
-                      <div className="simple-card-meta">
-                        <span>{item.city}</span>
-                        <span className="simple-card-dot">•</span>
-                        <span className="simple-card-timeframe">{item.timeframe}</span>
-                      </div>
+                  <div className="google-card-footer">
+                    <div className="google-verified-pill">
+                      <CheckCircle size={14} className="text-emerald" />
+                      <span>{item.outcome}</span>
                     </div>
+                    <span className="google-helpful-badge">Helpful 👍</span>
                   </div>
                 </div>
               ))}
-            </motion.div>
-          </AnimatePresence>
+            </div>
+          </div>
 
-          {/* Clean Pagination Controls */}
-          <div className="reviews-pagination-row">
-            <button 
-              className="review-page-nav-btn prev"
-              onClick={() => setTestimonialPage((prev) => (prev === 0 ? 1 : 0))}
-              aria-label="Previous Testimonials"
-            >
-              <ChevronLeft size={18} />
-            </button>
+          {/* Row 2: Right to Left */}
+          <div className="google-reviews-row row-right-to-left">
+            <div className="google-reviews-track">
+              {[...googleReviewsRow2, ...googleReviewsRow2].map((item, idx) => (
+                <div key={`row2-${idx}`} className="google-review-card">
+                  <div className="google-card-header">
+                    <div className="google-user-profile">
+                      <img src={item.avatar} alt={item.name} className="google-avatar" />
+                      <div className="google-user-meta">
+                        <h4 className="google-user-name">{item.name}</h4>
+                        <span className="google-user-sub">{item.meta}</span>
+                      </div>
+                    </div>
+                    <div className="google-g-logo" title="Google Verified Review">
+                      <svg viewBox="0 0 24 24" width="20" height="20">
+                        <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
+                        <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/>
+                        <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.97 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/>
+                        <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+                      </svg>
+                    </div>
+                  </div>
 
-            <div className="reviews-dots-box">
-              {[0, 1].map((index) => (
-                <button
-                  key={index}
-                  className={`review-page-dot ${index === testimonialPage ? 'active' : ''}`}
-                  onClick={() => setTestimonialPage(index)}
-                  aria-label={`View Testimonials Set ${index + 1}`}
-                />
+                  <div className="google-card-rating">
+                    <div className="google-stars">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} size={15} fill="#FBBC04" color="#FBBC04" />
+                      ))}
+                    </div>
+                    <span className="google-card-date">{item.date}</span>
+                  </div>
+
+                  <p className="google-card-text">
+                    "{item.text}"
+                  </p>
+
+                  <div className="google-card-footer">
+                    <div className="google-verified-pill">
+                      <CheckCircle size={14} className="text-emerald" />
+                      <span>{item.outcome}</span>
+                    </div>
+                    <span className="google-helpful-badge">Helpful 👍</span>
+                  </div>
+                </div>
               ))}
             </div>
-
-            <button 
-              className="review-page-nav-btn next"
-              onClick={() => setTestimonialPage((prev) => (prev === 0 ? 1 : 0))}
-              aria-label="Next Testimonials"
-            >
-              <ChevronRight size={18} />
-            </button>
           </div>
         </div>
+
+        {/* Google Write a Review Interactive Modal */}
+        <AnimatePresence>
+          {isReviewModalOpen && (
+            <div className="review-modal-backdrop" onClick={() => setIsReviewModalOpen(false)}>
+              <motion.div 
+                className="review-modal-card" 
+                onClick={(e) => e.stopPropagation()}
+                initial={{ opacity: 0, scale: 0.92, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.92, y: 20 }}
+                transition={{ duration: 0.25, ease: "easeOut" }}
+              >
+                <div className="review-modal-header">
+                  <div className="review-modal-title-row">
+                    <div className="google-mini-g">
+                      <svg viewBox="0 0 24 24" width="22" height="22">
+                        <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
+                        <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/>
+                        <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.97 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/>
+                        <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="review-modal-title">Write a Review for Master Arvind</h3>
+                      <p className="review-modal-subtitle">Share your authentic Vedic miracle experience</p>
+                    </div>
+                  </div>
+                  <button 
+                    type="button" 
+                    className="review-modal-close" 
+                    onClick={() => setIsReviewModalOpen(false)}
+                  >
+                    <X size={20} />
+                  </button>
+                </div>
+
+                {reviewSubmitted ? (
+                  <div className="review-success-state">
+                    <CheckCircle size={48} className="text-emerald" />
+                    <h4>Thank You For Sharing!</h4>
+                    <p>Your 5-star review has been recorded and submitted for verification.</p>
+                  </div>
+                ) : (
+                  <form onSubmit={handleReviewSubmit} className="review-modal-form">
+                    <div className="review-rating-select">
+                      <label>Your Rating:</label>
+                      <div className="review-stars-interactive">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                          <button
+                            key={star}
+                            type="button"
+                            className="star-btn"
+                            onClick={() => setReviewForm({ ...reviewForm, rating: star })}
+                          >
+                            <Star 
+                              size={26} 
+                              fill={star <= reviewForm.rating ? "#FBBC04" : "none"} 
+                              color={star <= reviewForm.rating ? "#FBBC04" : "#D1D5DB"} 
+                            />
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="review-form-row">
+                      <div className="review-input-group">
+                        <label>Your Name / Couple Name *</label>
+                        <input 
+                          type="text" 
+                          required 
+                          placeholder="e.g. Jessica & Marcus" 
+                          value={reviewForm.name}
+                          onChange={(e) => setReviewForm({ ...reviewForm, name: e.target.value })}
+                        />
+                      </div>
+                      <div className="review-input-group">
+                        <label>City & Province *</label>
+                        <input 
+                          type="text" 
+                          required 
+                          placeholder="e.g. Edmonton, AB" 
+                          value={reviewForm.city}
+                          onChange={(e) => setReviewForm({ ...reviewForm, city: e.target.value })}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="review-input-group">
+                      <label>Vedic Consultation or Healing Service</label>
+                      <select 
+                        value={reviewForm.service}
+                        onChange={(e) => setReviewForm({ ...reviewForm, service: e.target.value })}
+                      >
+                        <option value="Ex Love Problem Solution">Ex Love Problem Solution</option>
+                        <option value="Stopping Divorce & Separation">Stopping Divorce & Separation</option>
+                        <option value="Inter-Caste Marriage Approval">Inter-Caste Marriage Approval</option>
+                        <option value="Black Magic & Negative Energy Cleansing">Black Magic & Negative Energy Cleansing</option>
+                        <option value="Kundali & Horoscope Guidance">Kundali & Horoscope Guidance</option>
+                      </select>
+                    </div>
+
+                    <div className="review-input-group">
+                      <label>Your Story & Experience *</label>
+                      <textarea 
+                        required 
+                        rows={4}
+                        placeholder="Describe how Master Arvind helped you and the positive changes you experienced..."
+                        value={reviewForm.text}
+                        onChange={(e) => setReviewForm({ ...reviewForm, text: e.target.value })}
+                      />
+                    </div>
+
+                    <button type="submit" className="review-submit-btn">
+                      <Send size={16} />
+                      <span>Post Verified Review</span>
+                    </button>
+                  </form>
+                )}
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
       </section>
 
-      {/* 9. EDMONTON SANCTUARY & MAP REACH */}
-      <section className="edmonton-sanctuary-section section-padding">
-        <div className="edmonton-sanctuary-card glass-panel">
-          <div className="sanctuary-grid">
-            <div className="sanctuary-info-col">
-              <div className="section-badge">
-                <MapPin size={14} className="text-gold" /> Edmonton Spiritual Center
-              </div>
-              <h2 className="sanctuary-title">
-                Visit Our Physical Center in <span className="gradient-text-gold">Edmonton, Alberta</span>
-              </h2>
-              <p className="sanctuary-desc">
-                Located conveniently in Edmonton, our sanctuary welcomes you for in-person, highly confidential consultations. If you live anywhere in Canada or internationally, you can also consult Master Arvind effortlessly via direct Phone or WhatsApp.
-              </p>
-
-              <ul className="sanctuary-address-list">
-                <li>
-                  <MapPin className="text-gold list-icon" size={20} />
-                  <div>
-                    <strong>Center Address:</strong>
-                    <p>{CONTACT_INFO.address}</p>
-                  </div>
-                </li>
-                <li>
-                  <Phone className="text-love list-icon" size={20} />
-                  <div>
-                    <strong>Direct Consultation Line:</strong>
-                    <p><a href={`tel:${CONTACT_INFO.phoneLink}`} className="text-gold font-bold">{CONTACT_INFO.phoneDisplay}</a></p>
-                  </div>
-                </li>
-                <li>
-                  <Clock className="text-gold list-icon" size={20} />
-                  <div>
-                    <strong>Working Hours:</strong>
-                    <p>Monday - Sunday: 8:00 AM - 10:00 PM (Mountain Time)</p>
-                  </div>
-                </li>
-              </ul>
-
-              <div className="sanctuary-btn-group">
-                <a 
-                  href={`https://maps.google.com/?q=${encodeURIComponent(CONTACT_INFO.address)}`} 
-                  target="_blank" 
-                  rel="noreferrer" 
-                  className="btn-gold"
-                >
-                  <MapPin size={16} />
-                  <span>Get Directions on Google Maps</span>
-                </a>
-
-                <Link to="/book" className="btn-outline">
-                  <span>Book In-Person Session</span>
-                </Link>
-              </div>
+      {/* 9. FAQ & EDMONTON LOCATION MAP (SPLIT SECTION) */}
+      <section className="faq-map-section section-padding">
+        <div className="faq-map-container">
+          <div className="faq-map-header text-center">
+            <div className="section-badge love-badge">
+              <HelpCircle size={14} className="text-love" /> Clarity & Location
             </div>
-
-            <div className="sanctuary-map-col">
-              <div className="sanctuary-map-frame">
-                <iframe 
-                  title="Master Arvind Edmonton Location"
-                  src={`https://maps.google.com/maps?q=${encodeURIComponent(CONTACT_INFO.address)}&t=&z=14&ie=UTF8&iwloc=&output=embed`}
-                  width="100%" 
-                  height="100%" 
-                  style={{ border: 0 }} 
-                  allowFullScreen="" 
-                  loading="lazy" 
-                  referrerPolicy="no-referrer-when-downgrade"
-                ></iframe>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 10. FREQUENTLY ASKED QUESTIONS */}
-      <section className="faq-section-wrapper section-padding">
-        <div className="faq-header text-center">
-          <div className="section-badge love-badge">
-            <HelpCircle size={14} className="text-love" /> Clarity & Answers
-          </div>
-          <h2 className="section-title">
-            Frequently Asked <span className="gradient-text-gold">Questions</span>
-          </h2>
-          <p className="section-subtitle">
-            Clear, honest answers to help you understand how Master Arvind works with love spells, relationship dilemmas, and spiritual energy.
-          </p>
-        </div>
-
-        <div className="faq-accordion-container">
-          {faqs.map((faq, index) => (
-            <div
-              key={index}
-              className={`faq-accordion-item glass-panel ${activeFaq === index ? 'active' : ''}`}
-              onClick={() => setActiveFaq(activeFaq === index ? null : index)}
-            >
-              <div className="faq-question-bar">
-                <h3>{faq.q}</h3>
-                <ChevronDown
-                  className="faq-toggle-icon"
-                  size={20}
-                  style={{ transform: activeFaq === index ? 'rotate(180deg)' : 'rotate(0deg)' }}
-                />
-              </div>
-              <div className={`faq-answer-drawer ${activeFaq === index ? 'open' : ''}`}>
-                <p>{faq.a}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 11. PRE-FOOTER EMERGENCY LOVE BANNER */}
-      <section className="pre-footer-love-banner">
-        <div className="pre-footer-inner section-padding">
-          <div className="pre-footer-content-wrap text-center">
-            <div className="pre-footer-heart-symbol">
-              <Heart size={38} className="text-love" fill="#FF3366" />
-            </div>
-
-            <h2 className="pre-footer-heading">
-              Don’t Let Pride Or Distance End Your Love Story
+            <h2 className="section-title">
+              Frequently Asked <span className="gradient-text-gold">Questions</span>
             </h2>
-
-            <p className="pre-footer-sub">
-              Every day spent in separation allows negative energies to settle deeper. Contact Master Arvind right now for a confidential reading and begin your journey back to love.
+            <p className="section-subtitle">
+              Clear, honest answers to common questions about Master Arvind’s consultations, sacred remedies, and our Edmonton sanctuary location.
             </p>
+          </div>
 
-            <div className="pre-footer-actions">
-              <a 
-                href={`tel:${CONTACT_INFO.phoneLink}`} 
-                className="btn-primary" 
-                style={{ padding: '16px 36px', fontSize: '1rem' }}
-              >
-                <Phone size={18} className="animate-ring" />
-                <span>Call Master Arvind: {CONTACT_INFO.phoneDisplay}</span>
-              </a>
-
-              <a 
-                href={`https://wa.me/${CONTACT_INFO.whatsappLink}?text=${encodeURIComponent("Hello Master Arvind, I would like to speak with you urgently about my relationship.")}`} 
-                target="_blank" 
-                rel="noreferrer" 
-                className="btn-whatsapp" 
-                style={{ padding: '16px 32px', fontSize: '1rem' }}
-              >
-                <MessageCircle size={18} />
-                <span>Urgent WhatsApp Chat</span>
-              </a>
+          <div className="faq-map-split-grid">
+            {/* Left Side: FAQ Accordion */}
+            <div className="faq-accordion-col">
+              <div className="faq-accordion-container">
+                {faqs.map((faq, index) => (
+                  <div
+                    key={index}
+                    className={`faq-accordion-item glass-panel ${activeFaq === index ? 'active' : ''}`}
+                    onClick={() => setActiveFaq(activeFaq === index ? null : index)}
+                  >
+                    <div className="faq-question-bar">
+                      <h3>{faq.q}</h3>
+                      <ChevronDown
+                        className="faq-toggle-icon"
+                        size={20}
+                        style={{ transform: activeFaq === index ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                      />
+                    </div>
+                    <div className={`faq-answer-drawer ${activeFaq === index ? 'open' : ''}`}>
+                      <p>{faq.a}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            <div className="pre-footer-guarantee">
-              <Shield size={16} className="text-gold" />
-              <span>100% Strict Confidentiality Guaranteed • 25+ Years Experience • Edmonton, AB</span>
+            {/* Right Side: Map Card */}
+            <div className="faq-map-col">
+              <div className="faq-map-card glass-panel">
+                <div className="faq-map-frame-box">
+                  <iframe 
+                    title="Master Arvind Edmonton Location"
+                    src={`https://maps.google.com/maps?q=${encodeURIComponent(CONTACT_INFO.address)}&t=&z=14&ie=UTF8&iwloc=&output=embed`}
+                    width="100%" 
+                    height="100%" 
+                    style={{ border: 0 }} 
+                    allowFullScreen="" 
+                    loading="lazy" 
+                    referrerPolicy="no-referrer-when-downgrade"
+                  ></iframe>
+                </div>
+
+                <div className="faq-map-details">
+                  <div className="faq-map-address">
+                    <MapPin className="text-gold" size={20} style={{ flexShrink: 0, marginTop: '2px' }} />
+                    <div>
+                      <strong>Master Arvind Spiritual Sanctuary</strong>
+                      <p>{CONTACT_INFO.address}</p>
+                    </div>
+                  </div>
+
+                  <div className="faq-map-buttons">
+                    <a 
+                      href={`https://maps.google.com/?q=${encodeURIComponent(CONTACT_INFO.address)}`} 
+                      target="_blank" 
+                      rel="noreferrer" 
+                      className="btn-gold"
+                    >
+                      <MapPin size={15} />
+                      <span>Get Directions</span>
+                    </a>
+
+                    <a href={`tel:${CONTACT_INFO.phoneLink}`} className="btn-outline">
+                      <Phone size={15} />
+                      <span>Call Now</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

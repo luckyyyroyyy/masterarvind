@@ -336,5 +336,57 @@ export const servicesData = [
       { name: "Sophie R. (Calgary)", rating: 5, text: "A profoundly reassuring consultation. Master Arvind is kind, humble, and deeply accurate." },
       { name: "Jacob B. (Edmonton)", rating: 5, text: "Invaluable life guidance. I consult Master Arvind before every major step." }
     ]
+  },
+  {
+    id: "court-cases",
+    title: "Court Cases & Legal Dispute Solutions",
+    category: "Life & Career",
+    badge: "Justice & Victory",
+    image: "/images/services/court-cases.webp",
+    shortDesc: "Vedic remedies and planetary pacification to overcome false accusations and legal disputes.",
+    longDesc: "Prolonged court cases, property battles, and unexpected legal entanglements drain your finances and peace of mind. In Vedic astrology, the 6th house (litigation) and malefic planetary transits (Saturn, Rahu, Mars) often trigger unjust legal battles. Master Arvind performs specialized Baglamukhi and Hanuman victory poojas to neutralize opposition, turn judicial tides in your favor, and achieve swift justice.",
+    methodology: [
+      { step: "1", title: "6th & 8th House Legal Scan", desc: "Analyzing planetary positions governing disputes, litigation, and judicial outcomes." },
+      { step: "2", title: "Enemy & Opposition Pacification", desc: "Neutralizing false accusations, deceptive testimonies, and spiteful rivals." },
+      { step: "3", title: "Shatru Samhara Rituals", desc: "Chanting sacred victory mantras and performing hawan for favorable legal resolutions." }
+    ],
+    benefits: [
+      "Attract favorable judgments and amicable out-of-court settlements",
+      "Dispel false allegations and protect your personal reputation",
+      "Speed up stalled property, inheritance, and business lawsuits",
+      "Shield your family from ongoing vindictive legal harassment"
+    ],
+    testimonials: [
+      { name: "Robert K. (Edmonton)", rating: 5, text: "A bitter 4-year property case was settled in our favor within 6 weeks of Master Arvind's victory pooja." },
+      { name: "Suresh P. (Calgary)", rating: 5, text: "Master Arvind's astrological remedies brought truth to light and the false charges were dropped completely." },
+      { name: "Anita M. (Vancouver)", rating: 5, text: "His legal guidance and protective yantra brought immediate peace to our entire family." },
+      { name: "Daniel C. (Toronto)", rating: 5, text: "Exceptional spiritual support during our hardest legal trial. Truly gifted master." }
+    ]
+  },
+  {
+    id: "vastu-shastra",
+    title: "Vastu Shastra & Space Energy Harmony",
+    category: "Healing & Protection",
+    badge: "Sacred Space",
+    image: "/images/services/vastu-shastra.webp",
+    shortDesc: "Harmonize cosmic energy flow in your home or business to attract wealth and well-being.",
+    longDesc: "Your physical living and working environment deeply influences your mental tranquility, financial flow, and family harmony. Imbalances in directional cosmic forces (Vastu Dosha) can cause chronic illnesses, sudden financial setbacks, and domestic quarrels. Master Arvind provides comprehensive non-demolition Vastu remedies, sacred energization, and directional corrections.",
+    methodology: [
+      { step: "1", title: "Spatial Energy Audit", desc: "Evaluating directional alignments, entrance orientations, and elemental flows." },
+      { step: "2", title: "Vastu Dosha Identification", desc: "Pinpointing energetic blockages affecting health, peace, and financial growth." },
+      { step: "3", title: "Pyramid & Yantra Remediation", desc: "Installing consecrated Vedic copper yantras to balance energy without physical renovations." }
+    ],
+    benefits: [
+      "Dissolve negative stagnant energy in residential and commercial properties",
+      "Attract consistent wealth, financial abundance, and lucrative opportunities",
+      "Eliminate unexplained stress, insomnia, and recurring family ailments",
+      "Establish a serene, uplifting sanctum of peace for your household"
+    ],
+    testimonials: [
+      { name: "Harpreet & Sunita (Edmonton)", rating: 5, text: "Our business was struggling after moving into a new office. Master Arvind adjusted the Vastu energies and sales surged!" },
+      { name: "Elena S. (Calgary)", rating: 5, text: "The heavy, oppressive feeling in our home completely vanished. We sleep peacefully now." },
+      { name: "Vikram N. (Toronto)", rating: 5, text: "Practical, non-invasive remedies that made an immediate visible difference." },
+      { name: "Mary L. (Red Deer)", rating: 5, text: "Master Arvind's Vastu consultation transformed our home into a sanctuary of peace." }
+    ]
   }
 ];

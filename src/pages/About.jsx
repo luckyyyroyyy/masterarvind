@@ -1,12 +1,67 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { 
   Shield, Award, Sparkles, Compass, CheckCircle, PhoneCall, 
   MessageCircle, Heart, Star, MapPin, Clock, ArrowRight, Eye, Sun
 } from 'lucide-react';
 import { CONTACT_INFO } from '../config/contact';
 import './About.css';
+
+// Precision Animated Growing Stat Counter for About Page
+const StatCounter = ({ target, suffix = "", decimals = 0, formatComma = false }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: false, amount: 0.3 });
+  const [displayValue, setDisplayValue] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) {
+      setDisplayValue(0);
+      return;
+    }
+
+    let startTime = null;
+    let animationFrameId;
+    const duration = 2000;
+
+    const animateCount = (timestamp) => {
+      if (!startTime) startTime = timestamp;
+      const elapsed = timestamp - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      
+      const easeProgress = 1 - Math.pow(1 - progress, 3);
+      const current = easeProgress * target;
+
+      setDisplayValue(current);
+
+      if (progress < 1) {
+        animationFrameId = requestAnimationFrame(animateCount);
+      } else {
+        setDisplayValue(target);
+      }
+    };
+
+    animationFrameId = requestAnimationFrame(animateCount);
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [isInView, target]);
+
+  const formatted = decimals > 0 
+    ? displayValue.toFixed(decimals) 
+    : formatComma 
+      ? Math.floor(displayValue).toLocaleString() 
+      : Math.floor(displayValue).toString();
+
+  return (
+    <motion.span 
+      ref={ref} 
+      className="stat-big-num growing-number"
+      animate={{ scale: [1, 1.04, 1] }}
+      transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+    >
+      {formatted}{suffix}
+    </motion.span>
+  );
+};
 
 const About = () => {
   const [activeInstrument, setActiveInstrument] = useState(0);
@@ -41,25 +96,33 @@ const About = () => {
   const stats = [
     {
       icon: <Award className="text-gold" size={32} />,
-      num: "25+",
+      target: 25,
+      suffix: "+",
+      decimals: 0,
       label: "Years of Mastery",
       sub: "Vedic Lineage"
     },
     {
       icon: <Heart className="text-love" size={32} fill="#C2185B" />,
-      num: "30k+",
+      target: 30,
+      suffix: "k+",
+      decimals: 0,
       label: "Couples Reunited",
       sub: "Across Canada & USA"
     },
     {
       icon: <CheckCircle className="text-gold" size={32} />,
-      num: "99.4%",
+      target: 99.4,
+      suffix: "%",
+      decimals: 1,
       label: "Resolution Rate",
       sub: "Documented Success"
     },
     {
       icon: <Shield className="text-gold" size={32} />,
-      num: "100%",
+      target: 100,
+      suffix: "%",
+      decimals: 0,
       label: "Confidentiality",
       sub: "Strict Sanctuary Pledge"
     }
@@ -221,7 +284,7 @@ const About = () => {
               <div className="about-portrait-card glass-panel">
                 <div className="about-portrait-img-box">
                   <img 
-                    src="/images/services/consult-best-astrologer.webp" 
+                    src="/images/services/master-arvind-portrait.jpg" 
                     alt="Master Arvind" 
                     className="about-portrait-img" 
                     onError={(e) => { e.target.src = "/images/services/Master Jai Bn-1.webp"; }}
@@ -279,7 +342,11 @@ const About = () => {
               <div className="stat-icon-wrapper mb-2">
                 {stat.icon}
               </div>
-              <span className="stat-big-num">{stat.num}</span>
+              <StatCounter 
+                target={stat.target} 
+                suffix={stat.suffix} 
+                decimals={stat.decimals} 
+              />
               <span className="stat-caption">{stat.label}</span>
               <span className="stat-subcaption">{stat.sub}</span>
             </motion.div>

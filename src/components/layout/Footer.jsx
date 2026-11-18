@@ -7,33 +7,6 @@ import './Footer.css';
 const Footer = () => {
   return (
     <footer className="footer-root">
-      {/* Top Reassurance Bar */}
-      <div className="footer-reassurance">
-        <div className="reassurance-container">
-          <div className="reassurance-card">
-            <Shield className="reassurance-icon text-gold" size={28} />
-            <div>
-              <h4>100% Confidential</h4>
-              <p>Your privacy and sacred situation remain strictly private.</p>
-            </div>
-          </div>
-          <div className="reassurance-card">
-            <Heart className="reassurance-icon text-love" size={28} />
-            <div>
-              <h4>99.4% Success in Love</h4>
-              <p>Reuniting hearts with positive, ethical Vedic rituals.</p>
-            </div>
-          </div>
-          <div className="reassurance-card">
-            <Clock className="reassurance-icon text-gold" size={28} />
-            <div>
-              <h4>Fast Spiritual Guidance</h4>
-              <p>Immediate phone & WhatsApp consultation available 24/7.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div className="footer-main">
         <div className="footer-container">
           {/* Brand Col */}

@@ -61,6 +61,781 @@
   --shadow-gold: 0 12px 35px rgba(184, 134, 11, 0.18);
 }
 
+/* ==========================================================
+   Reference Website Theme: Psychic Jayaram (d:\pmtech\Psychic Jayaram)
+   Exact match to https://psychicjayaramdemo.vercel.app/
+   Toggled dynamically via document.documentElement [data-theme="ref-jayaram"]
+   ========================================================== */
+[data-theme="ref-jayaram"] {
+  /* Reference Site Clean Slate/White Foundations */
+  --bg-primary: #F8FAFC;
+  --bg-secondary: #FFFFFF;
+  --bg-tertiary: #F1F5F9;
+  --bg-section-alt: #F1F5F9;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #FFFFFF;
+  
+  /* Reference Site Gold & Coral Amber Accents */
+  --accent-gold: #FFB800;
+  --accent-gold-light: #FFD24D;
+  --accent-gold-soft: #FEF3C7;
+  --accent-gold-glow: rgba(255, 184, 0, 0.25);
+  --accent-amber: #FF5722;
+  
+  /* Reference Site Crimson Red (#C62828) & Sunset Coral */
+  --accent-love: #C62828;
+  --accent-love-glow: rgba(198, 40, 40, 0.25);
+  --accent-love-light: #E53935;
+  --accent-love-soft: #FFEBEE;
+  --accent-love-dark: #B71C1C;
+  
+  /* Reference Site Royal Purple (#6A1B79) & Deep Navy (#0A192F) */
+  --accent-mystic: #6A1B79;
+  --accent-mystic-soft: #F3E5F5;
+  --accent-mystic-glow: rgba(106, 27, 121, 0.18);
+  --accent-teal: #0284C7;
+  --accent-whatsapp: #25D366;
+  
+  /* Reference Slate/Navy High-Contrast Text */
+  --text-primary: #0F172A;
+  --text-secondary: #334155;
+  --text-muted: #64748B;
+  --text-gold: #D97706;
+  --text-love: #C62828;
+  
+  /* Crisp Modern Borders */
+  --border-color: rgba(226, 232, 240, 0.9);
+  --border-light: #E2E8F0;
+  --border-love: rgba(198, 40, 40, 0.3);
+  --border-glow: rgba(255, 184, 0, 0.35);
+  --glass-border: rgba(226, 232, 240, 0.8);
+  
+  /* Glows & Shadows */
+  --shadow-hover: 0 20px 45px rgba(198, 40, 40, 0.16);
+  --shadow-gold: 0 12px 35px rgba(255, 184, 0, 0.25);
+}
+
+/* Reference Theme Body Background */
+[data-theme="ref-jayaram"] body {
+  background-color: #F8FAFC !important;
+  background-image: 
+    radial-gradient(circle at 10% 8%, rgba(255, 235, 238, 0.7) 0%, transparent 45%),
+    radial-gradient(circle at 92% 12%, rgba(254, 243, 199, 0.5) 0%, transparent 45%),
+    radial-gradient(circle at 50% 55%, rgba(243, 229, 245, 0.35) 0%, transparent 50%),
+    radial-gradient(circle at 85% 90%, rgba(255, 235, 238, 0.6) 0%, transparent 45%) !important;
+}
+
+/* Reference Theme Custom Scrollbar */
+[data-theme="ref-jayaram"] ::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #FFB800, #C62828) !important;
+}
+
+/* ==========================================================
+   1. NAVIGATION & TOP ANNOUNCEMENT BAR
+   ========================================================== */
+[data-theme="ref-jayaram"] .navbar-top-bar {
+  background: linear-gradient(90deg, #FF4B2B 0%, #FF416C 45%, #E53935 80%, #C62828 100%) !important;
+  box-shadow: 0 2px 10px rgba(198, 40, 40, 0.25) !important;
+}
+
+[data-theme="ref-jayaram"] .navbar-main {
+  background: #FFFFFF !important;
+  border-bottom: 1px solid #E2E8F0 !important;
+}
+
+[data-theme="ref-jayaram"] .nav-link:hover,
+[data-theme="ref-jayaram"] .nav-link.active {
+  color: #C62828 !important;
+}
+
+[data-theme="ref-jayaram"] .nav-link.active::after {
+  background: #C62828 !important;
+}
+
+[data-theme="ref-jayaram"] .book-session-btn,
+[data-theme="ref-jayaram"] .nav-book-btn {
+  background: linear-gradient(135deg, #E53935 0%, #C62828 100%) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 8px 25px rgba(198, 40, 40, 0.35) !important;
+}
+[data-theme="ref-jayaram"] .book-session-btn:hover,
+[data-theme="ref-jayaram"] .nav-book-btn:hover {
+  box-shadow: 0 12px 30px rgba(198, 40, 40, 0.5) !important;
+}
+
+/* ==========================================================
+   2. TOP BANNER CAROUSEL (BELOW NAVBAR)
+   ========================================================== */
+[data-theme="ref-jayaram"] .banner-carousel {
+  background: radial-gradient(circle at 50% 50%, #0F223D 0%, #0A192F 100%) !important;
+  border-bottom: 2px solid rgba(255, 184, 0, 0.25) !important;
+}
+
+[data-theme="ref-jayaram"] .banner-nav {
+  background: rgba(10, 25, 47, 0.85) !important;
+  color: #FFD24D !important;
+  border: 1px solid rgba(255, 184, 0, 0.5) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4) !important;
+}
+
+[data-theme="ref-jayaram"] .banner-nav:hover {
+  background: #FFB800 !important;
+  color: #0A192F !important;
+  border-color: #FFB800 !important;
+}
+
+/* ==========================================================
+   3. GRAND VEDIC HERO SECTION (EXACT JAYARAM DARK COSMIC NAVY)
+   ========================================================== */
+[data-theme="ref-jayaram"] .vedic-master-hero {
+  background: radial-gradient(circle at 75% 30%, #152A4A 0%, #0A192F 50%, #06101E 100%) !important;
+  border-bottom: 2px solid rgba(255, 184, 0, 0.2) !important;
+  color: #FFFFFF !important;
+}
+
+[data-theme="ref-jayaram"] .vedic-nebula-orb {
+  opacity: 0.15 !important;
+}
+
+[data-theme="ref-jayaram"] .vedic-hero-title {
+  color: #FFFFFF !important;
+}
+
+[data-theme="ref-jayaram"] .vedic-hero-title .text-solid-red {
+  color: #FFFFFF !important;
+  background: none !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+}
+
+[data-theme="ref-jayaram"] .vedic-hero-title .text-solid-orange {
+  color: #FFD24D !important;
+  background: none !important;
+  -webkit-text-fill-color: #FFD24D !important;
+  text-shadow: 0 0 15px rgba(255, 210, 77, 0.35) !important;
+}
+
+[data-theme="ref-jayaram"] .vedic-master-hero .typewriter-lead {
+  color: #CBD5E1 !important;
+}
+
+[data-theme="ref-jayaram"] .vedic-master-hero .typewriter-phrase {
+  color: #FFD24D !important;
+  font-weight: 700 !important;
+  text-shadow: 0 0 12px rgba(255, 210, 77, 0.4) !important;
+}
+
+[data-theme="ref-jayaram"] .vedic-master-hero .typewriter-blink {
+  color: #FFB800 !important;
+}
+
+[data-theme="ref-jayaram"] .vedic-location-strip span {
+  color: #E2E8F0 !important;
+  font-weight: 600 !important;
+}
+
+[data-theme="ref-jayaram"] .vedic-gold-divider {
+  background: #FFB800 !important;
+}
+
+[data-theme="ref-jayaram"] .vedic-hero-desc {
+  color: #CBD5E1 !important;
+}
+
+[data-theme="ref-jayaram"] .vedic-hero-desc strong {
+  color: #FFFFFF !important;
+}
+
+[data-theme="ref-jayaram"] .vedic-bullet-item {
+  color: #E2E8F0 !important;
+}
+
+[data-theme="ref-jayaram"] .vedic-bullet-item strong {
+  color: #FFFFFF !important;
+}
+
+[data-theme="ref-jayaram"] .vedic-star-sparkle,
+[data-theme="ref-jayaram"] .vedic-bullet-item:nth-child(even) .vedic-star-sparkle {
+  color: #FFB800 !important;
+  text-shadow: 0 0 10px rgba(255, 184, 0, 0.4) !important;
+}
+
+/* 3D Glossy Call Button (Exact match to Psychic Jayaram .btn-glossy-call) */
+[data-theme="ref-jayaram"] .vedic-cta-buttons .btn-primary {
+  background: linear-gradient(180deg, #FF5E3A 0%, #E53935 50%, #C62828 100%) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 6px 18px rgba(229, 57, 53, 0.4), inset 0 2px 3px rgba(255, 255, 255, 0.5), inset 0 -2px 3px rgba(0, 0, 0, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+[data-theme="ref-jayaram"] .vedic-cta-buttons .btn-primary:hover {
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 0 10px 24px rgba(229, 57, 53, 0.55), inset 0 2px 4px rgba(255, 255, 255, 0.6) !important;
+}
+
+/* 3D Glossy WhatsApp Button (Exact match to Psychic Jayaram .btn-glossy-whatsapp) */
+[data-theme="ref-jayaram"] .vedic-cta-buttons .btn-whatsapp {
+  background: linear-gradient(180deg, #34D399 0%, #10B981 50%, #059669 100%) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.4), inset 0 2px 3px rgba(255, 255, 255, 0.5), inset 0 -2px 3px rgba(0, 0, 0, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+[data-theme="ref-jayaram"] .vedic-cta-buttons .btn-whatsapp:hover {
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 0 10px 24px rgba(16, 185, 129, 0.55), inset 0 2px 4px rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Book Appointment / Navy Button */
+[data-theme="ref-jayaram"] .vedic-cta-buttons .btn-appointment,
+[data-theme="ref-jayaram"] .vedic-cta-buttons .btn-gold {
+  background: #0A192F !important;
+  color: #FFFFFF !important;
+  border: 1px solid rgba(255, 184, 0, 0.4) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+}
+[data-theme="ref-jayaram"] .vedic-cta-buttons .btn-appointment:hover,
+[data-theme="ref-jayaram"] .vedic-cta-buttons .btn-gold:hover {
+  background: #162E52 !important;
+  border-color: #FFB800 !important;
+  color: #FFD24D !important;
+}
+
+/* Framed Visual Image in Hero */
+[data-theme="ref-jayaram"] .vedic-framed-card {
+  border: 4px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5) !important;
+  background: #0E223D !important;
+}
+
+/* 3-Box Stats Strip Underneath Visual (Exact match to Psychic Jayaram .stat-pill) */
+[data-theme="ref-jayaram"] .vedic-stat-pill {
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(4px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: none !important;
+}
+[data-theme="ref-jayaram"] .vedic-stat-pill.stat-pill-red,
+[data-theme="ref-jayaram"] .vedic-stat-pill.stat-pill-orange,
+[data-theme="ref-jayaram"] .vedic-stat-pill.stat-pill-crimson {
+  border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+[data-theme="ref-jayaram"] .stat-pill-num {
+  color: #FFD24D !important;
+}
+[data-theme="ref-jayaram"] .stat-pill-label {
+  color: #CBD5E1 !important;
+}
+
+/* ==========================================================
+   4. THREE CORE PILLARS SECTION (EXACT REFERENCE SERVICES)
+   ========================================================== */
+[data-theme="ref-jayaram"] .three-pillars-section {
+  background: #FFFFFF !important;
+  border-top: 1px solid #E2E8F0 !important;
+}
+
+[data-theme="ref-jayaram"] .three-pillar-card {
+  background: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+}
+[data-theme="ref-jayaram"] .three-pillar-card:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.1) !important;
+  border-color: #CBD5E1 !important;
+}
+
+[data-theme="ref-jayaram"] .pillar-card-title {
+  color: #7A2E19 !important; /* Reference copper/burgundy title */
+  font-family: var(--font-heading) !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="ref-jayaram"] .pillar-card-desc {
+  color: #64748B !important;
+}
+
+/* Purple to Orange gradient button (Reference .btn-purple-gradient) */
+[data-theme="ref-jayaram"] .pillar-btn-more {
+  background: linear-gradient(135deg, #7B1FA2 0%, #D84315 100%) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(123, 31, 162, 0.25) !important;
+}
+[data-theme="ref-jayaram"] .pillar-btn-more:hover {
+  filter: brightness(1.08) !important;
+}
+
+/* Call button */
+[data-theme="ref-jayaram"] .pillar-btn-call {
+  background: linear-gradient(180deg, #FF5E3A 0%, #E53935 50%, #C62828 100%) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 12px rgba(229, 57, 53, 0.3) !important;
+}
+
+[data-theme="ref-jayaram"] .pillar-badge.badge-red {
+  background: #C62828 !important;
+}
+[data-theme="ref-jayaram"] .pillar-badge.badge-orange {
+  background: #FF5722 !important;
+}
+[data-theme="ref-jayaram"] .pillar-badge.badge-crimson {
+  background: #6A1B79 !important;
+}
+
+/* ==========================================================
+   5. METHODOLOGY & CONNECT CONSULTATION FORM
+   ========================================================== */
+[data-theme="ref-jayaram"] .process-timeline-section {
+  background: #FFFFFF !important;
+}
+
+[data-theme="ref-jayaram"] .methodology-steps-2x2 .process-step-card {
+  background: #F8FAFC !important;
+  border: 1px solid #E2E8F0 !important;
+}
+
+[data-theme="ref-jayaram"] .methodology-steps-2x2 .process-step-card:hover {
+  border-color: #CBD5E1 !important;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08) !important;
+}
+
+[data-theme="ref-jayaram"] .methodology-steps-2x2 .process-step-card h4 {
+  color: #0A192F !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="ref-jayaram"] .methodology-steps-2x2 .process-step-card p {
+  color: #64748B !important;
+}
+
+/* Consultation Form Card */
+[data-theme="ref-jayaram"] .connect-master-card {
+  background: #FFFFFF !important;
+  background-image: radial-gradient(circle at 100% 0%, rgba(255, 235, 238, 0.6) 0%, transparent 60%) !important;
+  border: 1px solid #E2E8F0 !important;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.1) !important;
+}
+
+[data-theme="ref-jayaram"] .connect-card-title {
+  color: #0A192F !important;
+}
+
+[data-theme="ref-jayaram"] .connect-card-subtitle {
+  color: #64748B !important;
+}
+
+[data-theme="ref-jayaram"] .connect-form-input:focus,
+[data-theme="ref-jayaram"] .connect-form-select:focus,
+[data-theme="ref-jayaram"] .connect-form-textarea:focus {
+  border-color: #C62828 !important;
+  box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.1) !important;
+}
+
+/* Submit Button: Navy Button as in Psychic Jayaram (.btn-navy) */
+[data-theme="ref-jayaram"] .connect-form-submit-btn {
+  background: #0A192F !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 6px 20px rgba(10, 25, 47, 0.25) !important;
+}
+[data-theme="ref-jayaram"] .connect-form-submit-btn:hover {
+  background: #162E52 !important;
+  box-shadow: 0 10px 25px rgba(10, 25, 47, 0.35) !important;
+}
+
+/* ==========================================================
+   6. SERVICES SHOWCASE SECTION
+   ========================================================== */
+[data-theme="ref-jayaram"] .services-showcase-section {
+  background: #FFFFFF !important;
+}
+
+[data-theme="ref-jayaram"] .love-service-card {
+  background: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06) !important;
+}
+
+[data-theme="ref-jayaram"] .love-service-card:hover {
+  border-color: #CBD5E1 !important;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.1) !important;
+  transform: translateY(-6px) !important;
+}
+
+[data-theme="ref-jayaram"] .service-card-heading {
+  color: #7A2E19 !important;
+  font-family: var(--font-heading) !important;
+}
+
+[data-theme="ref-jayaram"] .service-btn-know-more {
+  background: linear-gradient(135deg, #E53935 0%, #C62828 100%) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  box-shadow: 0 4px 14px rgba(198, 40, 40, 0.3) !important;
+}
+
+[data-theme="ref-jayaram"] .service-btn-call {
+  background: #0A192F !important;
+  color: #FFFFFF !important;
+}
+
+[data-theme="ref-jayaram"] .service-btn-whatsapp {
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%) !important;
+  color: #FFFFFF !important;
+}
+
+/* ==========================================================
+   7. WHY CHOOSE SECTION (EXACT DEEP NAVY REFERENCE)
+   ========================================================== */
+[data-theme="ref-jayaram"] .why-choose-section {
+  background: #F8FAFC !important;
+  border-top: 1px solid #E2E8F0 !important;
+  border-bottom: 1px solid #E2E8F0 !important;
+}
+
+[data-theme="ref-jayaram"] .why-choose-card {
+  background: #0A192F !important;
+  border: 1px solid #1E2D4A !important;
+  box-shadow: 0 10px 25px rgba(10, 25, 47, 0.2) !important;
+  color: #FFFFFF !important;
+}
+
+[data-theme="ref-jayaram"] .why-choose-card:hover {
+  box-shadow: 0 20px 45px rgba(10, 25, 47, 0.35) !important;
+  border-color: rgba(255, 184, 0, 0.4) !important;
+}
+
+[data-theme="ref-jayaram"] .why-card-num {
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+
+[data-theme="ref-jayaram"] .why-card-tag {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  color: #FFFFFF !important;
+}
+
+[data-theme="ref-jayaram"] .why-card-icon-wrap {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.25) !important;
+  color: #FFD24D !important;
+}
+
+[data-theme="ref-jayaram"] .why-card-title {
+  color: #FFFFFF !important;
+}
+
+[data-theme="ref-jayaram"] .why-card-highlight {
+  color: #FFD24D !important;
+}
+
+[data-theme="ref-jayaram"] .why-choose-card p {
+  color: #CBD5E1 !important;
+}
+
+/* ==========================================================
+   8. TESTIMONIALS / REVIEWS SECTION (SIGNATURE ROYAL PURPLE)
+   ========================================================== */
+[data-theme="ref-jayaram"] .reviews-section {
+  background: linear-gradient(135deg, #6A1B79 0%, #511258 50%, #3B0941 100%) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+}
+
+[data-theme="ref-jayaram"] .reviews-section .section-title {
+  color: #FFD24D !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4) !important;
+}
+
+[data-theme="ref-jayaram"] .reviews-section .section-title span {
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+}
+
+[data-theme="ref-jayaram"] .reviews-section .section-subtitle {
+  color: #E2E8F0 !important;
+}
+
+[data-theme="ref-jayaram"] .google-trust-bar {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+[data-theme="ref-jayaram"] .google-score-num {
+  color: #FFFFFF !important;
+}
+
+[data-theme="ref-jayaram"] .google-score-sub,
+[data-theme="ref-jayaram"] .google-trust-pill {
+  color: #E2E8F0 !important;
+}
+
+[data-theme="ref-jayaram"] .write-review-btn {
+  background: #FFFFFF !important;
+  color: #C62828 !important;
+  border: none !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+}
+
+[data-theme="ref-jayaram"] .review-card-google {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  backdrop-filter: blur(12px) !important;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25) !important;
+}
+
+[data-theme="ref-jayaram"] .reviewer-name {
+  color: #FFD24D !important;
+  font-family: var(--font-heading) !important;
+}
+
+[data-theme="ref-jayaram"] .reviewer-meta {
+  color: #E2E8F0 !important;
+}
+
+[data-theme="ref-jayaram"] .review-date {
+  color: #CBD5E1 !important;
+}
+
+[data-theme="ref-jayaram"] .review-text {
+  color: #FFFFFF !important;
+  font-style: italic !important;
+}
+
+[data-theme="ref-jayaram"] .review-outcome {
+  color: #FFD24D !important;
+}
+
+[data-theme="ref-jayaram"] .review-helpful {
+  color: #E2E8F0 !important;
+}
+
+/* ==========================================================
+   9. FAQ & LOCATION MAP SECTION
+   ========================================================== */
+[data-theme="ref-jayaram"] .faq-map-section {
+  background: #F8FAFC !important;
+  border-top: 1px solid #E2E8F0 !important;
+}
+
+[data-theme="ref-jayaram"] .faq-map-header .section-title {
+  color: #B45309 !important; /* Warm Gold/Amber from reference */
+}
+
+[data-theme="ref-jayaram"] .faq-map-header .section-subtitle {
+  color: #64748B !important;
+}
+
+[data-theme="ref-jayaram"] .faq-accordion-item {
+  background: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06) !important;
+}
+
+[data-theme="ref-jayaram"] .faq-accordion-item.active {
+  border-color: #C62828 !important;
+  background: #FFFFFF !important;
+  box-shadow: 0 4px 12px rgba(198, 40, 40, 0.1) !important;
+}
+
+[data-theme="ref-jayaram"] .faq-question-bar h3 {
+  color: #0F172A !important;
+}
+
+[data-theme="ref-jayaram"] .faq-toggle-icon {
+  color: #C62828 !important;
+}
+
+[data-theme="ref-jayaram"] .faq-answer-drawer p {
+  color: #334155 !important;
+}
+
+[data-theme="ref-jayaram"] .faq-map-card {
+  background: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08) !important;
+}
+
+[data-theme="ref-jayaram"] .faq-map-address strong {
+  color: #0A192F !important;
+}
+
+[data-theme="ref-jayaram"] .faq-map-buttons .btn-gold {
+  background: #0A192F !important;
+  color: #FFFFFF !important;
+}
+
+[data-theme="ref-jayaram"] .faq-map-buttons .btn-outline {
+  border-color: #C62828 !important;
+  color: #C62828 !important;
+}
+
+/* ==========================================================
+   10. EXPERIENCE RED RIBBON BAR / PRE-FOOTER BANNER
+   ========================================================== */
+[data-theme="ref-jayaram"] .pre-footer-love-banner {
+  background: linear-gradient(90deg, #D32F2F 0%, #C62828 50%, #B71C1C 100%) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+}
+
+[data-theme="ref-jayaram"] .pre-footer-heading {
+  color: #FFFFFF !important;
+}
+
+[data-theme="ref-jayaram"] .pre-footer-sub {
+  color: #FFD24D !important;
+}
+
+[data-theme="ref-jayaram"] .pre-footer-heart-symbol {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-color: #FFD24D !important;
+  color: #FFD24D !important;
+}
+
+[data-theme="ref-jayaram"] .pre-footer-actions .btn-primary {
+  background: #FFFFFF !important;
+  color: #C62828 !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2) !important;
+}
+
+[data-theme="ref-jayaram"] .pre-footer-actions .btn-whatsapp {
+  background: #25D366 !important;
+  color: #FFFFFF !important;
+}
+
+/* ==========================================================
+   11. SIGNATURE VIBRANT RED FOOTER (EXACT MATCH TO #pm-footer-v2)
+   ========================================================== */
+[data-theme="ref-jayaram"] .footer-root {
+  background: #E10D0C !important;
+  color: #FFFFFF !important;
+  border-top: none !important;
+}
+
+[data-theme="ref-jayaram"] .footer-reassurance {
+  background: #C20B0A !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+[data-theme="ref-jayaram"] .reassurance-card {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  color: #FFFFFF !important;
+  backdrop-filter: blur(8px) !important;
+  box-shadow: none !important;
+}
+
+[data-theme="ref-jayaram"] .reassurance-card h4 {
+  color: #FFD400 !important;
+}
+
+[data-theme="ref-jayaram"] .reassurance-card p {
+  color: #FFFFFF !important;
+}
+
+[data-theme="ref-jayaram"] .footer-col h3,
+[data-theme="ref-jayaram"] .footer-col h4,
+[data-theme="ref-jayaram"] .footer-title {
+  color: #FFD400 !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="ref-jayaram"] .footer-links a {
+  color: #FFFFFF !important;
+}
+[data-theme="ref-jayaram"] .footer-links a:hover {
+  color: #FFD400 !important;
+  text-decoration: underline !important;
+}
+
+[data-theme="ref-jayaram"] .footer-contact-item strong,
+[data-theme="ref-jayaram"] .footer-contact-icon {
+  color: #FFD400 !important;
+}
+
+[data-theme="ref-jayaram"] .footer-contact-item span,
+[data-theme="ref-jayaram"] .footer-contact-item p {
+  color: #FFFFFF !important;
+}
+
+[data-theme="ref-jayaram"] .footer-bottom {
+  background: #A80807 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+[data-theme="ref-jayaram"] .copyright-text,
+[data-theme="ref-jayaram"] .disclaimer-text {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* ==========================================================
+   12. FLOATING CONTACT BUTTONS (REFERENCE PALETTE)
+   ========================================================== */
+[data-theme="ref-jayaram"] .floating-call-btn {
+  background: linear-gradient(180deg, #FF5E3A 0%, #E53935 50%, #C62828 100%) !important;
+  box-shadow: 0 8px 25px rgba(229, 57, 53, 0.45) !important;
+}
+
+[data-theme="ref-jayaram"] .floating-whatsapp-btn {
+  background: linear-gradient(180deg, #34D399 0%, #10B981 50%, #059669 100%) !important;
+}
+
+[data-theme="ref-jayaram"] .floating-scroll-top-btn {
+  background: #EAB308 !important;
+  color: #0F172A !important;
+  box-shadow: 0 8px 25px rgba(234, 179, 8, 0.4) !important;
+}
+
+/* ==========================================================
+   13. SUBPAGES (ABOUT, SERVICES, LOCATION, BLOG, BOOKING)
+   ========================================================== */
+[data-theme="ref-jayaram"] .about-hero-section,
+[data-theme="ref-jayaram"] .services-hero-banner,
+[data-theme="ref-jayaram"] .blog-hero-section,
+[data-theme="ref-jayaram"] .booking-hero-section {
+  background: radial-gradient(circle at 50% 30%, #152A4A 0%, #0A192F 70%, #06101E 100%) !important;
+  color: #FFFFFF !important;
+  border-bottom: 2px solid rgba(255, 184, 0, 0.2) !important;
+}
+
+[data-theme="ref-jayaram"] .about-hero-title,
+[data-theme="ref-jayaram"] .services-hero-title,
+[data-theme="ref-jayaram"] .blog-hero-title {
+  color: #FFFFFF !important;
+}
+
+[data-theme="ref-jayaram"] .about-hero-subtitle,
+[data-theme="ref-jayaram"] .services-hero-subtitle {
+  color: #CBD5E1 !important;
+}
+
+[data-theme="ref-jayaram"] .hero-pill-tag {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #FFD24D !important;
+}
+
+[data-theme="ref-jayaram"] .filter-btn-pill.active {
+  background: #C62828 !important;
+  color: #FFFFFF !important;
+  border-color: #C62828 !important;
+  box-shadow: 0 4px 15px rgba(198, 40, 40, 0.35) !important;
+}
+
+[data-theme="ref-jayaram"] .stat-counter-box,
+[data-theme="ref-jayaram"] .stat-counter-number {
+  color: #C62828 !important;
+}
+
+[data-theme="ref-jayaram"] .booking-card:hover {
+  border-color: #C62828 !important;
+}
+
+[data-theme="ref-jayaram"] .booking-card-icon {
+  color: #C62828 !important;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -415,7 +1190,7 @@ ul {
 
 .main-content {
   flex: 1;
-  padding-top: 86px;
+  padding-top: 116px;
 }
 
 /* Mobile Responsiveness */
@@ -446,6 +1221,12 @@ ul {
 }
 
 /* Strict Mobile Isolation: Desktop mode (>768px) is 100% untouched & locked */
+@media (max-width: 992px) {
+  .main-content {
+    padding-top: 104px;
+  }
+}
+
 @media (max-width: 768px) {
   html, body, #root, .page-container {
     overflow-x: hidden !important;
@@ -453,7 +1234,13 @@ ul {
   }
   
   .main-content {
-    padding-top: 76px;
+    padding-top: 96px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    padding-top: 90px;
   }
 }
 
