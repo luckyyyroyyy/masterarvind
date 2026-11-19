@@ -31,17 +31,16 @@ const Footer = () => {
             </div>
 
             <div className="footer-cta-quick">
-              <a href={`tel:${CONTACT_INFO.phoneLink}`} className="btn-primary" style={{ padding: '10px 20px', fontSize: '0.86rem' }}>
-                <Phone size={15} /> Call Master Arvind
+              <a href={`tel:${CONTACT_INFO.phoneLink}`} className="btn-primary footer-quick-btn">
+                <Phone size={14} /> <span>Call Master Arvind</span>
               </a>
               <a 
-                href={`https://wa.me/${CONTACT_INFO.whatsappLink}`} 
+                href={`https://wa.me/${CONTACT_INFO.whatsappLink}?text=${encodeURIComponent("Hello Master Arvind, I would like to book a relationship consultation.")}`} 
                 target="_blank" 
                 rel="noreferrer" 
-                className="btn-whatsapp" 
-                style={{ padding: '10px 18px', fontSize: '0.86rem' }}
+                className="btn-whatsapp footer-quick-btn"
               >
-                <MessageCircle size={15} /> WhatsApp
+                <MessageCircle size={14} /> <span>WhatsApp</span>
               </a>
             </div>
           </div>
@@ -76,44 +75,44 @@ const Footer = () => {
           <div className="footer-col contact-col">
             <h3 className="footer-heading">Edmonton Sanctuary</h3>
             <ul className="footer-contact-info">
-              <li>
+              <li className="footer-contact-item">
                 <div className="contact-icon-wrap">
-                  <MapPin className="text-gold" size={18} />
+                  <MapPin size={17} />
                 </div>
-                <div>
-                  <span className="contact-meta-label">Center Address:</span>
+                <div className="contact-text-wrap">
+                  <span className="contact-meta-label">Center Address</span>
                   <p className="contact-meta-val">{CONTACT_INFO.address}</p>
                 </div>
               </li>
-              <li>
+              <li className="footer-contact-item">
                 <div className="contact-icon-wrap">
-                  <Phone className="text-love" size={18} />
+                  <Phone size={17} />
                 </div>
-                <div>
-                  <span className="contact-meta-label">Direct Hotline:</span>
-                  <a href={`tel:${CONTACT_INFO.phoneLink}`} className="contact-meta-val highlight-gold">
+                <div className="contact-text-wrap">
+                  <span className="contact-meta-label">Direct Hotline</span>
+                  <a href={`tel:${CONTACT_INFO.phoneLink}`} className="contact-meta-val highlight-phone">
                     {CONTACT_INFO.phoneDisplay}
                   </a>
                 </div>
               </li>
-              <li>
+              <li className="footer-contact-item">
                 <div className="contact-icon-wrap">
-                  <Mail className="text-gold" size={18} />
+                  <Mail size={17} />
                 </div>
-                <div>
-                  <span className="contact-meta-label">Email Inquiries:</span>
+                <div className="contact-text-wrap">
+                  <span className="contact-meta-label">Email Inquiries</span>
                   <a href={`mailto:${CONTACT_INFO.email}`} className="contact-meta-val">
                     {CONTACT_INFO.email}
                   </a>
                 </div>
               </li>
-              <li>
+              <li className="footer-contact-item">
                 <div className="contact-icon-wrap">
-                  <Clock className="text-gold" size={18} />
+                  <Clock size={17} />
                 </div>
-                <div>
-                  <span className="contact-meta-label">Availability:</span>
-                  <p className="contact-meta-val">Mon - Sun: 8:00 AM - 10:00 PM (MST)</p>
+                <div className="contact-text-wrap">
+                  <span className="contact-meta-label">Availability</span>
+                  <p className="contact-meta-val">Mon – Sun: 8:00 AM – 10:00 PM (MST)</p>
                 </div>
               </li>
             </ul>

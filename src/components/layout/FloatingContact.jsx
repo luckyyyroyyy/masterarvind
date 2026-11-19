@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUp } from 'lucide-react';
+import { ArrowUp, CalendarCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { CONTACT_INFO } from '../../config/contact';
 import './FloatingContact.css';
@@ -61,6 +61,26 @@ const FloatingContact = () => {
           </svg>
         </div>
       </motion.a>
+
+      {/* Book Now Floating Button (Mobile Mode Only - Placed Above Location Pin) */}
+      <motion.div
+        className="floating-book-wrapper"
+        whileHover={{ scale: 1.1, x: -3 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        <Link 
+          to="/book" 
+          className="floating-btn floating-book-btn"
+          aria-label="Book Private Session with Master Arvind"
+        >
+          <span className="floating-tooltip">
+            Book Private Session
+          </span>
+          <div className="floating-icon-wrap">
+            <CalendarCheck size={22} />
+          </div>
+        </Link>
+      </motion.div>
 
       {/* Edmonton Sanctuary Location Pin (Official Google Maps 4-Color Pin Logo) */}
       <motion.div

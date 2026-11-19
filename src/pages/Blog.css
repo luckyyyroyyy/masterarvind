@@ -58,6 +58,17 @@
   height: 100%;
 }
 
+.blog-category-tag {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 0.74rem;
+  font-weight: 800;
+  color: var(--accent-love);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 8px;
+}
+
 .blog-meta {
   display: flex;
   align-items: center;

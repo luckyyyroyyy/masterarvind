@@ -749,14 +749,40 @@
   text-decoration: underline !important;
 }
 
-[data-theme="ref-jayaram"] .footer-contact-item strong,
-[data-theme="ref-jayaram"] .footer-contact-icon {
+[data-theme="ref-jayaram"] .footer-contact-item .contact-icon-wrap {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
   color: #FFD400 !important;
 }
 
-[data-theme="ref-jayaram"] .footer-contact-item span,
-[data-theme="ref-jayaram"] .footer-contact-item p {
+[data-theme="ref-jayaram"] .footer-contact-item:hover .contact-icon-wrap {
+  background: #FFD400 !important;
+  color: #C62828 !important;
+  border-color: #FFD400 !important;
+}
+
+[data-theme="ref-jayaram"] .contact-meta-label {
+  color: #FFD400 !important;
+}
+
+[data-theme="ref-jayaram"] .contact-meta-val {
   color: #FFFFFF !important;
+}
+
+[data-theme="ref-jayaram"] .contact-meta-val.highlight-phone {
+  color: #FFD400 !important;
+}
+
+[data-theme="ref-jayaram"] .footer-quick-btn.btn-primary {
+  background: linear-gradient(180deg, #FF5E3A 0%, #E53935 50%, #C62828 100%) !important;
+  color: #FFFFFF !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+[data-theme="ref-jayaram"] .footer-quick-btn.btn-whatsapp {
+  background: linear-gradient(180deg, #34D399 0%, #10B981 50%, #059669 100%) !important;
+  color: #FFFFFF !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
 }
 
 [data-theme="ref-jayaram"] .footer-bottom {

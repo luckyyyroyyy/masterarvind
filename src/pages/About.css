@@ -141,8 +141,44 @@
 .about-contact-buttons {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 16px;
   margin-top: 2rem;
+}
+
+.about-social-icons-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.about-social-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(28, 25, 36, 0.15);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  text-decoration: none;
+}
+
+.about-social-btn.btn-facebook {
+  background: #1877F2;
+}
+
+.about-social-btn.btn-instagram {
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+}
+
+.about-social-btn.btn-youtube {
+  background: #FF0000;
+}
+
+.about-social-btn:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
 }
 
 /* Portrait Wrapper with Floating Badges */
@@ -333,7 +369,46 @@
 
 /* 4. Values Grid */
 .about-values-section {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 5.5rem 0;
+  background: #EA580C;
+  background: linear-gradient(135deg, #EA580C 0%, #F97316 50%, #C2410C 100%);
+  position: relative;
+}
+
+.about-values-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+.about-values-section .section-badge.love-badge {
   background: #FFFFFF;
+  color: #C2410C;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+}
+
+.about-values-section .section-badge.love-badge svg {
+  color: #EA580C;
+}
+
+.about-values-section .section-title {
+  color: #FFFFFF !important;
+}
+
+.about-values-section .section-title .gradient-text-gold {
+  background: linear-gradient(135deg, #FFFBEB 0%, #FEF08A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.25));
+}
+
+.about-values-section .section-subtitle {
+  color: rgba(255, 255, 255, 0.95) !important;
 }
 
 .about-values-grid {

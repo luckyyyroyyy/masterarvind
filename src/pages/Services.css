@@ -189,28 +189,61 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
   padding-top: 1.25rem;
   border-top: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.catalog-quick-contacts {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.catalog-call-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #1A73E8;
+  border: 1px solid #1557B0;
+  color: #FFFFFF;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  text-decoration: none;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(26, 115, 232, 0.3);
+}
+
+.catalog-call-btn:hover {
+  background: #1557B0;
+  color: #FFFFFF;
+  transform: scale(1.08);
+  box-shadow: 0 4px 15px rgba(26, 115, 232, 0.5);
 }
 
 .catalog-wa-btn {
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  background: #DCFCE7;
-  border: 1px solid rgba(37, 211, 102, 0.4);
-  color: #15803D;
-  display: flex;
+  background: #25D366;
+  border: 1px solid #20BA5A;
+  color: #FFFFFF;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   transition: all 0.25s ease;
+  text-decoration: none;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(37, 211, 102, 0.3);
 }
 
 .catalog-wa-btn:hover {
-  background: #25D366;
+  background: #20BA5A;
   color: #FFFFFF;
-  transform: scale(1.1);
-  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+  transform: scale(1.08);
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.5);
 }
 
 .services-cta-banner {

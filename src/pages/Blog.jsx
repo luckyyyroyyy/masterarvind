@@ -53,6 +53,38 @@ const Blog = () => {
       author: "Master Arvind",
       image: "/images/blogs/zodiac_chart.png",
       tag: "Marriage Healing"
+    },
+    {
+      title: "Twin Flames vs. Karmic Soulmates: Recognizing True Spiritual Union",
+      excerpt: "Intense attraction isn't always destiny; often it is a karmic mirror demanding spiritual healing. Explore the Vedic markers of twin flame connections and how sacred rituals guide two souls through separation into divine harmony.",
+      date: "July 29, 2026",
+      author: "Master Arvind",
+      image: "/images/blogs/crystal_ball.png",
+      tag: "Twin Flame Connection"
+    },
+    {
+      title: "The Power of Full Moon Rituals in Rekindling Lost Romantic Passion",
+      excerpt: "The lunar cycles govern water, human emotions, and romantic receptivity. Master Arvind explains how planetary energies during the Purnima (Full Moon) can be channeled through consecrated love yantras to soften hardened hearts.",
+      date: "July 15, 2026",
+      author: "Master Arvind",
+      image: "/images/blogs/full_moon.png",
+      tag: "Moon Astrology & Love"
+    },
+    {
+      title: "5 Hidden Chakras Governing Emotional Attachment and Marital Trust",
+      excerpt: "When the Anahata (Heart) and Swadhisthana (Sacral) chakras fall out of resonance due to betrayal or stress, emotional detachment sets in. Discover Master Arvind's personalized energy balancing mantras that restore marital trust.",
+      date: "June 30, 2026",
+      author: "Master Arvind",
+      image: "/images/blogs/chakra_alignment.jpg",
+      tag: "Chakra Healing"
+    },
+    {
+      title: "How Resonant Healing Crystals Sever Toxic Third-Party Interference",
+      excerpt: "Third-party intrusions often stem from lower auric vibrations or ill-wishing outsiders. Discover how sacred black tourmaline, consecrated rose quartz, and ancient Vedic Kavach shields permanently cleanse your love sanctum.",
+      date: "June 12, 2026",
+      author: "Master Arvind",
+      image: "/images/blogs/healing_crystals.png",
+      tag: "Spiritual Protection"
     }
   ];
 
@@ -79,9 +111,9 @@ const Blog = () => {
         <article className="blog-featured-card glass-panel">
           <div className="blog-featured-image-wrapper">
             <img src={featuredPost.image} alt={featuredPost.title} className="blog-featured-image" />
-            <span className="blog-tag-badge">{featuredPost.tag}</span>
           </div>
           <div className="blog-featured-content">
+            <span className="blog-category-tag">{featuredPost.tag}</span>
             <div className="blog-meta">
               <span><Calendar size={14} className="text-gold" /> {featuredPost.date}</span>
               <span><User size={14} className="text-love" /> {featuredPost.author}</span>
@@ -105,9 +137,9 @@ const Blog = () => {
             <article key={index} className="blog-card glass-panel">
               <div className="blog-card-image-wrapper">
                 <img src={post.image} alt={post.title} className="blog-card-image" />
-                <span className="blog-tag-badge">{post.tag}</span>
               </div>
               <div className="blog-card-content">
+                <span className="blog-category-tag">{post.tag}</span>
                 <div className="blog-meta">
                   <span><Calendar size={13} className="text-gold" /> {post.date}</span>
                   <span><User size={13} className="text-love" /> {post.author}</span>

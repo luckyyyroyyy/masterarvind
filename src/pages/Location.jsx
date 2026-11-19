@@ -131,7 +131,6 @@ const Location = () => {
                 alt={`${city.name} location`} 
                 style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }} 
               />
-              <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '50%', background: 'linear-gradient(to top, rgba(255, 255, 255, 0.9), transparent)' }}></div>
               {city.isHQ && (
                 <span style={{ position: 'absolute', top: '14px', right: '14px', background: 'var(--accent-love)', color: '#fff', padding: '4px 14px', borderRadius: '9999px', fontSize: '0.75rem', fontWeight: '800', boxShadow: '0 2px 10px rgba(194, 24, 91, 0.3)' }}>
                   HEADQUARTERS

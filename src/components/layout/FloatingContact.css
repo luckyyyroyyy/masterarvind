@@ -44,6 +44,21 @@
   box-shadow: 0 12px 35px rgba(26, 115, 232, 0.58);
 }
 
+/* Mobile-Only Book Now Floating Button (Desktop mode strictly locked) */
+.floating-book-wrapper {
+  display: none !important; /* Completely locked and hidden on desktop */
+}
+
+.floating-book-btn {
+  background: linear-gradient(135deg, #C2185B 0%, #E91E63 100%);
+  box-shadow: 0 8px 25px rgba(194, 24, 91, 0.42);
+  color: #FFFFFF;
+}
+
+.floating-book-btn:hover {
+  box-shadow: 0 12px 35px rgba(194, 24, 91, 0.58);
+}
+
 .floating-location-btn {
   background: #FFFFFF;
   border: 1px solid rgba(0, 0, 0, 0.08);
@@ -140,6 +155,12 @@
 }
 
 /* Mobile Friendly */
+@media (max-width: 768px) {
+  .floating-book-wrapper {
+    display: flex !important; /* Visible ONLY on mobile mode */
+  }
+}
+
 @media (max-width: 640px) {
   .floating-actions-container {
     bottom: 18px;
