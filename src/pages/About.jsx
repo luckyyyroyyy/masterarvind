@@ -111,7 +111,7 @@ const About = () => {
       sub: "Vedic Lineage"
     },
     {
-      icon: <Heart className="text-love" size={32} fill="#C2185B" />,
+      icon: <Heart className="text-love" size={32} fill="#DC2626" />,
       target: 30,
       suffix: "k+",
       decimals: 0,
@@ -202,7 +202,7 @@ const About = () => {
             transition={{ duration: 0.6, delay: 0.45 }}
           >
             <span className="hero-pill-tag"><Sun size={14} className="text-gold" /> Vedic Jyotish Master</span>
-            <span className="hero-pill-tag"><Heart size={14} className="text-love" fill="#C2185B" /> Get Ex Love Back Specialist</span>
+            <span className="hero-pill-tag"><Heart size={14} className="text-love" fill="#DC2626" /> Get Ex Love Back Specialist</span>
             <span className="hero-pill-tag"><MapPin size={14} className="text-gold" /> Edmonton Sanctuary</span>
             <span className="hero-pill-tag"><Shield size={14} className="text-gold" /> 100% Private</span>
           </motion.div>
@@ -365,7 +365,7 @@ const About = () => {
               whileHover={{ 
                 y: -6, 
                 scale: 1.03,
-                boxShadow: "0 18px 36px rgba(194, 24, 91, 0.12)"
+                boxShadow: "0 18px 36px rgba(220, 38, 38, 0.16)"
               }}
             >
               <div className="stat-icon-wrapper mb-2">
@@ -416,7 +416,7 @@ const About = () => {
                 whileHover={{ 
                   y: -8, 
                   scale: 1.02,
-                  boxShadow: "0 18px 40px rgba(184, 134, 11, 0.15)"
+                  boxShadow: "0 18px 40px rgba(234, 88, 12, 0.18)"
                 }}
               >
                 <div className="val-icon-wrap">
@@ -543,7 +543,7 @@ const About = () => {
           whileInView={{ opacity: 1, scale: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.7 }}
-          whileHover={{ boxShadow: "0 20px 50px rgba(194, 24, 91, 0.12)" }}
+          whileHover={{ boxShadow: "0 20px 50px rgba(220, 38, 38, 0.16)" }}
         >
           <motion.div 
             animate={{ y: [0, -8, 0] }}

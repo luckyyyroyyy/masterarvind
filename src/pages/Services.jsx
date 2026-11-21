@@ -128,7 +128,7 @@ const Services = () => {
         <div className="services-cta-container section-padding text-center">
           <div className="services-cta-box glass-panel">
             <div className="cta-icon-circle">
-              <Heart size={34} className="text-love" fill="#C2185B" />
+              <Heart size={34} className="text-love" fill="#DC2626" />
             </div>
             <h2 className="services-cta-title">
               Unsure Which Spiritual Remedy Fits Your Love Dilemma?

@@ -8,8 +8,8 @@
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   min-height: 480px;
-  background: linear-gradient(135deg, #FFF9F5 0%, #FFF0F4 50%, #FAF5EE 100%);
-  border-bottom: 1.5px solid rgba(184, 134, 11, 0.18);
+  background: linear-gradient(135deg, #FFF9F5 0%, #EFF6FF 50%, #FAF5EE 100%);
+  border-bottom: 1.5px solid rgba(234, 88, 12, 0.2);
 }
 
 .top-left-back {
@@ -22,7 +22,7 @@
   gap: 8px;
   padding: 8px 18px;
   background: #FFFFFF;
-  border: 1px solid rgba(184, 134, 11, 0.25);
+  border: 1px solid rgba(220, 38, 38, 0.25);
   border-radius: 9999px;
   color: var(--accent-love);
   font-size: 0.85rem;
@@ -31,7 +31,7 @@
 }
 
 .top-left-back:hover {
-  background: #FFF0F4;
+  background: #FEF2F2;
   color: var(--accent-love);
   transform: translateX(-3px);
 }
@@ -99,7 +99,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #C2185B, #E91E63);
+  background: #DC2626;
   color: #FFFFFF;
   font-size: 0.72rem;
   font-weight: 800;
@@ -108,7 +108,7 @@
   justify-content: center;
   margin-left: -10px;
   border: 2px solid #FFFFFF;
-  box-shadow: 0 2px 6px rgba(194, 24, 91, 0.3);
+  box-shadow: 0 2px 6px rgba(220, 38, 38, 0.3);
 }
 
 .trust-text {
@@ -193,7 +193,7 @@
   gap: 20px;
   padding: 1.6rem 2rem;
   background: #FFFFFF !important;
-  border: 1px solid rgba(184, 134, 11, 0.2) !important;
+  border: 1px solid rgba(226, 232, 240, 0.9) !important;
   border-radius: 18px;
   box-shadow: 0 4px 15px rgba(28, 25, 36, 0.04);
 }
@@ -235,7 +235,7 @@
   color: #1C1924;
   font-weight: 600;
   background: #FFFDF9 !important;
-  border: 1px solid rgba(184, 134, 11, 0.18) !important;
+  border: 1px solid rgba(226, 232, 240, 0.9) !important;
   border-radius: 14px;
 }
 
@@ -245,7 +245,7 @@
   position: sticky;
   top: 100px;
   background: #FFFFFF !important;
-  border: 1.5px solid rgba(184, 134, 11, 0.25) !important;
+  border: 1.5px solid rgba(234, 88, 12, 0.25) !important;
   border-radius: 24px;
   box-shadow: 0 15px 45px rgba(28, 25, 36, 0.08) !important;
 }
@@ -276,8 +276,8 @@
 
 .sidebar-hotline-box {
   padding: 14px;
-  background: #FFF8E7;
-  border: 1px solid rgba(184, 134, 11, 0.35);
+  background: #FFF7ED;
+  border: 1px solid rgba(234, 88, 12, 0.35);
   border-radius: 14px;
   margin-bottom: 1.25rem;
   text-align: center;
@@ -323,7 +323,7 @@
 /* Dedicated Testimonials */
 .service-testimonials {
   background: #FFFDF9;
-  border-top: 1px solid rgba(184, 134, 11, 0.18);
+  border-top: 1px solid rgba(234, 88, 12, 0.2);
 }
 
 .testimonials-grid {
@@ -337,7 +337,7 @@
   display: flex;
   flex-direction: column;
   background: #FFFFFF !important;
-  border: 1px solid rgba(184, 134, 11, 0.2) !important;
+  border: 1px solid rgba(226, 232, 240, 0.9) !important;
   border-radius: 20px;
   box-shadow: 0 6px 25px rgba(28, 25, 36, 0.05);
 }

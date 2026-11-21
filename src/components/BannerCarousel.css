@@ -4,6 +4,7 @@
   overflow: hidden;
   background: transparent;
   margin: 0;
+  line-height: 0;
 }
 
 .banner-carousel-inner {

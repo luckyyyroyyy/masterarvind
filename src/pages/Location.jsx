@@ -124,7 +124,7 @@ const Location = () => {
 
       <div className="location-cities-grid">
         {cities.map((city, index) => (
-          <div key={index} className="glass-panel" style={{ position: 'relative', overflow: 'hidden', padding: 0, display: 'flex', flexDirection: 'column', background: '#FFFFFF', borderRadius: '20px', border: '1px solid rgba(184, 134, 11, 0.2)', boxShadow: '0 8px 30px rgba(28, 25, 36, 0.06)' }}>
+          <div key={index} className="glass-panel" style={{ position: 'relative', overflow: 'hidden', padding: 0, display: 'flex', flexDirection: 'column', background: '#FFFFFF', borderRadius: '20px', border: '1px solid rgba(226, 232, 240, 0.8)', boxShadow: '0 8px 30px rgba(28, 25, 36, 0.06)' }}>
             <div style={{ width: '100%', height: '220px', overflow: 'hidden', position: 'relative' }}>
               <img 
                 src={city.image} 
@@ -132,7 +132,7 @@ const Location = () => {
                 style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }} 
               />
               {city.isHQ && (
-                <span style={{ position: 'absolute', top: '14px', right: '14px', background: 'var(--accent-love)', color: '#fff', padding: '4px 14px', borderRadius: '9999px', fontSize: '0.75rem', fontWeight: '800', boxShadow: '0 2px 10px rgba(194, 24, 91, 0.3)' }}>
+                <span style={{ position: 'absolute', top: '14px', right: '14px', background: 'var(--accent-love)', color: '#fff', padding: '4px 14px', borderRadius: '9999px', fontSize: '0.75rem', fontWeight: '800', boxShadow: '0 2px 10px rgba(220, 38, 38, 0.3)' }}>
                   HEADQUARTERS
                 </span>
               )}

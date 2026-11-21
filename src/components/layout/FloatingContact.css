@@ -36,12 +36,13 @@
 }
 
 .floating-call-btn {
-  background: linear-gradient(135deg, #1A73E8 0%, #1557B0 100%);
-  box-shadow: 0 8px 25px rgba(26, 115, 232, 0.42);
+  background: #1D4ED8;
+  box-shadow: 0 8px 25px rgba(29, 78, 216, 0.45);
 }
 
 .floating-call-btn:hover {
-  box-shadow: 0 12px 35px rgba(26, 115, 232, 0.58);
+  background: #1E40AF;
+  box-shadow: 0 12px 35px rgba(29, 78, 216, 0.6);
 }
 
 /* Mobile-Only Book Now Floating Button (Desktop mode strictly locked) */
@@ -50,19 +51,24 @@
 }
 
 .floating-book-btn {
-  background: linear-gradient(135deg, #C2185B 0%, #E91E63 100%);
-  box-shadow: 0 8px 25px rgba(194, 24, 91, 0.42);
+  background: #EA580C;
+  box-shadow: 0 8px 25px rgba(234, 88, 12, 0.45);
   color: #FFFFFF;
 }
 
 .floating-book-btn:hover {
-  box-shadow: 0 12px 35px rgba(194, 24, 91, 0.58);
+  background: #C2410C;
+  box-shadow: 0 12px 35px rgba(234, 88, 12, 0.6);
 }
 
 .floating-location-btn {
   background: #FFFFFF;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 8px 25px rgba(60, 64, 67, 0.2);
+  border: 1.5px solid #DC2626;
+  box-shadow: 0 8px 25px rgba(220, 38, 38, 0.2);
+}
+
+.floating-location-btn .location-pin-icon {
+  color: #DC2626;
 }
 
 .floating-location-btn:hover {

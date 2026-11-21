@@ -1,64 +1,95 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Great+Vibes&display=swap');
 
 :root {
-  /* Radiant Sacred Light Theme */
+  /* Radiant Sacred Light Foundations */
   --bg-primary: #FFFFFF;
   --bg-secondary: #FFFDF9;
-  --bg-tertiary: #FFF6EE;
-  --bg-section-alt: #FBF6EE;
+  --bg-tertiary: #FFF7ED;
+  --bg-section-alt: #F8FAFC;
   --bg-card: #FFFFFF;
   --bg-card-hover: #FFFBF7;
   
-  /* Celestial Accents - Burnished Gold & Sunfire */
-  --accent-gold: #B8860B;
-  --accent-gold-light: #D4AF37;
-  --accent-gold-soft: #F9E7B9;
-  --accent-gold-glow: rgba(184, 134, 11, 0.2);
-  --accent-amber: #D97706;
+  /* ==========================================================
+     CORE BRAND TRIAD: SOLID RED, SOLID BLUE, SOLID ORANGE
+     Equally balanced, attractive, solid colors across all pages
+     ========================================================== */
+  /* 1. SOLID RED (Sacred Vermillion & Ruby) */
+  --color-red: #DC2626;
+  --color-red-dark: #B91C1C;
+  --color-red-light: #EF4444;
+  --color-red-soft: #FEF2F2;
+  --color-red-border: rgba(220, 38, 38, 0.25);
+  --color-red-glow: rgba(220, 38, 38, 0.3);
+
+  /* 2. SOLID BLUE (Royal Cosmic Sapphire & Deep Sky) */
+  --color-blue: #1D4ED8;
+  --color-blue-dark: #1E3A8A;
+  --color-blue-light: #3B82F6;
+  --color-blue-soft: #EFF6FF;
+  --color-blue-border: rgba(29, 78, 216, 0.25);
+  --color-blue-glow: rgba(29, 78, 216, 0.3);
+  --color-blue-deep: #0B192C;
+
+  /* 3. SOLID ORANGE (Sacred Saffron & Surya Sunfire) */
+  --color-orange: #EA580C;
+  --color-orange-dark: #C2410C;
+  --color-orange-light: #F97316;
+  --color-orange-soft: #FFF7ED;
+  --color-orange-border: rgba(234, 88, 12, 0.25);
+  --color-orange-glow: rgba(234, 88, 12, 0.3);
+
+  /* Shared Mappings for Universal Consistency */
+  --accent-love: var(--color-red);
+  --accent-love-glow: var(--color-red-glow);
+  --accent-love-light: var(--color-red-light);
+  --accent-love-soft: var(--color-red-soft);
+  --accent-love-dark: var(--color-red-dark);
   
-  /* Love & Relationship Accents - Passion Rose & Crimson Ruby */
-  --accent-love: #C2185B;
-  --accent-love-glow: rgba(194, 24, 91, 0.22);
-  --accent-love-light: #E91E63;
-  --accent-love-soft: #FCE4EC;
-  --accent-love-dark: #880E4F;
-  
-  /* Cosmic Amethyst & Teal */
-  --accent-mystic: #6A1B9A;
-  --accent-mystic-soft: #F3E5F5;
-  --accent-mystic-glow: rgba(106, 27, 154, 0.15);
-  --accent-teal: #00897B;
+  --accent-gold: var(--color-orange);
+  --accent-gold-light: var(--color-orange-light);
+  --accent-gold-soft: var(--color-orange-soft);
+  --accent-gold-glow: var(--color-orange-glow);
+  --accent-amber: var(--color-orange);
+
+  --accent-mystic: var(--color-blue);
+  --accent-mystic-soft: var(--color-blue-soft);
+  --accent-mystic-glow: var(--color-blue-glow);
+  --accent-teal: #0284C7;
   --accent-whatsapp: #25D366;
   
-  /* Text Shades - High Contrast Deep Velvet */
-  --text-primary: #1C1924;
-  --text-secondary: #4A4458;
-  --text-muted: #7A7289;
-  --text-gold: #996515;
-  --text-love: #C2185B;
+  /* Text Shades - High Contrast Deep Slate */
+  --text-primary: #0F172A;
+  --text-secondary: #334155;
+  --text-muted: #64748B;
+  --text-gold: var(--color-orange);
+  --text-love: var(--color-red);
+  --text-blue: var(--color-blue);
+  --text-orange: var(--color-orange);
   
   /* Borders & Dividers */
-  --border-color: rgba(184, 134, 11, 0.2);
-  --border-light: rgba(0, 0, 0, 0.08);
-  --border-love: rgba(194, 24, 91, 0.25);
-  --border-glow: rgba(184, 134, 11, 0.4);
+  --border-color: rgba(234, 88, 12, 0.22);
+  --border-light: rgba(15, 23, 42, 0.08);
+  --border-love: var(--color-red-border);
+  --border-blue: var(--color-blue-border);
+  --border-orange: var(--color-orange-border);
+  --border-glow: rgba(234, 88, 12, 0.4);
   
   /* Fonts */
   --font-heading: 'Playfair Display', 'Cinzel', Georgia, serif;
   --font-body: 'Plus Jakarta Sans', sans-serif;
   --font-script: 'Great Vibes', cursive;
   
-  /* Glassmorphism & Shadows (Light Theme) */
-  --glass-bg: rgba(255, 255, 255, 0.92);
-  --glass-border: rgba(184, 134, 11, 0.18);
-  --glass-shadow: 0 10px 35px -5px rgba(28, 25, 36, 0.07), 0 4px 12px rgba(194, 24, 91, 0.04);
+  /* Shadows */
+  --glass-bg: rgba(255, 255, 255, 0.94);
+  --glass-border: rgba(234, 88, 12, 0.18);
+  --glass-shadow: 0 10px 35px -5px rgba(15, 23, 42, 0.07);
   --glass-blur: blur(12px);
   
-  --shadow-sm: 0 2px 8px rgba(28, 25, 36, 0.05);
-  --shadow-md: 0 6px 20px rgba(28, 25, 36, 0.08);
-  --shadow-lg: 0 16px 45px rgba(28, 25, 36, 0.1);
-  --shadow-hover: 0 20px 50px rgba(194, 24, 91, 0.14);
-  --shadow-gold: 0 12px 35px rgba(184, 134, 11, 0.18);
+  --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 6px 20px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 16px 45px rgba(15, 23, 42, 0.1);
+  --shadow-hover: 0 20px 50px rgba(220, 38, 38, 0.15);
+  --shadow-gold: 0 12px 35px rgba(234, 88, 12, 0.2);
 }
 
 /* ==========================================================
@@ -897,13 +928,13 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #D4AF37, #C2185B);
+  background: linear-gradient(180deg, #EA580C, #DC2626);
   border-radius: 6px;
   border: 2px solid #FFFBF7;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #B8860B, #880E4F);
+  background: linear-gradient(180deg, #C2410C, #B91C1C);
 }
 
 /* Typography */
@@ -936,7 +967,7 @@ ul {
 }
 
 .glass-panel:hover {
-  border-color: rgba(194, 24, 91, 0.3);
+  border-color: rgba(220, 38, 38, 0.3);
   box-shadow: var(--shadow-hover);
   transform: translateY(-4px);
 }
@@ -962,30 +993,44 @@ ul {
   display: inline-block;
 }
 
-.gradient-text-love {
-  background: linear-gradient(135deg, #880E4F 0%, #C2185B 50%, #E91E63 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.gradient-text-gold {
+  color: var(--color-orange);
   display: inline-block;
+  font-weight: 800;
+}
+
+.gradient-text-love {
+  color: var(--color-red);
+  display: inline-block;
+  font-weight: 800;
 }
 
 .gradient-text-mystic {
-  background: linear-gradient(135deg, #C2185B 0%, #6A1B9A 50%, #B8860B 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--color-blue);
   display: inline-block;
+  font-weight: 800;
 }
 
-/* Luxury Interactive Buttons */
+.text-solid-red, .text-red, .text-love {
+  color: var(--color-red) !important;
+}
+
+.text-solid-blue, .text-blue {
+  color: var(--color-blue) !important;
+}
+
+.text-solid-orange, .text-orange, .text-gold {
+  color: var(--color-orange) !important;
+}
+
+/* Luxury Interactive Buttons - Solid Red, Blue, Orange */
 .btn-primary {
-  background: linear-gradient(135deg, #C2185B 0%, #E91E63 100%);
+  background: var(--color-orange);
   color: #FFFFFF !important;
   font-weight: 700;
   padding: 14px 34px;
   border-radius: 9999px;
-  border: none;
+  border: 1px solid var(--color-orange-dark);
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   font-family: var(--font-body);
@@ -996,33 +1041,73 @@ ul {
   text-transform: uppercase;
   letter-spacing: 0.8px;
   font-size: 0.92rem;
-  box-shadow: 0 6px 22px rgba(194, 24, 91, 0.35);
+  box-shadow: 0 6px 20px rgba(234, 88, 12, 0.35);
   position: relative;
   overflow: hidden;
 }
 
-.btn-primary::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transition: 0.5s;
-}
-
-.btn-primary:hover::before {
-  left: 100%;
-}
-
 .btn-primary:hover {
+  background: var(--color-orange-dark);
   transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 12px 30px rgba(194, 24, 91, 0.5);
+  box-shadow: 0 12px 28px rgba(234, 88, 12, 0.5);
+}
+
+.btn-blue,
+.btn-secondary {
+  background: var(--color-blue);
+  color: #FFFFFF !important;
+  font-weight: 700;
+  padding: 14px 32px;
+  border-radius: 9999px;
+  border: 1px solid var(--color-blue-dark);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: var(--font-body);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-size: 0.92rem;
+  box-shadow: 0 6px 20px rgba(29, 78, 216, 0.35);
+}
+
+.btn-blue:hover,
+.btn-secondary:hover {
+  background: var(--color-blue-dark);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(29, 78, 216, 0.5);
+}
+
+.btn-red {
+  background: var(--color-red);
+  color: #FFFFFF !important;
+  font-weight: 700;
+  padding: 14px 32px;
+  border-radius: 9999px;
+  border: 1px solid var(--color-red-dark);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: var(--font-body);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-size: 0.92rem;
+  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.35);
+}
+
+.btn-red:hover {
+  background: var(--color-red-dark);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(220, 38, 38, 0.5);
 }
 
 .btn-gold {
-  background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%);
+  background: var(--color-orange);
   color: #FFFFFF !important;
   font-weight: 700;
   padding: 14px 32px;
@@ -1038,19 +1123,19 @@ ul {
   text-transform: uppercase;
   letter-spacing: 0.8px;
   font-size: 0.92rem;
-  box-shadow: 0 6px 20px rgba(184, 134, 11, 0.3);
+  box-shadow: 0 6px 20px rgba(234, 88, 12, 0.3);
 }
 
 .btn-gold:hover {
   transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 12px 30px rgba(184, 134, 11, 0.45);
-  background: linear-gradient(135deg, #F3C94F 0%, #C48F11 100%);
+  box-shadow: 0 12px 30px rgba(234, 88, 12, 0.45);
+  background: var(--color-orange-dark);
 }
 
 .btn-outline {
   background: #FFFFFF;
-  color: var(--accent-love) !important;
-  border: 1.5px solid var(--accent-love);
+  color: var(--color-blue) !important;
+  border: 1.5px solid var(--color-blue);
   font-weight: 700;
   padding: 13px 30px;
   border-radius: 9999px;
@@ -1063,19 +1148,19 @@ ul {
   gap: 8px;
   letter-spacing: 0.8px;
   font-size: 0.92rem;
-  box-shadow: 0 4px 15px rgba(194, 24, 91, 0.12);
+  box-shadow: 0 4px 15px rgba(29, 78, 216, 0.12);
 }
 
 .btn-outline:hover {
-  background: var(--accent-love);
-  border-color: var(--accent-love);
+  background: var(--color-blue);
+  border-color: var(--color-blue);
   color: #FFFFFF !important;
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(194, 24, 91, 0.3);
+  box-shadow: 0 8px 25px rgba(29, 78, 216, 0.35);
 }
 
 .btn-whatsapp {
-  background: linear-gradient(135deg, #25D366 0%, #1EBE5D 100%);
+  background: #25D366;
   color: #FFFFFF !important;
   font-weight: 700;
   padding: 14px 30px;
@@ -1092,6 +1177,7 @@ ul {
 }
 
 .btn-whatsapp:hover {
+  background: #1EBE5D;
   transform: translateY(-3px) scale(1.02);
   box-shadow: 0 12px 32px rgba(37, 211, 102, 0.48);
 }
@@ -1108,23 +1194,45 @@ ul {
   align-items: center;
   gap: 8px;
   padding: 8px 20px;
-  background: #FFF8E7;
-  border: 1px solid rgba(184, 134, 11, 0.35);
+  background: var(--color-orange-soft);
+  border: 1px solid var(--color-orange-border);
   border-radius: 9999px;
-  color: var(--accent-gold);
+  color: var(--color-orange);
   font-size: 0.84rem;
   font-weight: 800;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   margin-bottom: 1.25rem;
-  box-shadow: 0 2px 8px rgba(184, 134, 11, 0.08);
+  box-shadow: 0 2px 8px rgba(234, 88, 12, 0.1);
+}
+
+.section-badge.love-badge,
+.section-badge.badge-red {
+  background: var(--color-red-soft);
+  border-color: var(--color-red-border);
+  color: var(--color-red);
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.1);
+}
+
+.section-badge.badge-blue {
+  background: var(--color-blue-soft);
+  border-color: var(--color-blue-border);
+  color: var(--color-blue);
+  box-shadow: 0 2px 8px rgba(29, 78, 216, 0.1);
+}
+
+.section-badge.badge-orange {
+  background: var(--color-orange-soft);
+  border-color: var(--color-orange-border);
+  color: var(--color-orange);
+  box-shadow: 0 2px 8px rgba(234, 88, 12, 0.1);
 }
 
 .section-badge.love-badge {
-  background: #FFF0F4;
-  border-color: rgba(194, 24, 91, 0.3);
-  color: var(--accent-love);
-  box-shadow: 0 2px 8px rgba(194, 24, 91, 0.08);
+  background: var(--color-red-soft);
+  border-color: var(--color-red-border);
+  color: var(--color-red);
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.1);
 }
 
 .section-title {
@@ -1167,19 +1275,19 @@ ul {
 
 @keyframes pulseGlowGold {
   0%, 100% {
-    box-shadow: 0 0 15px rgba(184, 134, 11, 0.2);
+    box-shadow: 0 0 15px rgba(234, 88, 12, 0.25);
   }
   50% {
-    box-shadow: 0 0 35px rgba(184, 134, 11, 0.45);
+    box-shadow: 0 0 35px rgba(234, 88, 12, 0.5);
   }
 }
 
 @keyframes pulseGlowLove {
   0%, 100% {
-    box-shadow: 0 0 15px rgba(194, 24, 91, 0.22);
+    box-shadow: 0 0 15px rgba(220, 38, 38, 0.25);
   }
   50% {
-    box-shadow: 0 0 32px rgba(194, 24, 91, 0.45);
+    box-shadow: 0 0 32px rgba(220, 38, 38, 0.5);
   }
 }
 

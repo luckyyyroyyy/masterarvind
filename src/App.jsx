@@ -5,7 +5,6 @@ import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import FloatingContact from './components/layout/FloatingContact';
 import ScrollToTop from './components/ScrollToTop';
-import ThemeColorSwitch from './components/ThemeColorSwitch';
 
 // Pages
 import Home from './pages/Home';
@@ -60,7 +59,6 @@ function App() {
         </main>
         <Footer />
         <FloatingContact />
-        <ThemeColorSwitch />
       </div>
     </Router>
   );

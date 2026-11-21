@@ -17,9 +17,43 @@
   flex-direction: column;
   align-items: center;
   background: #FFFFFF !important;
-  border: 1px solid rgba(184, 134, 11, 0.2) !important;
+  border: 1px solid rgba(226, 232, 240, 0.9) !important;
   border-radius: 18px;
   box-shadow: 0 4px 15px rgba(28, 25, 36, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.booking-card:nth-child(1) {
+  border-top: 3.5px solid #DC2626 !important;
+}
+.booking-card:nth-child(1) .booking-card-icon {
+  color: #DC2626 !important;
+}
+
+.booking-card:nth-child(2) {
+  border-top: 3.5px solid #EA580C !important;
+}
+.booking-card:nth-child(2) .booking-card-icon {
+  color: #EA580C !important;
+}
+
+.booking-card:nth-child(3) {
+  border-top: 3.5px solid #1D4ED8 !important;
+}
+.booking-card:nth-child(3) .booking-card-icon {
+  color: #1D4ED8 !important;
+}
+
+.booking-card:nth-child(4) {
+  border-top: 3.5px solid #DC2626 !important;
+}
+.booking-card:nth-child(4) .booking-card-icon {
+  color: #DC2626 !important;
+}
+
+.booking-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.1);
 }
 
 .booking-card-icon {
@@ -50,7 +84,7 @@
 .booking-form-box {
   padding: 3rem;
   background: #FFFFFF !important;
-  border: 1.5px solid rgba(184, 134, 11, 0.25) !important;
+  border: 1.5px solid rgba(234, 88, 12, 0.25) !important;
   border-radius: 24px;
   box-shadow: 0 15px 45px rgba(28, 25, 36, 0.07) !important;
 }
@@ -110,8 +144,8 @@
 .form-field input:focus,
 .form-field select:focus,
 .form-field textarea:focus {
-  border-color: var(--accent-love);
-  box-shadow: 0 0 15px rgba(194, 24, 91, 0.18);
+  border-color: var(--color-red);
+  box-shadow: 0 0 15px rgba(220, 38, 38, 0.2);
   background: #FFFFFF;
 }
 
@@ -156,7 +190,7 @@
 .booking-map-card {
   padding: 2rem;
   background: #FFFFFF !important;
-  border: 1.5px solid rgba(184, 134, 11, 0.25) !important;
+  border: 1.5px solid rgba(29, 78, 216, 0.25) !important;
   border-radius: 24px;
   box-shadow: 0 15px 45px rgba(28, 25, 36, 0.07) !important;
   display: flex;
@@ -180,7 +214,7 @@
   height: 380px;
   border-radius: 16px;
   overflow: hidden;
-  border: 1.5px solid rgba(184, 134, 11, 0.25);
+  border: 1.5px solid rgba(226, 232, 240, 0.9);
   margin-bottom: 1.2rem;
 }
 
